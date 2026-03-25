@@ -1,0 +1,5 @@
+load STM32F334R8Tx
+project name STM32CubeMX
+project toolchain "MDK-ARM V5"
+project path "D:\7_TU\Bachelor Elektrotechnik und Informationstechnik\Mechatronik und Instrumentierung\testproject\STM32CubeMX\Target_1"
+SetCopyLibrary "copy only"

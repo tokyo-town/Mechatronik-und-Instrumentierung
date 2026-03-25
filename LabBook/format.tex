@@ -1,0 +1,72 @@
+%======= Einbinden der benötigten Packete (= Zusatzfunktionen)
+\usepackage[T1]{fontenc}                % für Fonts in westeuropäischer Codierung
+\usepackage{lmodern}										% Latin Modern Paket verändert die verwendete Schriftart. Bessere Darstellung für pdf
+\usepackage{textcomp}										% Provides extra symbols, e.g. arrows like \textrightarrow, various currencies (\texteuro,..
+\usepackage[utf8]{inputenc}    				% german special characters
+\usepackage[english]{babel}     % hyphenation   usepackage[english,ngerman]{babel} f. deutsch
+\usepackage{pdfpages}										% Einbinden von pdf-Files
+\usepackage{pifont,textcomp,mathcomp}   % dingbad psfonts and text-compilant fonts (euro, TM, ...)
+\usepackage{amsmath,amsopn,amsthm}      % AMS mathematics
+\usepackage{amssymb}                    % zusätzliche Symbole 
+\usepackage{xspace}											% avoids eaten spaces
+
+%======= Eine Umgebung für Bilder und Tabellen			  	
+%\usepackage[textfont={Small},labelfont={bf},margin=1cm,format=plain,font=singlespacing]{caption}   % hanging caption text [hang]
+\usepackage[textfont={small},labelfont={bf},margin=1cm,format=plain,font=singlespacing]{caption}   % hanging caption text [hang]
+\captionsetup*[figure]{name=Fig.}			 % Abbildungsunterschrift beginnt mit Abb.
+\captionsetup*[table]{name=Tab.}
+
+
+%======= Farben für Überschriften
+\usepackage{color}
+\definecolor{TUBlue}{rgb}{0,0.4,0.6}   % TU blue RGB 0 102 153
+\addtokomafont{sectioning}{\sffamily\bfseries\selectfont\color{TUBlue}}
+\setkomafont{chapter}{\normalfont\huge\sffamily\bfseries\color{TUBlue}}
+\addtokomafont{section}{\Large}
+\addtokomafont{subsection}{\normalfont\Large\sffamily\bfseries\color{TUBlue}}
+\addtokomafont{subsubsection}{\normalfont\large\sffamily\bfseries\color{TUBlue}}
+\addtokomafont{paragraph}{\normalfont\large\sffamily\bfseries\color{TUBlue}}
+
+
+%======= Kopf-/Fußzeilen
+\pagestyle{plain} % nur Fußzeile
+
+
+
+%======= Eine kompakte Umgebung für die Bilder
+\newcommand{\bild}[5]{{
+\begin{figure}[#2]
+\begin{center}
+\includegraphics[width=#3\linewidth]{#1}
+\caption{#4}\label{#5}
+\end{center}
+\end{figure}
+}}
+
+\newcommand{\bilder}[9]{{
+    \begin{figure}[#1]
+    \begin{center}
+    \begin{subfigure}{0.5\textwidth}
+    \includegraphics[width=#2\linewidth]{#3}
+    \caption{#4}\label{#5}
+    \end{subfigure}%
+    \begin{subfigure}{0.5\textwidth}
+    \includegraphics[width=#6\linewidth]{#7}
+    \caption{#8}\label{#9}
+    \end{subfigure}
+    \end{center}
+    \end{figure}
+}}
+
+\newcommand{\tabelle}[5]{{
+\begin{table}[#1]
+    \centering
+    \caption{#2}
+    \label{#3}
+    \begin{tabular}{#4}
+        #5
+    \end{tabular}
+\end{table}
+}}
+
+%======= Definitionen eigener Befehle

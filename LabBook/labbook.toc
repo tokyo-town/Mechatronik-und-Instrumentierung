@@ -1,0 +1,4 @@
+\babel@toc {english}{}\relax 
+\contentsline {chapter}{\numberline {1}Honor Code}{1}{}%
+\contentsline {chapter}{\numberline {2}Experiments}{3}{}%
+\providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 
