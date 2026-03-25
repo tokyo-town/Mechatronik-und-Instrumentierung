@@ -59,10 +59,11 @@ Es wird die Funktion mittels Messung und Ansteuerung über einen Mikrocontroller
 Eine Übersicht der Komponenten findet sich in Tabelle \ref{tab:components}.
 
 \tabelle{htb}{Mechatronische Komponenten der Geräte}{tab:components}{l | l}{
-    \textbf{Drucker} & Stepper Motor 1 (Vorschub) \\
-    & Stepper Motor 2 (Druckkopf) \\
-    & Stepper Motor 3 (Scanner) \\
+    \textbf{Drucker} & BLDC Motor 1 (Vorschub) \\
+    & BLDC Motor 2 (Druckkopf) \\
+    & BLDC Motor 3 (Scanner) \\
     & Lautsprecher \\
+    & Lichtschranken \\
     \textbf{Festplatte} & Lorentz-Aktuator (VCA) \\
     & Spindelmotor \\
 }
@@ -93,13 +94,14 @@ Foto siehe Abbildung \ref{fig:motor1}. Die Anschlüsse und Werte sind in Tabelle
 
 \textbf{Motor 2:}
 
-Der zweite Motor hat 4 Anschlüsse, mit denen die Drehrichtung und die Schrittfolge gesteuert werden.
+Der zweite Motor hat 4 Anschlüsse, mit denen die Drehrichtung und die Schrittfolge gesteuert werden. Pro Schritt dreht er sich um 7,5°.
 Foto siehe Abbildung \ref{fig:motor2}. Die Anschlüsse und Werte sind in Tabelle \ref{tab:motor2} zusammengefasst.
 
 \bild{htb}{0.5}{images/DC_StepperMotor02}{Motor 2}{fig:motor2}
-\tabelle{htb}{Motor 2}{tab:motor2}{l l}{
+\tabelle{htb}{Motor 2}{tab:motor2}{l}{
     Anschlüsse \\
     \hline
+    je 2 Pins für die beiden Spulen \\
     \hline
 }
 
@@ -109,6 +111,16 @@ Der dritte Motor wird über einen Controller mit 5 Anschlüssen angesteuert. Die
 Während der Messung wurde ein Teil der Schaltung zerstört, weshalb der Motor nicht mehr funktionsfähig ist. Foto siehe Abbildung \ref{fig:motor3}.
 
 \bild{htb}{0.5}{images/DC_Motor_2}{Motor 3}{fig:motor3}
+
+
+\textbf{Motor 4:}
+
+Der vierte BLCD-Motor wird über bis zu 4 Pins angesteuert. Der vierte Pin (Sternpunktleiter) ist für die Steuerung nicht notwendig.
+Die Steuerung erfolgt reihum über drei Phasen, wobei eine davon "floating", also ohne Strom läuft.
+Der Motor ist in Abbildung \ref{fig:BLDC_Motor} zu sehen.
+
+\bilder{htb}{1.0}{images/festplatte_BLDC}{1.0}{images/festplatte_BLDC02}{Motor 4}{fig:BLDC_Motor}
+% \bild{htb}{0.5}{images/BLDC_S}{Steuerungsschema BLDC-Motor (Festplatte)}{fig:BLDC_Daten}
 
 \textbf{VCA:}
 
@@ -133,6 +145,12 @@ Foto siehe Abbildung \ref{fig:vca}. Die Kennzahlen sind in Tabelle \ref{tab:vca}
     \hline
     Widerstand & \qty{10.2}{\ohm} \\
 }
+
+\textbf{Lichtschranke:}
+
+\large
+\includepdf[fitpaper=true]
+{images/Lichtschranke}     %file name of title page
 
 % \bibliographystyle{plain}
 % \bibliography{Literatur}
