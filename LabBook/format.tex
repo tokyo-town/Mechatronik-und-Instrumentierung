@@ -35,25 +35,25 @@
 
 %======= Eine kompakte Umgebung für die Bilder
 \newcommand{\bild}[5]{{
-\begin{figure}[#2]
+\begin{figure}[#1]
 \begin{center}
-\includegraphics[width=#3\linewidth]{#1}
+\includegraphics[width=#2\linewidth]{#3}
 \caption{#4}\label{#5}
 \end{center}
 \end{figure}
 }}
 
-\newcommand{\bilder}[9]{{
+\newcommand{\bilder}[7]{{
     \begin{figure}[#1]
     \begin{center}
     \begin{subfigure}{0.5\textwidth}
     \includegraphics[width=#2\linewidth]{#3}
-    \caption{#4}\label{#5}
+    % \caption{#4}\label{#5}
     \end{subfigure}%
     \begin{subfigure}{0.5\textwidth}
-    \includegraphics[width=#6\linewidth]{#7}
-    \caption{#8}\label{#9}
+    \includegraphics[width=#4\linewidth]{#5}
     \end{subfigure}
+    \caption{#6}\label{#7}
     \end{center}
     \end{figure}
 }}

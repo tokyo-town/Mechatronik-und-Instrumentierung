@@ -22,11 +22,6 @@
 \usepackage{multirow}
 \usepackage{subcaption}
 
-\newcommand{\hthresh}{T_{\mathrm{high}}}
-\newcommand{\lthresh}{T_{\mathrm{low}}}
-\newcommand{\wk}{w_{\mathrm{k}}}
-\newcommand{\hthreshauto}{\tau_{\mathrm{high}}}
-\newcommand{\lthreshauto}{\tau_{\mathrm{low}}}
 
 \begin{document}
 
@@ -38,156 +33,106 @@
             % place title centered on A4 page (width 21cm -> center x=10.5cm, height 29.7cm -> center y=14.85cm)
             \put(10.5,14.85){\makebox(0,0){\Huge\bfseries Lab Book}}
             \put(10.5, 13.5){\makebox(0,0){\large 369.013 Fachvertiefung - Mechatronik und Instrumentierung, SS 2026}} % subtitle below line
-            \put(7.3,7.7){Gruppe 5}
-            \put(7.3,7.7){Anton Krusenotto} \put(14.1,7.7){12425720}
-            \put(7.3,7.7){Darko Maletic} \put(14.1,7.7){12320189}
+            \put(7.3,10.3){Gruppe 5:}
+            \put(7.3,9.3){Anton Krusenotto} \put(14.1,9.3){12425720}
+            \put(7.3,8.5){Darko Maletic} \put(14.1,8.5){12320189}
             \put(7.3,7.7){Heinrich Fuhrmann} \put(14.1,7.7){11940304}
 						\put(7.3,6.7){\today} 
 }]
 {images/titlesheet}     %file name of title page
 
-\cleardoublepage
-\setcounter{tocdepth}{3}
+% \cleardoublepage
+% \setcounter{tocdepth}{3}
 
-\setcounter{page}{0}
-\renewcommand{\thepage}{\roman{page}}
-\tableofcontents \cleardoublepage
+% \setcounter{page}{0}
+% \renewcommand{\thepage}{\roman{page}}
+% \tableofcontents \cleardoublepage
 
-\setcounter{page}{1}
-\renewcommand{\thepage}{\arabic{page}}
-\setcounter{chapter}{0}
+% \setcounter{page}{1}
+% \renewcommand{\thepage}{\arabic{page}}
+% \setcounter{chapter}{0}
 
-\chapter{Honor Code}
-For the assignment I followed the honor code:
-\begin{itemize}
-    \item Rule 1: Don't look at solutions or code of other students; everything you submit should be your own work
-    \item Rule 2: Don't share your solution code with others; however, discussing ideas or general strategies is fine and encouraged
-    \item Rule 3: If you use code from somewhere you need to cite the source directly in your code (e.g., StackOverflow).
-If the source is a generative AI tool (e.g., ChatGPT) provide a link to the specific Chat.
-\end{itemize}
+\chapter{Analyse}
 
-I know that I have full responsibility for what I submit. I made sure the assignment allows the teaching staff to evaluate which
-competences I have acquired. I am aware that plagiarism is prohibited and may lead to failure of this course.
+Im ersten Teil der Arbeit wurden ein Drucker und eine Festplatte zerlegt und die darin enthaltenen mechatronischen Komponenten analysiert.
+Es wird die Funktion mittels Messung und Ansteuerung über einen Mikrocontroller (STM32 NUCLEO-F446RE) überprüft.
+Eine Übersicht der Komponenten findet sich in Tabelle \ref{tab:components}.
 
-\chapter{Experiments}
-The findings in this section are mainly visualized using the image ''rubens.jpg'' which is referred to as the ''source image''.
-Other images used to generate visualizations for this documentation are found in the folder ''image''.
-The visualizations themselves are found in the subfolder ''documentation/images''.
-
-\subsection*{Abbreviations}
-\tabelle{htb}{Abbreviations}{tab:Abbreviations}{l l}{
-    \toprule
-    $\sigma$, sigma & Standard deviation of Gaussian kernel or Gaussian noise \\
-    $\wk$ & Kernel width (in pixels) \\
-    $\lthresh$ & Low threshold for edge hysteresis \\
-    $\hthresh$ & High threshold for edge hysteresis \\
-    $\lthreshauto$ & Adaptive low threshold for edge hysteresis \\
-    $\hthreshauto$ & Adaptive high threshold for edge hysteresis \\
-    \bottomrule
+\tabelle{htb}{Mechatronische Komponenten der Geräte}{tab:components}{l | l}{
+    \textbf{Drucker} & Stepper Motor 1 (Vorschub) \\
+    & Stepper Motor 2 (Druckkopf) \\
+    & Stepper Motor 3 (Scanner) \\
+    & Lautsprecher \\
+    \textbf{Festplatte} & Lorentz-Aktuator (VCA) \\
+    & Spindelmotor \\
 }
 
-\newpage
-\section*{1.1}
+\textbf{Motor 1:}
 
-Defining $\wk$ as a function of $\sigma$ ensures an accurate representation of the gauss curve in the kernel.
-$\wk$ is defined to have the following characteristics:
-\begin{itemize}
-\item
-Odd number of pixels to include the maximum at the center of the kernel.
-\item
-$\wk$ of at least $\pm 3 \sigma$ around center, so that the kernel covers at least 99 \% of the gauss curve.
-\end{itemize}
+Der erste Motor ist vom Herstellertyp Nidec 45M2880020 und wird über einen Controller mit 6 Anschlüssen angesteuert.
+Neben den beiden Versorgungssanschlüssen können drei der Anschlüsse auf Masse gelegt werden, um das Verhalten des Motors zu beeinflussen.
+Die Drehzahl des Motors ist konstant.
+Foto siehe Abbildung \ref{fig:motor1}. Die Anschlüsse und Werte sind in Tabelle \ref{tab:motor1} zusammengefasst.
 
-If $\wk$ is too small, the blur radius is reduced and less blur will occur (see fig.~\ref{fig:kernel_widths}).
-The sharp cutoff will also introduce some distortion, as shown in fig.~\ref{fig:kernel_distortion}.
-
-If $\wk$ is too large, many near-zero values will be calculated which increases computation time (see tab.~\ref{tab:kernel_computation})
-but does not contribute to the result (see fig.~\ref{fig:kernel_computation}).
-
-% \bilder{htb}{1}{images/kernel_widths.png}{Effects of small $\wk$ (sigma = 10). Left: $\wk = 7$ (too small), right: $\wk = 61$ (calculated)}{fig:kernel_widths}
-% {1}{images/kernel_distortion.png}{Effects of small kernel width. Left: $\sigma = 2$, $\wk = 13$ (undistorted), right: $\sigma = 10$, $\wk = 7$ (distorted)}{fig:kernel_distortion}
-
-\bild{images/kernel_widths.png}{htb}{0.5}{Effects of small $\wk$ (sigma = 10). Left: $\wk = 7$ (too small), right: $\wk = 61$ (calculated)}{fig:kernel_widths}
-\bild{images/kernel_distortion.png}{htb}{0.5}{Effects of small kernel width. Left: $\sigma = 2$, $\wk = 13$ (undistorted), right: $\sigma = 10$, $\wk = 7$ (distorted)}{fig:kernel_distortion}
-
-\bild{images/kernel_widths_larger.png}{htb}{0.5}{Choosing a larger than necessary $\wk$ has no practical effect. Left: $\wk = 61$, right: $\wk = 1000$; $\sigma = 10$}{fig:kernel_computation}
-\tabelle{htb}{Computation time of Gaussian blur, using timeit Python module (100 iterations)}{tab:kernel_computation}{l r r}{
-    \toprule
-    $\wk$ ($\sigma = 10$) & \qty{61}{px} & \qty{1000}{px} \\
-    computation time & \qty{1075}{\milli\second} & \qty{10263}{\milli\second} \\
-    \bottomrule
+\bild{htb}{0.5}{images/DC_StepperMotor01}{Motor 1}{fig:motor1}
+\tabelle{htb}{Motor 1}{tab:motor1}{l l}{
+    Anschlüsse & Funktion (auf Ground) \\
+    \hline
+    LOCK & Sperrt den Motor \\
+    ON/OFF & Schaltet den Motor ein \\
+    +24V & Versorgungsspannung \\
+    GND & Masse \\
+    NC & nicht belegt \\
+    CW/CCW & dreht gegen den Uhrzeigersinn \\
+    \hline
+    Nennspannung & \qty{24}{\volt} \\
+    Nennstrom & \qty{1.15}{\ampere} \\
+    Drehzahl & \qty{}{\per\minute} \\
+    Leistung & \qty{27.6}{\watt} \\
 }
 
+\textbf{Motor 2:}
 
-\section*{1.2}
+Der zweite Motor hat 4 Anschlüsse, mit denen die Drehrichtung und die Schrittfolge gesteuert werden.
+Foto siehe Abbildung \ref{fig:motor2}. Die Anschlüsse und Werte sind in Tabelle \ref{tab:motor2} zusammengefasst.
 
-Blurring (using a linear filter) smooths out the pixel intensities without changing their mean value.
-This is because the linear filter is a moving weighted average of each pixel neighborhood where the sum of coefficients is always 1.
-Fig.~\ref{fig:blur_intensities} illustrates this principle for a single row of pixels of a given image.
-
-\bild{images/intensities_comparison.png}{htb}{0.8}{Averaging effect of blur using pixel row 100 of the source image: Pixel intensities with no blur (left) and with Gaussian blur ($\sigma = 5$, $\wk = 31$) (right)}{fig:blur_intensities}
-
-
-\section*{2.1}
-
-$\lthresh$ determines the lowest possible gradient for a pixel to be considered part of an edge.
-A large $\lthresh$ might therefore introduce holes in otherwise continuous edge loops.
-
-$\hthresh$ determines the lowest possible gradient for a continuous edge to be considered valid.
-A large $\hthresh$ removes consistently smooth edges (smooth = small gradient) while keeping other edges with at least one sharp section intact.
-
-Fig.~\ref{fig:low_threshold} shows the effect of varying $\lthresh$.
-Fig.~\ref{fig:high_threshold} shows the effect of varying $\hthresh$.
-See tab.~\ref{tab:thresholdEffects} for a summary of the effects.
-
-\bild{images/threshold_low.png}{htb}{0.8}{Edge hysteresis with varying $\lthresh$ ($\hthresh = 0$)}{fig:low_threshold}
-\bild{images/threshold_high.png}{htb}{0.8}{Edge hysteresis with varying $\hthresh$ ($\lthresh = 0$)}{fig:high_threshold}
-
-\tabelle{htb}{Effects of thresholds}{tab:thresholdEffects}{l | l l}{
-    & smaller value & larger value \\
-    \midrule
-	$\lthresh$ & more edges overall & fewer edges overall \\
-	$\hthresh$ & more edge segments & fewer edge segments \\
+\bild{htb}{0.5}{images/DC_StepperMotor02}{Motor 2}{fig:motor2}
+\tabelle{htb}{Motor 2}{tab:motor2}{l l}{
+    Anschlüsse \\
+    \hline
+    \hline
 }
 
+\textbf{Motor 3:}
 
-\section*{2.2}
+Der dritte Motor wird über einen Controller mit 5 Anschlüssen angesteuert. Die Drehzahl des Motors ändert sich mit der Spannung.
+Während der Messung wurde ein Teil der Schaltung zerstört, weshalb der Motor nicht mehr funktionsfähig ist. Foto siehe Abbildung \ref{fig:motor3}.
 
-Since $\lthresh$ and $\hthresh$ limit gradients, images with different contrast (due to different environments and lighting) will yield different results for the same thresholds.
+\bild{htb}{0.5}{images/DC_Motor_2}{Motor 3}{fig:motor3}
 
-Adaptive thresholding aims at achieving a largely consistent amount of edges across different environments.
-However, fixed thresholding might be more suitable in a stable environment where the amount of detected edges is important and may vary greatly.
-For example, we might wish to estimate the number of objects on a table. The more objects, the more edges should be detected.
+\textbf{VCA:}
 
-See fig.~\ref{fig:thresholding_methods} for a comparison of both methods.
-$\lthreshauto$ and $\hthreshauto$ have been chosen to achieve a similar amount of edges in the top image.
-We can see that in the bottom image, the adaptive method excludes some objects because of the overall edge limit given by $\hthreshauto$,
-whereas the fixed method detects objects more reliably in both images.
+Der Lautsprecher und der Lorentz-Aktuator basieren auf demselben Prinzip. Eine stromdurchflossene Spule erzeugt ein Magnetfeld, welches
+durch ein Permanentmagnetfeld gemäß der Lorentz-Kraft das Bauteil in Bewegung versetzt.
+Der VCA wird über eine Transistorschaltung mit Pull-Down-Widerstand und einer Freilaufdiode (siehe Schaltbild \ref{fig:vca_schaltung}) angesteuert.
+Wird ein PWM-Signal an das Transistorgate angelegt, kann ein Ton erzeugt werden, liegt eine Gleichspannung an, wirkt eine konstante Kraft auf den Aktuator.
+Foto siehe Abbildung \ref{fig:vca}. Die Kennzahlen sind in Tabelle \ref{tab:vca} zusammengefasst.
 
-\bild{images/thresholding_methods.jpg}{htb}{0.8}
-{Comparison of fixed and adaptive thresholding methods using images ``table\_object.jpg'' and ``table\_objects.jpg''.
-Note that some objects like the glasses or the compass are not detected by the adaptive method.}{fig:thresholding_methods}
-
-
-\section*{3.1}
-
-Since noise has very high frequency components, it will introduce sharp gradients throughout the whole image which might be detected as edges.
-See fig.~\ref{fig:noise_effects} for an illustration of this effect.
-
-\bild{images/noise_effects.jpg}{htb}{0.8}{Effects of noise on edge detection without blur.}{fig:noise_effects}
-
-
-\section*{3.2}
-
-Because blurring works as a lowpass filter, applying a wide gauss filter (large $\sigma$) will get rid of high frequency noise
-and mitigate sharp gradients introduced by it. We can see the lowpass characteristic in fig.~\ref{fig:noise_blur_effects}.
-The soft gradients introduced by the low frequency components of the noise can then be sorted out by increasing the hysteresis thresholds.
-
-It is therefore possible to set the parameters such that edges can be detected \textit{as if almost no noise was present (!)}, even in highly noisy images.
-However, finer details will be lost due to the blurring (see fig.~\ref{fig:canny_high_noise}).
-
-\bild{images/noise_blur_effects.jpg}{htb}{0.8}{Left: Source image with noise, right: Canny edges with various blur sigmas (no edge hysteresis applied). Note how increasing $\sigma$ reduces the frequency of detected edges.}{fig:noise_blur_effects}
-\bild{images/canny_high_noise.jpg}{htb}{0.8}{Top: Source image, bottom: image with high noise ($\sigma = 0.5$). Blur $\sigma = 10$, $\lthresh = 0.1$, $\hthresh = 0.2$ for both images.}{fig:canny_high_noise}
+\bild{htb}{0.7}{images/steuerung_VCA}{Schaltung zur Ansteuerung des VCA}{fig:vca_schaltung}
+\bilder{htb}{1.0}{images/Lautsprecher01}{1.0}{images/Lautsprecher02}{Lautsprecher}{fig:vca}
+\bild{htb}{0.5}{images/Lorentz-Aktuator}{Lorentz-Aktuator (VCA)}{fig:lorentz}
+\tabelle{htb}{Lautsprecher und Lorentz-Aktuator Werte}{tab:vca}{l l}{
+    \textbf{Lautsprecher} \\
+    \hline
+    Widerstand & \qty{8}{\ohm} \\
+    Nennleistung & \qty{0.5}{\watt} \\
+    Spannung & \qty{2}{\volt} \\
+    Strom & \qty{0.25}{\ampere} \\
+    \hline
+    \textbf{Lorentz-Aktuator} \\
+    \hline
+    Widerstand & \qty{10.2}{\ohm} \\
+}
 
 % \bibliographystyle{plain}
 % \bibliography{Literatur}

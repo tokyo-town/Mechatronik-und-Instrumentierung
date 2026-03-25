@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.11.17)  25 MAR 2026 11:08
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.11.17)  25 MAR 2026 13:02
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -721,36 +721,36 @@ Package caption Info: New subtype `subfigure' on input line 238.
 Package caption Info: New subtype `subtable' on input line 238.
 \c@subtable=\count335
 )
-LaTeX Font Info:    Trying to load font information for T1+lmr on input line 31.
+LaTeX Font Info:    Trying to load font information for T1+lmr on input line 26.
  (C:\Program Files\MiKTeX\tex/latex/lm\t1lmr.fd
 File: t1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 ) (labbook.aux)
 \openout1 = `labbook.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 31.
-LaTeX Font Info:    ... okay on input line 31.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 31.
-LaTeX Font Info:    ... okay on input line 31.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 31.
-LaTeX Font Info:    ... okay on input line 31.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 31.
-LaTeX Font Info:    ... okay on input line 31.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 31.
-LaTeX Font Info:    ... okay on input line 31.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 31.
-LaTeX Font Info:    ... okay on input line 31.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 31.
-LaTeX Font Info:    ... okay on input line 31.
-Package scrbase Info: activating english \partname on input line 31.
-Package scrbase Info: activating english \chaptername on input line 31.
-Package scrbase Info: activating english \appendixname on input line 31.
-Package scrbase Info: activating english \figurename on input line 31.
-Package scrbase Info: activating english \tablename on input line 31.
-Package scrbase Info: activating english \contentsname on input line 31.
-Package scrbase Info: activating english \listfigurename on input line 31.
-Package scrbase Info: activating english \listtablename on input line 31.
-Package scrbase Info: activating english \bibname on input line 31.
-Package scrbase Info: activating english \indexname on input line 31.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+Package scrbase Info: activating english \partname on input line 26.
+Package scrbase Info: activating english \chaptername on input line 26.
+Package scrbase Info: activating english \appendixname on input line 26.
+Package scrbase Info: activating english \figurename on input line 26.
+Package scrbase Info: activating english \tablename on input line 26.
+Package scrbase Info: activating english \contentsname on input line 26.
+Package scrbase Info: activating english \listfigurename on input line 26.
+Package scrbase Info: activating english \listtablename on input line 26.
+Package scrbase Info: activating english \bibname on input line 26.
+Package scrbase Info: activating english \indexname on input line 26.
  (C:\Program Files\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count336
@@ -787,21 +787,21 @@ Package pgfplots notification 'compat/show suggested version=true': document has
 (C:\Program Files\MiKTeX\tex/latex/translations/dicts\translations-basic-dictionary-english.trsl
 File: translations-basic-dictionary-english.trsl (english translation file `translations-basic-dictionary')
 )
-Package translations Info: loading dictionary `translations-basic-dictionary' for `english'. on input line 31.
+Package translations Info: loading dictionary `translations-basic-dictionary' for `english'. on input line 26.
 
 
 pdfTeX warning: pdflatex (file ./images/titlesheet.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
 <images/titlesheet.pdf, id=4, 597.432pt x 845.07718pt>
 File: images/titlesheet.pdf Graphic file (type pdf)
 <use images/titlesheet.pdf>
-Package pdftex.def Info: images/titlesheet.pdf  used on input line 47.
+Package pdftex.def Info: images/titlesheet.pdf  used on input line 42.
 (pdftex.def)             Requested size: 597.43054pt x 845.07512pt.
 
 
 pdfTeX warning: pdflatex (file ./images/titlesheet.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
 File: images/titlesheet.pdf Graphic file (type pdf)
 <use images/titlesheet.pdf>
-Package pdftex.def Info: images/titlesheet.pdf  used on input line 47.
+Package pdftex.def Info: images/titlesheet.pdf  used on input line 42.
 (pdftex.def)             Requested size: 597.43054pt x 845.07512pt.
 
 
@@ -812,23 +812,23 @@ pdfTeX warning: pdflatex (file ./images/titlesheet.pdf): PDF inclusion: found PD
 <images/titlesheet.pdf, id=7, page=1, 597.432pt x 845.07718pt>
 File: images/titlesheet.pdf Graphic file (type pdf)
 <use images/titlesheet.pdf, page 1>
-Package pdftex.def Info: images/titlesheet.pdf , page1 used on input line 47.
+Package pdftex.def Info: images/titlesheet.pdf , page1 used on input line 42.
 (pdftex.def)             Requested size: 597.43054pt x 845.07512pt.
 File: images/titlesheet.pdf Graphic file (type pdf)
 <use images/titlesheet.pdf, page 1>
-Package pdftex.def Info: images/titlesheet.pdf , page1 used on input line 47.
+Package pdftex.def Info: images/titlesheet.pdf , page1 used on input line 42.
 (pdftex.def)             Requested size: 597.47612pt x 845.13959pt.
 File: images/titlesheet.pdf Graphic file (type pdf)
 <use images/titlesheet.pdf, page 1>
-Package pdftex.def Info: images/titlesheet.pdf , page1 used on input line 47.
+Package pdftex.def Info: images/titlesheet.pdf , page1 used on input line 42.
 (pdftex.def)             Requested size: 597.47612pt x 845.13959pt.
 File: images/titlesheet.pdf Graphic file (type pdf)
 <use images/titlesheet.pdf, page 1>
-Package pdftex.def Info: images/titlesheet.pdf , page1 used on input line 47.
+Package pdftex.def Info: images/titlesheet.pdf , page1 used on input line 42.
 (pdftex.def)             Requested size: 597.47612pt x 845.13959pt.
 File: images/titlesheet.pdf Graphic file (type pdf)
 <use images/titlesheet.pdf, page 1>
-Package pdftex.def Info: images/titlesheet.pdf , page1 used on input line 47.
+Package pdftex.def Info: images/titlesheet.pdf , page1 used on input line 42.
 (pdftex.def)             Requested size: 597.47612pt x 845.13959pt.
 [1{C:/Users/admin/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Program Files/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc}
 
@@ -836,305 +836,102 @@ Package pdftex.def Info: images/titlesheet.pdf , page1 used on input line 47.
  <./images/titlesheet.pdf>] [2
 
 
-] [0
-
-
-]
-LaTeX Font Info:    Trying to load font information for T1+lmss on input line 54.
- (C:\Program Files\MiKTeX\tex/latex/lm\t1lmss.fd
-File: t1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
-No file labbook.toc.
-\tf@toc=\write4
-\openout4 = `labbook.toc'.
-
-[1] [2
-
-
 ]
 chapter 1.
-LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 63.
-(C:\Program Files\MiKTeX\tex/latex/lm\ts1lmr.fd
-File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-) [1
-
-
-{C:/Program Files/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc}] [2
-
-
-]
-chapter 2.
-
-Overfull \hbox (20.9882pt too wide) in paragraph at lines 73--76
-\T1/lmr/m/n/14.4 The find-ings in this sec-tion are mainly vi-su-al-ized us-ing the im-age ''rubens.jpg''
- []
-
-LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 87.
-(C:\Program Files\MiKTeX\tex/latex/lm\ot1lmr.fd
+LaTeX Font Info:    Trying to load font information for T1+lmss on input line 55.
+(C:\Program Files\MiKTeX\tex/latex/lm\t1lmss.fd
+File: t1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 68.
+ (C:\Program Files\MiKTeX\tex/latex/lm\ot1lmr.fd
 File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OML+lmm on input line 87.
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 68.
  (C:\Program Files\MiKTeX\tex/latex/lm\omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 87.
+LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 68.
  (C:\Program Files\MiKTeX\tex/latex/lm\omslmsy.fd
 File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 87.
+LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 68.
  (C:\Program Files\MiKTeX\tex/latex/lm\omxlmex.fd
 File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 87.
+(Font)              <12> on input line 68.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 87.
+(Font)              <8> on input line 68.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 87.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 87.
+(Font)              <6> on input line 68.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 68.
  (C:\Program Files\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 87.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 68.
  (C:\Program Files\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) [3{C:/Program Files/MiKTeX/fonts/enc/dvips/lm/lm-mathit.enc}{C:/Program Files/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}]
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <14.4> on input line 92.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 92.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 92.
-
-
-LaTeX Warning: Reference `fig:kernel_widths' on page 4 undefined on input line 101.
-
-
-LaTeX Warning: Reference `fig:kernel_distortion' on page 4 undefined on input line 102.
-
-
-LaTeX Warning: Reference `tab:kernel_computation' on page 4 undefined on input line 104.
-
-
-LaTeX Warning: Reference `fig:kernel_computation' on page 4 undefined on input line 105.
-
-
-LaTeX Warning: File `images/kernel_widths.png' not found on input line 110.
-
-
-d:/7_TU/Bachelor Elektrotechnik und Informationstechnik/Mechatronik und Instrumentierung/LabBook/labbook.tex:110: Package pdftex.def Error: File `images/kernel_widths.png' not found: using draft setting.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.110 ...wk = 61$ (calculated)}{fig:kernel_widths}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 110.
-(C:\Program Files\MiKTeX\tex/latex/lm\t1lmtt.fd
-File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10.95> on input line 110.
-
-
-LaTeX Warning: File `images/kernel_distortion.png' not found on input line 111.
-
-
-d:/7_TU/Bachelor Elektrotechnik und Informationstechnik/Mechatronik und Instrumentierung/LabBook/labbook.tex:111: Package pdftex.def Error: File `images/kernel_distortion.png' not found: using draft setting.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.111 ... = 7$ (distorted)}{fig:kernel_distortion}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: File `images/kernel_widths_larger.png' not found on input line 113.
-
-
-d:/7_TU/Bachelor Elektrotechnik und Informationstechnik/Mechatronik und Instrumentierung/LabBook/labbook.tex:113: Package pdftex.def Error: File `images/kernel_widths_larger.png' not found: using draft setting.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.113 ...$; $\sigma = 10$}{fig:kernel_computation}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: Reference `fig:blur_intensities' on page 4 undefined on input line 126.
-
-[4{C:/Program Files/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc}]
-
-LaTeX Warning: File `images/intensities_comparison.png' not found on input line 128.
-
-
-d:/7_TU/Bachelor Elektrotechnik und Informationstechnik/Mechatronik und Instrumentierung/LabBook/labbook.tex:128: Package pdftex.def Error: File `images/intensities_comparison.png' not found: using draft setting.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.128 ...\wk = 31$) (right)}{fig:blur_intensities}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-[5]
-
-LaTeX Warning: Reference `fig:low_threshold' on page 6 undefined on input line 139.
-
-
-LaTeX Warning: Reference `fig:high_threshold' on page 6 undefined on input line 140.
-
-
-LaTeX Warning: Reference `tab:thresholdEffects' on page 6 undefined on input line 141.
-
-
-LaTeX Warning: File `images/threshold_low.png' not found on input line 143.
-
-
-d:/7_TU/Bachelor Elektrotechnik und Informationstechnik/Mechatronik und Instrumentierung/LabBook/labbook.tex:143: Package pdftex.def Error: File `images/threshold_low.png' not found: using draft setting.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.143 ...esh$ ($\hthresh = 0$)}{fig:low_threshold}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: File `images/threshold_high.png' not found on input line 144.
-
-
-d:/7_TU/Bachelor Elektrotechnik und Informationstechnik/Mechatronik und Instrumentierung/LabBook/labbook.tex:144: Package pdftex.def Error: File `images/threshold_high.png' not found: using draft setting.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.144 ...sh$ ($\lthresh = 0$)}{fig:high_threshold}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-[6]
-
-LaTeX Warning: Reference `fig:thresholding_methods' on page 7 undefined on input line 162.
-
-
-Underfull \vbox (badness 4242) has occurred while \output is active []
-
- [7]
-
-LaTeX Warning: File `images/thresholding_methods.jpg' not found on input line 169.
-
-
-d:/7_TU/Bachelor Elektrotechnik und Informationstechnik/Mechatronik und Instrumentierung/LabBook/labbook.tex:169: Package pdftex.def Error: File `images/thresholding_methods.jpg' not found: using draft setting.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.169 ...aptive method.}{fig:thresholding_methods}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: Reference `fig:noise_effects' on page 8 undefined on input line 175.
-
-
-LaTeX Warning: File `images/noise_effects.jpg' not found on input line 177.
-
-
-d:/7_TU/Bachelor Elektrotechnik und Informationstechnik/Mechatronik und Instrumentierung/LabBook/labbook.tex:177: Package pdftex.def Error: File `images/noise_effects.jpg' not found: using draft setting.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.177 ...tection without blur.}{fig:noise_effects}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: Reference `fig:noise_blur_effects' on page 8 undefined on input line 183.
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [8]
-
-LaTeX Warning: Reference `fig:canny_high_noise' on page 9 undefined on input line 187.
-
-
-LaTeX Warning: File `images/noise_blur_effects.jpg' not found on input line 189.
-
-
-d:/7_TU/Bachelor Elektrotechnik und Informationstechnik/Mechatronik und Instrumentierung/LabBook/labbook.tex:189: Package pdftex.def Error: File `images/noise_blur_effects.jpg' not found: using draft setting.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.189 ... detected edges.}{fig:noise_blur_effects}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: File `images/canny_high_noise.jpg' not found on input line 190.
-
-
-d:/7_TU/Bachelor Elektrotechnik und Informationstechnik/Mechatronik und Instrumentierung/LabBook/labbook.tex:190: Package pdftex.def Error: File `images/canny_high_noise.jpg' not found: using draft setting.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.190 ...$ for both images.}{fig:canny_high_noise}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-[9] [10] [11] [12] [13] (labbook.aux)
+<images/DC_StepperMotor01.jpg, id=40, 4047.12pt x 3035.34pt>
+File: images/DC_StepperMotor01.jpg Graphic file (type jpg)
+<use images/DC_StepperMotor01.jpg>
+Package pdftex.def Info: images/DC_StepperMotor01.jpg  used on input line 77.
+(pdftex.def)             Requested size: 224.33907pt x 168.2179pt.
+<images/DC_StepperMotor02.jpg, id=41, 4047.12pt x 3035.34pt>
+File: images/DC_StepperMotor02.jpg Graphic file (type jpg)
+<use images/DC_StepperMotor02.jpg>
+Package pdftex.def Info: images/DC_StepperMotor02.jpg  used on input line 99.
+(pdftex.def)             Requested size: 224.33907pt x 168.2179pt.
+ [3]
+<images/DC_Motor_2.jpg, id=47, 971.3088pt x 728.4816pt>
+File: images/DC_Motor_2.jpg Graphic file (type jpg)
+<use images/DC_Motor_2.jpg>
+Package pdftex.def Info: images/DC_Motor_2.jpg  used on input line 111.
+(pdftex.def)             Requested size: 224.33907pt x 168.24753pt.
+
+Overfull \hbox (7.25049pt too wide) in paragraph at lines 115--120
+\T1/lmr/m/n/14.4 Pull-Down-Widerstand und einer Freilauf-diode (siehe Schalt-bild 1.4[]) anges-
+ []
+
+[4{C:/Program Files/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}{C:/Program Files/MiKTeX/fonts/enc/dvips/lm/lm-mathit.enc}{C:/Program Files/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc} <./images/DC_StepperMotor01.jpg>]
+<images/steuerung_VCA.png, id=55, 344.78813pt x 374.14781pt>
+File: images/steuerung_VCA.png Graphic file (type png)
+<use images/steuerung_VCA.png>
+Package pdftex.def Info: images/steuerung_VCA.png  used on input line 121.
+(pdftex.def)             Requested size: 314.07332pt x 340.82327pt.
+<images/Lautsprecher01.jpg, id=57, 4047.12pt x 3035.34pt>
+File: images/Lautsprecher01.jpg Graphic file (type jpg)
+<use images/Lautsprecher01.jpg>
+Package pdftex.def Info: images/Lautsprecher01.jpg  used on input line 122.
+(pdftex.def)             Requested size: 224.33907pt x 168.2179pt.
+<images/Lautsprecher02.jpg, id=58, 4047.12pt x 3035.34pt>
+File: images/Lautsprecher02.jpg Graphic file (type jpg)
+<use images/Lautsprecher02.jpg>
+Package pdftex.def Info: images/Lautsprecher02.jpg  used on input line 122.
+(pdftex.def)             Requested size: 224.33907pt x 168.2179pt.
+<images/Lorentz-Aktuator.jpg, id=59, 971.3088pt x 728.4816pt>
+File: images/Lorentz-Aktuator.jpg Graphic file (type jpg)
+<use images/Lorentz-Aktuator.jpg>
+Package pdftex.def Info: images/Lorentz-Aktuator.jpg  used on input line 123.
+(pdftex.def)             Requested size: 224.33907pt x 168.24753pt.
+ [5 <./images/DC_StepperMotor02.jpg>] [6 <./images/DC_Motor_2.jpg> <./images/steuerung_VCA.png>] [7 <./images/Lautsprecher01.jpg> <./images/Lautsprecher02.jpg> <./images/Lorentz-Aktuator.jpg>] (labbook.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2020/03/25>
  ***********
-
-
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
  ) 
 Here is how much of TeX's memory you used:
- 36354 strings out of 474485
- 931724 string characters out of 5753548
- 1932542 words of memory out of 5000000
- 58036 multiletter control sequences out of 15000+600000
- 636146 words of font info for 100 fonts, out of 8000000 for 9000
+ 35982 strings out of 474485
+ 919889 string characters out of 5753548
+ 1933542 words of memory out of 5000000
+ 57684 multiletter control sequences out of 15000+600000
+ 605201 words of font info for 70 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  108i,17n,107p,11001b,768s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<C:/Program Files/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmmi10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmmi12.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmri12.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmssbx10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmtt12.pfb>
-Output written on labbook.pdf (18 pages, 313115 bytes).
+<C:/Program Files/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmmi12.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmssbx10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmsy8.pfb>
+Output written on labbook.pdf (7 pages, 21875081 bytes).
 PDF statistics:
- 154 PDF objects out of 1000 (max. 8388607)
+ 107 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 33 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 68 words of extra memory for PDF output out of 10000 (max. 10000000)
 

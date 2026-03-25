@@ -380,15 +380,6 @@ INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\ec-lmss12.tfm
 INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\ec-lmssbx10.tfm
 INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\ec-lmss17.tfm
 INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\ec-lmssbx10.tfm
-OUTPUT labbook.toc
-INPUT C:\Program Files\MiKTeX\tex\latex\lm\ts1lmr.fd
-INPUT C:\Program Files\MiKTeX\tex\latex\lm\ts1lmr.fd
-INPUT C:\Program Files\MiKTeX\tex\latex\lm\ts1lmr.fd
-INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\ts1-lmr12.tfm
-INPUT C:\Program Files\MiKTeX\fonts\enc\dvips\lm\lm-ts1.enc
-INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\ec-lmr17.tfm
-INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\ec-lmss17.tfm
-INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\ec-lmssbx10.tfm
 INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\ec-lmbx12.tfm
 INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\ec-lmr10.tfm
 INPUT C:\Program Files\MiKTeX\tex\latex\lm\ot1lmr.fd
@@ -428,44 +419,55 @@ INPUT C:\Program Files\MiKTeX\tex\latex\amsfonts\umsb.fd
 INPUT C:\Program Files\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm10.tfm
 INPUT C:\Program Files\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm10.tfm
 INPUT C:\Program Files\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm7.tfm
-INPUT C:\Program Files\MiKTeX\fonts\enc\dvips\lm\lm-mathit.enc
-INPUT C:\Program Files\MiKTeX\fonts\enc\dvips\lm\lm-rm.enc
-INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\rm-lmr12.tfm
-INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\rm-lmr10.tfm
-INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\rm-lmr7.tfm
-INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\lmmi12.tfm
-INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\lmmi10.tfm
-INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\lmmi7.tfm
-INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\lmsy10.tfm
-INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\lmsy10.tfm
-INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\lmsy7.tfm
-INPUT C:\Program Files\MiKTeX\fonts\tfm\jknappen\ec\tcrm1440.tfm
-INPUT C:\Program Files\MiKTeX\fonts\tfm\jknappen\ec\tcrm1000.tfm
-INPUT C:\Program Files\MiKTeX\fonts\tfm\jknappen\ec\tcrm0700.tfm
-INPUT C:\Program Files\MiKTeX\fonts\tfm\public\amsfonts\symbols\msam10.tfm
-INPUT C:\Program Files\MiKTeX\fonts\tfm\public\amsfonts\symbols\msam10.tfm
-INPUT C:\Program Files\MiKTeX\fonts\tfm\public\amsfonts\symbols\msam7.tfm
-INPUT C:\Program Files\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm10.tfm
-INPUT C:\Program Files\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm10.tfm
-INPUT C:\Program Files\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm7.tfm
 INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\ec-lmbx12.tfm
-INPUT C:\Program Files\MiKTeX\tex\latex\lm\t1lmtt.fd
-INPUT C:\Program Files\MiKTeX\tex\latex\lm\t1lmtt.fd
-INPUT C:\Program Files\MiKTeX\tex\latex\lm\t1lmtt.fd
-INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\ec-lmtt12.tfm
-INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\rm-lmr10.tfm
-INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\lmmi10.tfm
-INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\lmsy10.tfm
-INPUT C:\Program Files\MiKTeX\fonts\tfm\jknappen\ec\tcrm1095.tfm
-INPUT C:\Program Files\MiKTeX\fonts\tfm\public\amsfonts\symbols\msam10.tfm
-INPUT C:\Program Files\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm10.tfm
+INPUT .\images\DC_StepperMotor01.jpg
+INPUT .\images\DC_StepperMotor01.jpg
+INPUT .\images\DC_StepperMotor01.jpg
+INPUT .\images\DC_StepperMotor01.jpg
+INPUT .\images\DC_StepperMotor01.jpg
+INPUT .\images\DC_StepperMotor01.jpg
+INPUT .\images\DC_StepperMotor02.jpg
+INPUT .\images\DC_StepperMotor02.jpg
+INPUT .\images\DC_StepperMotor02.jpg
+INPUT .\images\DC_StepperMotor02.jpg
+INPUT .\images\DC_StepperMotor02.jpg
+INPUT .\images\DC_StepperMotor02.jpg
+INPUT .\images\DC_Motor_2.jpg
+INPUT .\images\DC_Motor_2.jpg
+INPUT .\images\DC_Motor_2.jpg
+INPUT .\images\DC_Motor_2.jpg
+INPUT .\images\DC_Motor_2.jpg
+INPUT .\images\DC_Motor_2.jpg
+INPUT C:\Program Files\MiKTeX\fonts\enc\dvips\lm\lm-rm.enc
+INPUT C:\Program Files\MiKTeX\fonts\enc\dvips\lm\lm-mathit.enc
 INPUT C:\Program Files\MiKTeX\fonts\enc\dvips\lm\lm-mathsy.enc
-INPUT C:\Program Files\MiKTeX\fonts\tfm\public\lm\ec-lmri12.tfm
+INPUT .\images\steuerung_VCA.png
+INPUT .\images\steuerung_VCA.png
+INPUT .\images\steuerung_VCA.png
+INPUT .\images\steuerung_VCA.png
+INPUT .\images\steuerung_VCA.png
+INPUT .\images\steuerung_VCA.png
+INPUT .\images\Lautsprecher01.jpg
+INPUT .\images\Lautsprecher01.jpg
+INPUT .\images\Lautsprecher01.jpg
+INPUT .\images\Lautsprecher01.jpg
+INPUT .\images\Lautsprecher01.jpg
+INPUT .\images\Lautsprecher01.jpg
+INPUT .\images\Lautsprecher02.jpg
+INPUT .\images\Lautsprecher02.jpg
+INPUT .\images\Lautsprecher02.jpg
+INPUT .\images\Lautsprecher02.jpg
+INPUT .\images\Lautsprecher02.jpg
+INPUT .\images\Lautsprecher02.jpg
+INPUT .\images\Lorentz-Aktuator.jpg
+INPUT .\images\Lorentz-Aktuator.jpg
+INPUT .\images\Lorentz-Aktuator.jpg
+INPUT .\images\Lorentz-Aktuator.jpg
+INPUT .\images\Lorentz-Aktuator.jpg
+INPUT .\images\Lorentz-Aktuator.jpg
 INPUT labbook.aux
 INPUT C:\Program Files\MiKTeX\fonts\type1\public\lm\lmbx12.pfb
 INPUT C:\Program Files\MiKTeX\fonts\type1\public\lm\lmbx12.pfb
-INPUT C:\Program Files\MiKTeX\fonts\type1\public\lm\lmmi10.pfb
-INPUT C:\Program Files\MiKTeX\fonts\type1\public\lm\lmmi10.pfb
 INPUT C:\Program Files\MiKTeX\fonts\type1\public\lm\lmmi12.pfb
 INPUT C:\Program Files\MiKTeX\fonts\type1\public\lm\lmmi12.pfb
 INPUT C:\Program Files\MiKTeX\fonts\type1\public\lm\lmr10.pfb
@@ -474,11 +476,7 @@ INPUT C:\Program Files\MiKTeX\fonts\type1\public\lm\lmr12.pfb
 INPUT C:\Program Files\MiKTeX\fonts\type1\public\lm\lmr12.pfb
 INPUT C:\Program Files\MiKTeX\fonts\type1\public\lm\lmr8.pfb
 INPUT C:\Program Files\MiKTeX\fonts\type1\public\lm\lmr8.pfb
-INPUT C:\Program Files\MiKTeX\fonts\type1\public\lm\lmri12.pfb
-INPUT C:\Program Files\MiKTeX\fonts\type1\public\lm\lmri12.pfb
 INPUT C:\Program Files\MiKTeX\fonts\type1\public\lm\lmssbx10.pfb
 INPUT C:\Program Files\MiKTeX\fonts\type1\public\lm\lmssbx10.pfb
-INPUT C:\Program Files\MiKTeX\fonts\type1\public\lm\lmsy10.pfb
-INPUT C:\Program Files\MiKTeX\fonts\type1\public\lm\lmsy10.pfb
-INPUT C:\Program Files\MiKTeX\fonts\type1\public\lm\lmtt12.pfb
-INPUT C:\Program Files\MiKTeX\fonts\type1\public\lm\lmtt12.pfb
+INPUT C:\Program Files\MiKTeX\fonts\type1\public\lm\lmsy8.pfb
+INPUT C:\Program Files\MiKTeX\fonts\type1\public\lm\lmsy8.pfb
