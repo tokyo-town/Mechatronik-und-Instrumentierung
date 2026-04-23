@@ -1,0 +1,5 @@
+load STM32F446RETx
+project name STM32CubeMX
+project toolchain "MDK-ARM V5"
+project path "C:\Users\heinr\OneDrive\Documents\TU\Mechatronik-und-Instrumentierung\STM_test_stepper_F446RE\STM32CubeMX\Target_1"
+SetCopyLibrary "copy only"
