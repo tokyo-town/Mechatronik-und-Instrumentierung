@@ -1088,32 +1088,32 @@ Image Symbol Table
     [Anonymous Symbol]                       0x08000e04   Section        0  stm32f4xx_hal_rcc_ex.o(.text.HAL_RCC_OscConfig)
     [Anonymous Symbol]                       0x0800152c   Section        0  stm32f4xx_hal_cortex.o(.text.HAL_SYSTICK_Config)
     [Anonymous Symbol]                       0x0800153c   Section        0  stm32f4xx_it.o(.text.HardFault_Handler)
-    MX_GPIO_Init                             0x08001541   Thumb Code   266  main.o(.text.MX_GPIO_Init)
+    MX_GPIO_Init                             0x08001541   Thumb Code   264  main.o(.text.MX_GPIO_Init)
     [Anonymous Symbol]                       0x08001540   Section        0  main.o(.text.MX_GPIO_Init)
-    [Anonymous Symbol]                       0x0800164c   Section        0  stm32f4xx_it.o(.text.MemManage_Handler)
-    [Anonymous Symbol]                       0x08001650   Section        0  stm32f4xx_it.o(.text.NMI_Handler)
-    NVIC_EncodePriority                      0x08001655   Thumb Code   108  stm32f4xx_hal_cortex.o(.text.NVIC_EncodePriority)
-    [Anonymous Symbol]                       0x08001654   Section        0  stm32f4xx_hal_cortex.o(.text.NVIC_EncodePriority)
-    [Anonymous Symbol]                       0x080016c0   Section        0  stm32f4xx_it.o(.text.PendSV_Handler)
-    [Anonymous Symbol]                       0x080016c4   Section        0  stm32f4xx_it.o(.text.SVC_Handler)
-    SysTick_Config                           0x080016c9   Thumb Code    82  stm32f4xx_hal_cortex.o(.text.SysTick_Config)
-    [Anonymous Symbol]                       0x080016c8   Section        0  stm32f4xx_hal_cortex.o(.text.SysTick_Config)
-    [Anonymous Symbol]                       0x0800171c   Section        0  stm32f4xx_it.o(.text.SysTick_Handler)
-    [Anonymous Symbol]                       0x08001724   Section        0  main.o(.text.SystemClock_Config)
-    [Anonymous Symbol]                       0x080017c4   Section        0  system_stm32f4xx.o(.text.SystemInit)
-    [Anonymous Symbol]                       0x080017d8   Section        0  stm32f4xx_it.o(.text.UsageFault_Handler)
-    __NVIC_GetPriorityGrouping               0x080017dd   Thumb Code    16  stm32f4xx_hal_cortex.o(.text.__NVIC_GetPriorityGrouping)
-    [Anonymous Symbol]                       0x080017dc   Section        0  stm32f4xx_hal_cortex.o(.text.__NVIC_GetPriorityGrouping)
-    __NVIC_SetPriority                       0x080017ed   Thumb Code    66  stm32f4xx_hal_cortex.o(.text.__NVIC_SetPriority)
-    [Anonymous Symbol]                       0x080017ec   Section        0  stm32f4xx_hal_cortex.o(.text.__NVIC_SetPriority)
-    __NVIC_SetPriorityGrouping               0x08001831   Thumb Code    60  stm32f4xx_hal_cortex.o(.text.__NVIC_SetPriorityGrouping)
-    [Anonymous Symbol]                       0x08001830   Section        0  stm32f4xx_hal_cortex.o(.text.__NVIC_SetPriorityGrouping)
-    [Anonymous Symbol]                       0x0800186c   Section        0  main.o(.text.main)
-    [Anonymous Symbol]                       0x08001a20   Section        0  main.o(.text.set_coil_a)
-    [Anonymous Symbol]                       0x08001ae0   Section        0  main.o(.text.set_coil_b)
-    $v0                                      0x08001ba0   Number         0  fpinit.o(x$fpl$fpinit)
-    x$fpl$fpinit                             0x08001ba0   Section       26  fpinit.o(x$fpl$fpinit)
-    .L__const.main.steps                     0x08001bbc   Data          64  main.o(.rodata..L__const.main.steps)
+    [Anonymous Symbol]                       0x08001648   Section        0  stm32f4xx_it.o(.text.MemManage_Handler)
+    [Anonymous Symbol]                       0x0800164c   Section        0  stm32f4xx_it.o(.text.NMI_Handler)
+    NVIC_EncodePriority                      0x08001651   Thumb Code   108  stm32f4xx_hal_cortex.o(.text.NVIC_EncodePriority)
+    [Anonymous Symbol]                       0x08001650   Section        0  stm32f4xx_hal_cortex.o(.text.NVIC_EncodePriority)
+    [Anonymous Symbol]                       0x080016bc   Section        0  stm32f4xx_it.o(.text.PendSV_Handler)
+    [Anonymous Symbol]                       0x080016c0   Section        0  stm32f4xx_it.o(.text.SVC_Handler)
+    SysTick_Config                           0x080016c5   Thumb Code    82  stm32f4xx_hal_cortex.o(.text.SysTick_Config)
+    [Anonymous Symbol]                       0x080016c4   Section        0  stm32f4xx_hal_cortex.o(.text.SysTick_Config)
+    [Anonymous Symbol]                       0x08001718   Section        0  stm32f4xx_it.o(.text.SysTick_Handler)
+    [Anonymous Symbol]                       0x08001720   Section        0  main.o(.text.SystemClock_Config)
+    [Anonymous Symbol]                       0x080017c0   Section        0  system_stm32f4xx.o(.text.SystemInit)
+    [Anonymous Symbol]                       0x080017d4   Section        0  stm32f4xx_it.o(.text.UsageFault_Handler)
+    __NVIC_GetPriorityGrouping               0x080017d9   Thumb Code    16  stm32f4xx_hal_cortex.o(.text.__NVIC_GetPriorityGrouping)
+    [Anonymous Symbol]                       0x080017d8   Section        0  stm32f4xx_hal_cortex.o(.text.__NVIC_GetPriorityGrouping)
+    __NVIC_SetPriority                       0x080017e9   Thumb Code    66  stm32f4xx_hal_cortex.o(.text.__NVIC_SetPriority)
+    [Anonymous Symbol]                       0x080017e8   Section        0  stm32f4xx_hal_cortex.o(.text.__NVIC_SetPriority)
+    __NVIC_SetPriorityGrouping               0x0800182d   Thumb Code    60  stm32f4xx_hal_cortex.o(.text.__NVIC_SetPriorityGrouping)
+    [Anonymous Symbol]                       0x0800182c   Section        0  stm32f4xx_hal_cortex.o(.text.__NVIC_SetPriorityGrouping)
+    [Anonymous Symbol]                       0x08001868   Section        0  main.o(.text.main)
+    [Anonymous Symbol]                       0x08001a1c   Section        0  main.o(.text.set_coil_a)
+    [Anonymous Symbol]                       0x08001adc   Section        0  main.o(.text.set_coil_b)
+    $v0                                      0x08001b9c   Number         0  fpinit.o(x$fpl$fpinit)
+    x$fpl$fpinit                             0x08001b9c   Section       26  fpinit.o(x$fpl$fpinit)
+    .L__const.main.steps                     0x08001bb8   Data          64  main.o(.rodata..L__const.main.steps)
     .bss                                     0x20000030   Section       96  libspace.o(.bss)
     Heap_Mem                                 0x20000098   Data         512  startup_stm32f446xx.o(HEAP)
     HEAP                                     0x20000098   Section      512  startup_stm32f446xx.o(HEAP)
@@ -1333,23 +1333,23 @@ Image Symbol Table
     HAL_RCC_OscConfig                        0x08000e05   Thumb Code  1830  stm32f4xx_hal_rcc_ex.o(.text.HAL_RCC_OscConfig)
     HAL_SYSTICK_Config                       0x0800152d   Thumb Code    16  stm32f4xx_hal_cortex.o(.text.HAL_SYSTICK_Config)
     HardFault_Handler                        0x0800153d   Thumb Code     4  stm32f4xx_it.o(.text.HardFault_Handler)
-    MemManage_Handler                        0x0800164d   Thumb Code     4  stm32f4xx_it.o(.text.MemManage_Handler)
-    NMI_Handler                              0x08001651   Thumb Code     4  stm32f4xx_it.o(.text.NMI_Handler)
-    PendSV_Handler                           0x080016c1   Thumb Code     2  stm32f4xx_it.o(.text.PendSV_Handler)
-    SVC_Handler                              0x080016c5   Thumb Code     2  stm32f4xx_it.o(.text.SVC_Handler)
-    SysTick_Handler                          0x0800171d   Thumb Code     8  stm32f4xx_it.o(.text.SysTick_Handler)
-    SystemClock_Config                       0x08001725   Thumb Code   160  main.o(.text.SystemClock_Config)
-    SystemInit                               0x080017c5   Thumb Code    18  system_stm32f4xx.o(.text.SystemInit)
-    UsageFault_Handler                       0x080017d9   Thumb Code     4  stm32f4xx_it.o(.text.UsageFault_Handler)
-    main                                     0x0800186d   Thumb Code   428  main.o(.text.main)
-    set_coil_a                               0x08001a21   Thumb Code   192  main.o(.text.set_coil_a)
-    set_coil_b                               0x08001ae1   Thumb Code   192  main.o(.text.set_coil_b)
-    _fp_init                                 0x08001ba1   Thumb Code    26  fpinit.o(x$fpl$fpinit)
-    __fplib_config_fpu_vfp                   0x08001bb9   Thumb Code     0  fpinit.o(x$fpl$fpinit)
-    __fplib_config_pureend_doubles           0x08001bb9   Thumb Code     0  fpinit.o(x$fpl$fpinit)
-    AHBPrescTable                            0x08001bfc   Data          16  system_stm32f4xx.o(.rodata.AHBPrescTable)
-    Region$$Table$$Base                      0x08001c0c   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x08001c2c   Number         0  anon$$obj.o(Region$$Table)
+    MemManage_Handler                        0x08001649   Thumb Code     4  stm32f4xx_it.o(.text.MemManage_Handler)
+    NMI_Handler                              0x0800164d   Thumb Code     4  stm32f4xx_it.o(.text.NMI_Handler)
+    PendSV_Handler                           0x080016bd   Thumb Code     2  stm32f4xx_it.o(.text.PendSV_Handler)
+    SVC_Handler                              0x080016c1   Thumb Code     2  stm32f4xx_it.o(.text.SVC_Handler)
+    SysTick_Handler                          0x08001719   Thumb Code     8  stm32f4xx_it.o(.text.SysTick_Handler)
+    SystemClock_Config                       0x08001721   Thumb Code   160  main.o(.text.SystemClock_Config)
+    SystemInit                               0x080017c1   Thumb Code    18  system_stm32f4xx.o(.text.SystemInit)
+    UsageFault_Handler                       0x080017d5   Thumb Code     4  stm32f4xx_it.o(.text.UsageFault_Handler)
+    main                                     0x08001869   Thumb Code   428  main.o(.text.main)
+    set_coil_a                               0x08001a1d   Thumb Code   192  main.o(.text.set_coil_a)
+    set_coil_b                               0x08001add   Thumb Code   192  main.o(.text.set_coil_b)
+    _fp_init                                 0x08001b9d   Thumb Code    26  fpinit.o(x$fpl$fpinit)
+    __fplib_config_fpu_vfp                   0x08001bb5   Thumb Code     0  fpinit.o(x$fpl$fpinit)
+    __fplib_config_pureend_doubles           0x08001bb5   Thumb Code     0  fpinit.o(x$fpl$fpinit)
+    AHBPrescTable                            0x08001bf8   Data          16  system_stm32f4xx.o(.rodata.AHBPrescTable)
+    Region$$Table$$Base                      0x08001c08   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x08001c28   Number         0  anon$$obj.o(Region$$Table)
     GPIO_ENA                                 0x20000000   Data           4  main.o(.data.GPIO_ENA)
     GPIO_ENB                                 0x20000004   Data           4  main.o(.data.GPIO_ENB)
     GPIO_IN1                                 0x20000008   Data           4  main.o(.data.GPIO_IN1)
@@ -1377,9 +1377,9 @@ Memory Map of the image
 
   Image Entry point : 0x08000291
 
-  Load Region LR_1 (Base: 0x08000000, Size: 0x00001c5c, Max: 0xffffffff, ABSOLUTE)
+  Load Region LR_1 (Base: 0x08000000, Size: 0x00001c58, Max: 0xffffffff, ABSOLUTE)
 
-    Execution Region ER_RO (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x00001c2c, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_RO (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x00001c28, Max: 0xffffffff, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -1476,65 +1476,64 @@ Memory Map of the image
     0x0800152a   0x0800152a   0x00000002   PAD
     0x0800152c   0x0800152c   0x00000010   Code   RO          431    .text.HAL_SYSTICK_Config  stm32f4xx_hal_cortex.o
     0x0800153c   0x0800153c   0x00000004   Code   RO           37    .text.HardFault_Handler  stm32f4xx_it.o
-    0x08001540   0x08001540   0x0000010a   Code   RO            6    .text.MX_GPIO_Init  main.o
-    0x0800164a   0x0800164a   0x00000002   PAD
-    0x0800164c   0x0800164c   0x00000004   Code   RO           39    .text.MemManage_Handler  stm32f4xx_it.o
-    0x08001650   0x08001650   0x00000004   Code   RO           35    .text.NMI_Handler   stm32f4xx_it.o
-    0x08001654   0x08001654   0x0000006c   Code   RO          417    .text.NVIC_EncodePriority  stm32f4xx_hal_cortex.o
-    0x080016c0   0x080016c0   0x00000002   Code   RO           49    .text.PendSV_Handler  stm32f4xx_it.o
+    0x08001540   0x08001540   0x00000108   Code   RO            6    .text.MX_GPIO_Init  main.o
+    0x08001648   0x08001648   0x00000004   Code   RO           39    .text.MemManage_Handler  stm32f4xx_it.o
+    0x0800164c   0x0800164c   0x00000004   Code   RO           35    .text.NMI_Handler   stm32f4xx_it.o
+    0x08001650   0x08001650   0x0000006c   Code   RO          417    .text.NVIC_EncodePriority  stm32f4xx_hal_cortex.o
+    0x080016bc   0x080016bc   0x00000002   Code   RO           49    .text.PendSV_Handler  stm32f4xx_it.o
+    0x080016be   0x080016be   0x00000002   PAD
+    0x080016c0   0x080016c0   0x00000002   Code   RO           45    .text.SVC_Handler   stm32f4xx_it.o
     0x080016c2   0x080016c2   0x00000002   PAD
-    0x080016c4   0x080016c4   0x00000002   Code   RO           45    .text.SVC_Handler   stm32f4xx_it.o
-    0x080016c6   0x080016c6   0x00000002   PAD
-    0x080016c8   0x080016c8   0x00000052   Code   RO          433    .text.SysTick_Config  stm32f4xx_hal_cortex.o
-    0x0800171a   0x0800171a   0x00000002   PAD
-    0x0800171c   0x0800171c   0x00000008   Code   RO           51    .text.SysTick_Handler  stm32f4xx_it.o
-    0x08001724   0x08001724   0x000000a0   Code   RO            4    .text.SystemClock_Config  main.o
-    0x080017c4   0x080017c4   0x00000012   Code   RO           77    .text.SystemInit    system_stm32f4xx.o
-    0x080017d6   0x080017d6   0x00000002   PAD
-    0x080017d8   0x080017d8   0x00000004   Code   RO           43    .text.UsageFault_Handler  stm32f4xx_it.o
-    0x080017dc   0x080017dc   0x00000010   Code   RO          413    .text.__NVIC_GetPriorityGrouping  stm32f4xx_hal_cortex.o
-    0x080017ec   0x080017ec   0x00000042   Code   RO          415    .text.__NVIC_SetPriority  stm32f4xx_hal_cortex.o
-    0x0800182e   0x0800182e   0x00000002   PAD
-    0x08001830   0x08001830   0x0000003c   Code   RO          409    .text.__NVIC_SetPriorityGrouping  stm32f4xx_hal_cortex.o
-    0x0800186c   0x0800186c   0x000001b4   Code   RO            2    .text.main          main.o
-    0x08001a20   0x08001a20   0x000000c0   Code   RO            8    .text.set_coil_a    main.o
-    0x08001ae0   0x08001ae0   0x000000c0   Code   RO           10    .text.set_coil_b    main.o
-    0x08001ba0   0x08001ba0   0x0000001a   Code   RO          693    x$fpl$fpinit        fz_wm.l(fpinit.o)
-    0x08001bba   0x08001bba   0x00000002   PAD
-    0x08001bbc   0x08001bbc   0x00000040   Data   RO           26    .rodata..L__const.main.steps  main.o
-    0x08001bfc   0x08001bfc   0x00000010   Data   RO           82    .rodata.AHBPrescTable  system_stm32f4xx.o
-    0x08001c0c   0x08001c0c   0x00000020   Data   RO          754    Region$$Table       anon$$obj.o
+    0x080016c4   0x080016c4   0x00000052   Code   RO          433    .text.SysTick_Config  stm32f4xx_hal_cortex.o
+    0x08001716   0x08001716   0x00000002   PAD
+    0x08001718   0x08001718   0x00000008   Code   RO           51    .text.SysTick_Handler  stm32f4xx_it.o
+    0x08001720   0x08001720   0x000000a0   Code   RO            4    .text.SystemClock_Config  main.o
+    0x080017c0   0x080017c0   0x00000012   Code   RO           77    .text.SystemInit    system_stm32f4xx.o
+    0x080017d2   0x080017d2   0x00000002   PAD
+    0x080017d4   0x080017d4   0x00000004   Code   RO           43    .text.UsageFault_Handler  stm32f4xx_it.o
+    0x080017d8   0x080017d8   0x00000010   Code   RO          413    .text.__NVIC_GetPriorityGrouping  stm32f4xx_hal_cortex.o
+    0x080017e8   0x080017e8   0x00000042   Code   RO          415    .text.__NVIC_SetPriority  stm32f4xx_hal_cortex.o
+    0x0800182a   0x0800182a   0x00000002   PAD
+    0x0800182c   0x0800182c   0x0000003c   Code   RO          409    .text.__NVIC_SetPriorityGrouping  stm32f4xx_hal_cortex.o
+    0x08001868   0x08001868   0x000001b4   Code   RO            2    .text.main          main.o
+    0x08001a1c   0x08001a1c   0x000000c0   Code   RO            8    .text.set_coil_a    main.o
+    0x08001adc   0x08001adc   0x000000c0   Code   RO           10    .text.set_coil_b    main.o
+    0x08001b9c   0x08001b9c   0x0000001a   Code   RO          693    x$fpl$fpinit        fz_wm.l(fpinit.o)
+    0x08001bb6   0x08001bb6   0x00000002   PAD
+    0x08001bb8   0x08001bb8   0x00000040   Data   RO           26    .rodata..L__const.main.steps  main.o
+    0x08001bf8   0x08001bf8   0x00000010   Data   RO           82    .rodata.AHBPrescTable  system_stm32f4xx.o
+    0x08001c08   0x08001c08   0x00000020   Data   RO          754    Region$$Table       anon$$obj.o
 
 
-    Execution Region ER_RW (Exec base: 0x20000000, Load base: 0x08001c2c, Size: 0x00000030, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_RW (Exec base: 0x20000000, Load base: 0x08001c28, Size: 0x00000030, Max: 0xffffffff, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x20000000   0x08001c2c   0x00000004   Data   RW           18    .data.GPIO_ENA      main.o
-    0x20000004   0x08001c30   0x00000004   Data   RW           19    .data.GPIO_ENB      main.o
-    0x20000008   0x08001c34   0x00000004   Data   RW           14    .data.GPIO_IN1      main.o
-    0x2000000c   0x08001c38   0x00000004   Data   RW           15    .data.GPIO_IN2      main.o
-    0x20000010   0x08001c3c   0x00000004   Data   RW           16    .data.GPIO_IN3      main.o
-    0x20000014   0x08001c40   0x00000004   Data   RW           17    .data.GPIO_IN4      main.o
-    0x20000018   0x08001c44   0x00000002   Data   RW           24    .data.PIN_ENA       main.o
-    0x2000001a   0x08001c46   0x00000002   Data   RW           25    .data.PIN_ENB       main.o
-    0x2000001c   0x08001c48   0x00000002   Data   RW           20    .data.PIN_IN1       main.o
-    0x2000001e   0x08001c4a   0x00000002   Data   RW           21    .data.PIN_IN2       main.o
-    0x20000020   0x08001c4c   0x00000002   Data   RW           22    .data.PIN_IN3       main.o
-    0x20000022   0x08001c4e   0x00000002   Data   RW           23    .data.PIN_IN4       main.o
-    0x20000024   0x08001c50   0x00000004   Data   RW           81    .data.SystemCoreClock  system_stm32f4xx.o
-    0x20000028   0x08001c54   0x00000001   Data   RW          539    .data.uwTickFreq    stm32f4xx_hal.o
-    0x20000029   0x08001c55   0x00000003   PAD
-    0x2000002c   0x08001c58   0x00000004   Data   RW          538    .data.uwTickPrio    stm32f4xx_hal.o
+    0x20000000   0x08001c28   0x00000004   Data   RW           18    .data.GPIO_ENA      main.o
+    0x20000004   0x08001c2c   0x00000004   Data   RW           19    .data.GPIO_ENB      main.o
+    0x20000008   0x08001c30   0x00000004   Data   RW           14    .data.GPIO_IN1      main.o
+    0x2000000c   0x08001c34   0x00000004   Data   RW           15    .data.GPIO_IN2      main.o
+    0x20000010   0x08001c38   0x00000004   Data   RW           16    .data.GPIO_IN3      main.o
+    0x20000014   0x08001c3c   0x00000004   Data   RW           17    .data.GPIO_IN4      main.o
+    0x20000018   0x08001c40   0x00000002   Data   RW           24    .data.PIN_ENA       main.o
+    0x2000001a   0x08001c42   0x00000002   Data   RW           25    .data.PIN_ENB       main.o
+    0x2000001c   0x08001c44   0x00000002   Data   RW           20    .data.PIN_IN1       main.o
+    0x2000001e   0x08001c46   0x00000002   Data   RW           21    .data.PIN_IN2       main.o
+    0x20000020   0x08001c48   0x00000002   Data   RW           22    .data.PIN_IN3       main.o
+    0x20000022   0x08001c4a   0x00000002   Data   RW           23    .data.PIN_IN4       main.o
+    0x20000024   0x08001c4c   0x00000004   Data   RW           81    .data.SystemCoreClock  system_stm32f4xx.o
+    0x20000028   0x08001c50   0x00000001   Data   RW          539    .data.uwTickFreq    stm32f4xx_hal.o
+    0x20000029   0x08001c51   0x00000003   PAD
+    0x2000002c   0x08001c54   0x00000004   Data   RW          538    .data.uwTickPrio    stm32f4xx_hal.o
 
 
-    Execution Region ER_ZI (Exec base: 0x20000030, Load base: 0x08001c5c, Size: 0x00000668, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_ZI (Exec base: 0x20000030, Load base: 0x08001c58, Size: 0x00000668, Max: 0xffffffff, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
     0x20000030        -       0x00000060   Zero   RW          619    .bss                c_w.l(libspace.o)
     0x20000090        -       0x00000004   Zero   RW          540    .bss.uwTick         stm32f4xx_hal.o
-    0x20000094   0x08001c5c   0x00000004   PAD
+    0x20000094   0x08001c58   0x00000004   PAD
     0x20000098        -       0x00000200   Zero   RW           68    HEAP                startup_stm32f446xx.o
     0x20000298        -       0x00000400   Zero   RW           67    STACK               startup_stm32f446xx.o
 
@@ -1546,7 +1545,7 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
-      1252          8         64         36          0       5083   main.o
+      1250          8         64         36          0       5084   main.o
         64         26        452          0       1536        972   startup_stm32f446xx.o
        270          0          0          5          4       7537   stm32f4xx_hal.o
        414          0          0          0          0      10116   stm32f4xx_hal_cortex.o
@@ -1558,9 +1557,9 @@ Image component sizes
         18          0         16          4          0       2876   system_stm32f4xx.o
 
     ----------------------------------------------------------------------
-      5976         48        564         48       1544      53921   Object Totals
+      5972         48        564         48       1544      53922   Object Totals
          0          0         32          0          0          0   (incl. Generated)
-        36          0          0          3          4          0   (incl. Padding)
+        34          0          0          3          4          0   (incl. Padding)
 
     ----------------------------------------------------------------------
 
@@ -1611,15 +1610,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-      6648         64        564         48       1640      54449   Grand Totals
-      6648         64        564         48       1640      54449   ELF Image Totals
-      6648         64        564         48          0          0   ROM Totals
+      6644         64        564         48       1640      54450   Grand Totals
+      6644         64        564         48       1640      54450   ELF Image Totals
+      6644         64        564         48          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                 7212 (   7.04kB)
+    Total RO  Size (Code + RO Data)                 7208 (   7.04kB)
     Total RW  Size (RW Data + ZI Data)              1688 (   1.65kB)
-    Total ROM Size (Code + RO Data + RW Data)       7260 (   7.09kB)
+    Total ROM Size (Code + RO Data + RW Data)       7256 (   7.09kB)
 
 ==============================================================================
 
