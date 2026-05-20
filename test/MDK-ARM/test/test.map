@@ -38,7 +38,7 @@ Section Cross References
     main.o(.text.main) refers to main.o(.text.setFrequency) for setFrequency
     main.o(.text.main) refers to main.o(.text.setFullstepHalfstep) for setFullstepHalfstep
     main.o(.text.main) refers to main.o(.text.stift) for stift
-    main.o(.text.main) refers to main.o(.text.goTo) for goTo
+    main.o(.text.main) refers to main.o(.text.move) for move
     main.o(.ARM.exidx.text.main) refers to main.o(.text.main) for [Anonymous Symbol]
     main.o(.ARM.exidx.text.LL_APB2_GRP1_EnableClock) refers to main.o(.text.LL_APB2_GRP1_EnableClock) for [Anonymous Symbol]
     main.o(.ARM.exidx.text.LL_APB1_GRP1_EnableClock) refers to main.o(.text.LL_APB1_GRP1_EnableClock) for [Anonymous Symbol]
@@ -75,9 +75,9 @@ Section Cross References
     main.o(.text.setFrequency) refers to main.o(.text.LL_TIM_EnableCounter) for LL_TIM_EnableCounter
     main.o(.ARM.exidx.text.setFrequency) refers to main.o(.text.setFrequency) for [Anonymous Symbol]
     main.o(.text.setFullstepHalfstep) refers to main.o(.data.maxSteps) for maxSteps
-    main.o(.text.setFullstepHalfstep) refers to main.o(.bss.pattern_1) for pattern_1
+    main.o(.text.setFullstepHalfstep) refers to main.o(.data.pattern_1) for pattern_1
     main.o(.text.setFullstepHalfstep) refers to main.o(.rodata.fullstep_pattern) for fullstep_pattern
-    main.o(.text.setFullstepHalfstep) refers to main.o(.bss.pattern_2) for pattern_2
+    main.o(.text.setFullstepHalfstep) refers to main.o(.data.pattern_2) for pattern_2
     main.o(.text.setFullstepHalfstep) refers to main.o(.rodata.fullstep_pattern_2) for fullstep_pattern_2
     main.o(.text.setFullstepHalfstep) refers to main.o(.rodata.halfstep_pattern) for halfstep_pattern
     main.o(.text.setFullstepHalfstep) refers to main.o(.rodata.halfstep_pattern_2) for halfstep_pattern_2
@@ -85,17 +85,17 @@ Section Cross References
     main.o(.text.stift) refers to main.o(.text.LL_GPIO_ResetOutputPin) for LL_GPIO_ResetOutputPin
     main.o(.text.stift) refers to main.o(.text.LL_GPIO_SetOutputPin) for LL_GPIO_SetOutputPin
     main.o(.ARM.exidx.text.stift) refers to main.o(.text.stift) for [Anonymous Symbol]
-    main.o(.text.goTo) refers to main.o(.bss.endCoord) for endCoord
-    main.o(.text.goTo) refers to main.o(.bss.startCoord) for startCoord
-    main.o(.text.goTo) refers to main.o(.bss.dx) for dx
-    main.o(.text.goTo) refers to main.o(.bss.dy) for dy
-    main.o(.text.goTo) refers to main.o(.data.direction_x) for direction_x
-    main.o(.text.goTo) refers to main.o(.data.direction_y) for direction_y
-    main.o(.text.goTo) refers to main.o(.bss.fehler) for fehler
-    main.o(.text.goTo) refers to main.o(.bss.nSteps) for nSteps
-    main.o(.text.goTo) refers to main.o(.bss.drawing) for drawing
-    main.o(.text.goTo) refers to main.o(.text.LL_TIM_EnableCounter) for LL_TIM_EnableCounter
-    main.o(.ARM.exidx.text.goTo) refers to main.o(.text.goTo) for [Anonymous Symbol]
+    main.o(.text.move) refers to main.o(.bss.endCoord) for endCoord
+    main.o(.text.move) refers to main.o(.bss.startCoord) for startCoord
+    main.o(.text.move) refers to main.o(.bss.d1) for d1
+    main.o(.text.move) refers to main.o(.bss.d2) for d2
+    main.o(.text.move) refers to main.o(.data.direction_1) for direction_1
+    main.o(.text.move) refers to main.o(.data.direction_2) for direction_2
+    main.o(.text.move) refers to main.o(.bss.fehler) for fehler
+    main.o(.text.move) refers to main.o(.bss.nSteps) for nSteps
+    main.o(.text.move) refers to main.o(.bss.drawing) for drawing
+    main.o(.text.move) refers to main.o(.text.LL_TIM_EnableCounter) for LL_TIM_EnableCounter
+    main.o(.ARM.exidx.text.move) refers to main.o(.text.move) for [Anonymous Symbol]
     main.o(.text.USART_Config) refers to main.o(.text.LL_AHB1_GRP1_EnableClock) for LL_AHB1_GRP1_EnableClock
     main.o(.text.USART_Config) refers to stm32f4xx_ll_gpio.o(.text.LL_GPIO_Init) for LL_GPIO_Init
     main.o(.text.USART_Config) refers to main.o(.text.LL_APB1_GRP1_EnableClock) for LL_APB1_GRP1_EnableClock
@@ -143,16 +143,16 @@ Section Cross References
     main.o(.text.TIM2_IRQHandler) refers to main.o(.bss.drawing) for drawing
     main.o(.text.TIM2_IRQHandler) refers to main.o(.text.LL_GPIO_TogglePin) for LL_GPIO_TogglePin
     main.o(.text.TIM2_IRQHandler) refers to main.o(.text.LL_GPIO_ResetOutputPin) for LL_GPIO_ResetOutputPin
-    main.o(.text.TIM2_IRQHandler) refers to main.o(.bss.pattern_1) for pattern_1
+    main.o(.text.TIM2_IRQHandler) refers to main.o(.data.pattern_1) for pattern_1
     main.o(.text.TIM2_IRQHandler) refers to main.o(.bss.step_index_1) for step_index_1
-    main.o(.text.TIM2_IRQHandler) refers to main.o(.bss.pattern_2) for pattern_2
+    main.o(.text.TIM2_IRQHandler) refers to main.o(.data.pattern_2) for pattern_2
     main.o(.text.TIM2_IRQHandler) refers to main.o(.bss.step_index_2) for step_index_2
     main.o(.text.TIM2_IRQHandler) refers to main.o(.text.LL_GPIO_SetOutputPin) for LL_GPIO_SetOutputPin
-    main.o(.text.TIM2_IRQHandler) refers to main.o(.bss.dx) for dx
-    main.o(.text.TIM2_IRQHandler) refers to main.o(.bss.dy) for dy
-    main.o(.text.TIM2_IRQHandler) refers to main.o(.data.direction_x) for direction_x
+    main.o(.text.TIM2_IRQHandler) refers to main.o(.bss.d1) for d1
+    main.o(.text.TIM2_IRQHandler) refers to main.o(.bss.d2) for d2
+    main.o(.text.TIM2_IRQHandler) refers to main.o(.data.direction_1) for direction_1
     main.o(.text.TIM2_IRQHandler) refers to main.o(.bss.fehler) for fehler
-    main.o(.text.TIM2_IRQHandler) refers to main.o(.data.direction_y) for direction_y
+    main.o(.text.TIM2_IRQHandler) refers to main.o(.data.direction_2) for direction_2
     main.o(.text.TIM2_IRQHandler) refers to main.o(.data.maxSteps) for maxSteps
     main.o(.ARM.exidx.text.TIM2_IRQHandler) refers to main.o(.text.TIM2_IRQHandler) for [Anonymous Symbol]
     main.o(.ARM.exidx.text.LL_TIM_ClearFlag_UPDATE) refers to main.o(.text.LL_TIM_ClearFlag_UPDATE) for [Anonymous Symbol]
@@ -178,6 +178,8 @@ Section Cross References
     main.o(.ARM.exidx.text.LL_RCC_GetSysClkSource) refers to main.o(.text.LL_RCC_GetSysClkSource) for [Anonymous Symbol]
     main.o(.ARM.exidx.text.LL_RCC_SetTIMPrescaler) refers to main.o(.text.LL_RCC_SetTIMPrescaler) for [Anonymous Symbol]
     main.o(.ARM.exidx.text.Error_Handler) refers to main.o(.text.Error_Handler) for [Anonymous Symbol]
+    main.o(.data.pattern_1) refers to main.o(.rodata.fullstep_pattern) for fullstep_pattern
+    main.o(.data.pattern_2) refers to main.o(.rodata.fullstep_pattern_2) for fullstep_pattern_2
     stm32f4xx_it.o(.ARM.exidx.text.NMI_Handler) refers to stm32f4xx_it.o(.text.NMI_Handler) for [Anonymous Symbol]
     stm32f4xx_it.o(.ARM.exidx.text.HardFault_Handler) refers to stm32f4xx_it.o(.text.HardFault_Handler) for [Anonymous Symbol]
     stm32f4xx_it.o(.ARM.exidx.text.MemManage_Handler) refers to stm32f4xx_it.o(.text.MemManage_Handler) for [Anonymous Symbol]
@@ -702,7 +704,7 @@ Removing Unused input sections from the image.
     Removing main.o(.ARM.exidx.text.setFrequency), (8 bytes).
     Removing main.o(.ARM.exidx.text.setFullstepHalfstep), (8 bytes).
     Removing main.o(.ARM.exidx.text.stift), (8 bytes).
-    Removing main.o(.ARM.exidx.text.goTo), (8 bytes).
+    Removing main.o(.ARM.exidx.text.move), (8 bytes).
     Removing main.o(.ARM.exidx.text.USART_Config), (8 bytes).
     Removing main.o(.ARM.exidx.text.LL_AHB1_GRP1_EnableClock), (8 bytes).
     Removing main.o(.ARM.exidx.text.LL_USART_Enable), (8 bytes).
@@ -1365,28 +1367,28 @@ Image Symbol Table
     [Anonymous Symbol]                       0x080011ec   Section        0  main.o(.text.SystemClock_Config)
     [Anonymous Symbol]                       0x0800126c   Section        0  system_stm32f4xx.o(.text.SystemInit)
     [Anonymous Symbol]                       0x08001280   Section        0  main.o(.text.TIM2_IRQHandler)
-    [Anonymous Symbol]                       0x080015b8   Section        0  main.o(.text.USART2_IRQHandler)
-    [Anonymous Symbol]                       0x08001754   Section        0  main.o(.text.USART_Config)
-    [Anonymous Symbol]                       0x080017ec   Section        0  stm32f4xx_it.o(.text.UsageFault_Handler)
-    __NVIC_EnableIRQ                         0x080017f1   Thumb Code    48  main.o(.text.__NVIC_EnableIRQ)
-    [Anonymous Symbol]                       0x080017f0   Section        0  main.o(.text.__NVIC_EnableIRQ)
-    __NVIC_GetPriorityGrouping               0x08001821   Thumb Code    16  main.o(.text.__NVIC_GetPriorityGrouping)
-    [Anonymous Symbol]                       0x08001820   Section        0  main.o(.text.__NVIC_GetPriorityGrouping)
-    __NVIC_SetPriority                       0x08001831   Thumb Code    66  main.o(.text.__NVIC_SetPriority)
-    [Anonymous Symbol]                       0x08001830   Section        0  main.o(.text.__NVIC_SetPriority)
-    __NVIC_SetPriorityGrouping               0x08001875   Thumb Code    60  main.o(.text.__NVIC_SetPriorityGrouping)
-    [Anonymous Symbol]                       0x08001874   Section        0  main.o(.text.__NVIC_SetPriorityGrouping)
-    [Anonymous Symbol]                       0x080018b0   Section        0  main.o(.text.befehl)
-    [Anonymous Symbol]                       0x08001970   Section        0  main.o(.text.goTo)
-    [Anonymous Symbol]                       0x08001a78   Section        0  main.o(.text.gpio_Config)
-    [Anonymous Symbol]                       0x08001af8   Section        0  main.o(.text.main)
-    [Anonymous Symbol]                       0x08001be0   Section        0  main.o(.text.setFrequency)
-    [Anonymous Symbol]                       0x08001c38   Section        0  main.o(.text.setFullstepHalfstep)
-    [Anonymous Symbol]                       0x08001cbc   Section        0  main.o(.text.stift)
-    [Anonymous Symbol]                       0x08001d00   Section        0  main.o(.text.tim2_Config)
-    $v0                                      0x08001d42   Number         0  fpinit.o(x$fpl$fpinit)
-    x$fpl$fpinit                             0x08001d42   Section       26  fpinit.o(x$fpl$fpinit)
-    .bss                                     0x20000018   Section       96  libspace.o(.bss)
+    [Anonymous Symbol]                       0x080014ec   Section        0  main.o(.text.USART2_IRQHandler)
+    [Anonymous Symbol]                       0x08001688   Section        0  main.o(.text.USART_Config)
+    [Anonymous Symbol]                       0x08001720   Section        0  stm32f4xx_it.o(.text.UsageFault_Handler)
+    __NVIC_EnableIRQ                         0x08001725   Thumb Code    48  main.o(.text.__NVIC_EnableIRQ)
+    [Anonymous Symbol]                       0x08001724   Section        0  main.o(.text.__NVIC_EnableIRQ)
+    __NVIC_GetPriorityGrouping               0x08001755   Thumb Code    16  main.o(.text.__NVIC_GetPriorityGrouping)
+    [Anonymous Symbol]                       0x08001754   Section        0  main.o(.text.__NVIC_GetPriorityGrouping)
+    __NVIC_SetPriority                       0x08001765   Thumb Code    66  main.o(.text.__NVIC_SetPriority)
+    [Anonymous Symbol]                       0x08001764   Section        0  main.o(.text.__NVIC_SetPriority)
+    __NVIC_SetPriorityGrouping               0x080017a9   Thumb Code    60  main.o(.text.__NVIC_SetPriorityGrouping)
+    [Anonymous Symbol]                       0x080017a8   Section        0  main.o(.text.__NVIC_SetPriorityGrouping)
+    [Anonymous Symbol]                       0x080017e4   Section        0  main.o(.text.befehl)
+    [Anonymous Symbol]                       0x080018a4   Section        0  main.o(.text.gpio_Config)
+    [Anonymous Symbol]                       0x08001924   Section        0  main.o(.text.main)
+    [Anonymous Symbol]                       0x08001a48   Section        0  main.o(.text.move)
+    [Anonymous Symbol]                       0x08001b60   Section        0  main.o(.text.setFrequency)
+    [Anonymous Symbol]                       0x08001bb8   Section        0  main.o(.text.setFullstepHalfstep)
+    [Anonymous Symbol]                       0x08001c3c   Section        0  main.o(.text.stift)
+    [Anonymous Symbol]                       0x08001c80   Section        0  main.o(.text.tim2_Config)
+    $v0                                      0x08001cc2   Number         0  fpinit.o(x$fpl$fpinit)
+    x$fpl$fpinit                             0x08001cc2   Section       26  fpinit.o(x$fpl$fpinit)
+    .bss                                     0x20000020   Section       96  libspace.o(.bss)
     Heap_Mem                                 0x200000b0   Data         512  startup_stm32f446xx.o(HEAP)
     HEAP                                     0x200000b0   Section      512  startup_stm32f446xx.o(HEAP)
     Stack_Mem                                0x200002b0   Data        1024  startup_stm32f446xx.o(STACK)
@@ -1601,46 +1603,46 @@ Image Symbol Table
     SysTick_Handler                          0x080011e9   Thumb Code     2  stm32f4xx_it.o(.text.SysTick_Handler)
     SystemClock_Config                       0x080011ed   Thumb Code   126  main.o(.text.SystemClock_Config)
     SystemInit                               0x0800126d   Thumb Code    18  system_stm32f4xx.o(.text.SystemInit)
-    TIM2_IRQHandler                          0x08001281   Thumb Code   822  main.o(.text.TIM2_IRQHandler)
-    USART2_IRQHandler                        0x080015b9   Thumb Code   410  main.o(.text.USART2_IRQHandler)
-    USART_Config                             0x08001755   Thumb Code   152  main.o(.text.USART_Config)
-    UsageFault_Handler                       0x080017ed   Thumb Code     4  stm32f4xx_it.o(.text.UsageFault_Handler)
-    befehl                                   0x080018b1   Thumb Code   190  main.o(.text.befehl)
-    goTo                                     0x08001971   Thumb Code   264  main.o(.text.goTo)
-    gpio_Config                              0x08001a79   Thumb Code   128  main.o(.text.gpio_Config)
-    main                                     0x08001af9   Thumb Code   230  main.o(.text.main)
-    setFrequency                             0x08001be1   Thumb Code    86  main.o(.text.setFrequency)
-    setFullstepHalfstep                      0x08001c39   Thumb Code   130  main.o(.text.setFullstepHalfstep)
-    stift                                    0x08001cbd   Thumb Code    68  main.o(.text.stift)
-    tim2_Config                              0x08001d01   Thumb Code    66  main.o(.text.tim2_Config)
-    _fp_init                                 0x08001d43   Thumb Code    26  fpinit.o(x$fpl$fpinit)
-    __fplib_config_fpu_vfp                   0x08001d5b   Thumb Code     0  fpinit.o(x$fpl$fpinit)
-    __fplib_config_pureend_doubles           0x08001d5b   Thumb Code     0  fpinit.o(x$fpl$fpinit)
-    AHBPrescTable                            0x08001d5c   Data          16  system_stm32f4xx.o(.rodata.AHBPrescTable)
-    APBPrescTable                            0x08001d6c   Data           8  system_stm32f4xx.o(.rodata.APBPrescTable)
-    fullstep_pattern                         0x08001d74   Data           8  main.o(.rodata.fullstep_pattern)
-    fullstep_pattern_2                       0x08001d7c   Data           8  main.o(.rodata.fullstep_pattern_2)
-    halfstep_pattern                         0x08001d84   Data          16  main.o(.rodata.halfstep_pattern)
-    halfstep_pattern_2                       0x08001d94   Data          16  main.o(.rodata.halfstep_pattern_2)
-    Region$$Table$$Base                      0x08001da4   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x08001dc4   Number         0  anon$$obj.o(Region$$Table)
+    TIM2_IRQHandler                          0x08001281   Thumb Code   618  main.o(.text.TIM2_IRQHandler)
+    USART2_IRQHandler                        0x080014ed   Thumb Code   410  main.o(.text.USART2_IRQHandler)
+    USART_Config                             0x08001689   Thumb Code   152  main.o(.text.USART_Config)
+    UsageFault_Handler                       0x08001721   Thumb Code     4  stm32f4xx_it.o(.text.UsageFault_Handler)
+    befehl                                   0x080017e5   Thumb Code   190  main.o(.text.befehl)
+    gpio_Config                              0x080018a5   Thumb Code   128  main.o(.text.gpio_Config)
+    main                                     0x08001925   Thumb Code   290  main.o(.text.main)
+    move                                     0x08001a49   Thumb Code   280  main.o(.text.move)
+    setFrequency                             0x08001b61   Thumb Code    86  main.o(.text.setFrequency)
+    setFullstepHalfstep                      0x08001bb9   Thumb Code   130  main.o(.text.setFullstepHalfstep)
+    stift                                    0x08001c3d   Thumb Code    68  main.o(.text.stift)
+    tim2_Config                              0x08001c81   Thumb Code    66  main.o(.text.tim2_Config)
+    _fp_init                                 0x08001cc3   Thumb Code    26  fpinit.o(x$fpl$fpinit)
+    __fplib_config_fpu_vfp                   0x08001cdb   Thumb Code     0  fpinit.o(x$fpl$fpinit)
+    __fplib_config_pureend_doubles           0x08001cdb   Thumb Code     0  fpinit.o(x$fpl$fpinit)
+    AHBPrescTable                            0x08001cdc   Data          16  system_stm32f4xx.o(.rodata.AHBPrescTable)
+    APBPrescTable                            0x08001cec   Data           8  system_stm32f4xx.o(.rodata.APBPrescTable)
+    fullstep_pattern                         0x08001cf4   Data           8  main.o(.rodata.fullstep_pattern)
+    fullstep_pattern_2                       0x08001cfc   Data           8  main.o(.rodata.fullstep_pattern_2)
+    halfstep_pattern                         0x08001d04   Data          16  main.o(.rodata.halfstep_pattern)
+    halfstep_pattern_2                       0x08001d14   Data          16  main.o(.rodata.halfstep_pattern_2)
+    Region$$Table$$Base                      0x08001d24   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x08001d44   Number         0  anon$$obj.o(Region$$Table)
     SystemCoreClock                          0x20000000   Data           4  system_stm32f4xx.o(.data.SystemCoreClock)
-    direction_x                              0x20000004   Data           4  main.o(.data.direction_x)
-    direction_y                              0x20000008   Data           4  main.o(.data.direction_y)
+    direction_1                              0x20000004   Data           4  main.o(.data.direction_1)
+    direction_2                              0x20000008   Data           4  main.o(.data.direction_2)
     maxSteps                                 0x2000000c   Data           1  main.o(.data.maxSteps)
-    priority_grouping                        0x20000010   Data           4  main.o(.data.priority_grouping)
-    __libspace_start                         0x20000018   Data          96  libspace.o(.bss)
-    __temporary_stack_top$libspace           0x20000078   Data           0  libspace.o(.bss)
-    cmd                                      0x20000078   Data           4  main.o(.bss.cmd)
-    drawing                                  0x2000007c   Data           1  main.o(.bss.drawing)
-    dx                                       0x20000080   Data           4  main.o(.bss.dx)
-    dy                                       0x20000084   Data           4  main.o(.bss.dy)
-    endCoord                                 0x20000088   Data           8  main.o(.bss.endCoord)
-    fehler                                   0x20000090   Data           4  main.o(.bss.fehler)
-    i                                        0x20000094   Data           4  main.o(.bss.i)
-    nSteps                                   0x20000098   Data           4  main.o(.bss.nSteps)
-    pattern_1                                0x2000009c   Data           4  main.o(.bss.pattern_1)
-    pattern_2                                0x200000a0   Data           4  main.o(.bss.pattern_2)
+    pattern_1                                0x20000010   Data           4  main.o(.data.pattern_1)
+    pattern_2                                0x20000014   Data           4  main.o(.data.pattern_2)
+    priority_grouping                        0x20000018   Data           4  main.o(.data.priority_grouping)
+    __libspace_start                         0x20000020   Data          96  libspace.o(.bss)
+    __temporary_stack_top$libspace           0x20000080   Data           0  libspace.o(.bss)
+    cmd                                      0x20000080   Data           4  main.o(.bss.cmd)
+    d1                                       0x20000084   Data           4  main.o(.bss.d1)
+    d2                                       0x20000088   Data           4  main.o(.bss.d2)
+    drawing                                  0x2000008c   Data           1  main.o(.bss.drawing)
+    endCoord                                 0x20000090   Data           8  main.o(.bss.endCoord)
+    fehler                                   0x20000098   Data           4  main.o(.bss.fehler)
+    i                                        0x2000009c   Data           4  main.o(.bss.i)
+    nSteps                                   0x200000a0   Data           4  main.o(.bss.nSteps)
     startCoord                               0x200000a4   Data           8  main.o(.bss.startCoord)
     step_index_1                             0x200000ac   Data           1  main.o(.bss.step_index_1)
     step_index_2                             0x200000ad   Data           1  main.o(.bss.step_index_2)
@@ -1653,9 +1655,9 @@ Memory Map of the image
 
   Image Entry point : 0x080001c5
 
-  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x00001de0, Max: 0x00080000, ABSOLUTE)
+  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x00001d68, Max: 0x00080000, ABSOLUTE)
 
-    Execution Region ER_IROM1 (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x00001dc4, Max: 0x00080000, ABSOLUTE)
+    Execution Region ER_IROM1 (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x00001d44, Max: 0x00080000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -1829,66 +1831,66 @@ Memory Map of the image
     0x0800126a   0x0800126a   0x00000002   PAD
     0x0800126c   0x0800126c   0x00000012   Code   RO          584    .text.SystemInit    system_stm32f4xx.o
     0x0800127e   0x0800127e   0x00000002   PAD
-    0x08001280   0x08001280   0x00000336   Code   RO           63    .text.TIM2_IRQHandler  main.o
-    0x080015b6   0x080015b6   0x00000002   PAD
-    0x080015b8   0x080015b8   0x0000019a   Code   RO           53    .text.USART2_IRQHandler  main.o
-    0x08001752   0x08001752   0x00000002   PAD
-    0x08001754   0x08001754   0x00000098   Code   RO           37    .text.USART_Config  main.o
-    0x080017ec   0x080017ec   0x00000004   Code   RO          149    .text.UsageFault_Handler  stm32f4xx_it.o
-    0x080017f0   0x080017f0   0x00000030   Code   RO           45    .text.__NVIC_EnableIRQ  main.o
-    0x08001820   0x08001820   0x00000010   Code   RO           23    .text.__NVIC_GetPriorityGrouping  main.o
-    0x08001830   0x08001830   0x00000042   Code   RO           19    .text.__NVIC_SetPriority  main.o
-    0x08001872   0x08001872   0x00000002   PAD
-    0x08001874   0x08001874   0x0000003c   Code   RO           17    .text.__NVIC_SetPriorityGrouping  main.o
-    0x080018b0   0x080018b0   0x000000be   Code   RO           61    .text.befehl        main.o
-    0x0800196e   0x0800196e   0x00000002   PAD
-    0x08001970   0x08001970   0x00000108   Code   RO           35    .text.goTo          main.o
-    0x08001a78   0x08001a78   0x00000080   Code   RO           47    .text.gpio_Config   main.o
-    0x08001af8   0x08001af8   0x000000e6   Code   RO           11    .text.main          main.o
-    0x08001bde   0x08001bde   0x00000002   PAD
-    0x08001be0   0x08001be0   0x00000056   Code   RO           29    .text.setFrequency  main.o
-    0x08001c36   0x08001c36   0x00000002   PAD
-    0x08001c38   0x08001c38   0x00000082   Code   RO           31    .text.setFullstepHalfstep  main.o
-    0x08001cba   0x08001cba   0x00000002   PAD
-    0x08001cbc   0x08001cbc   0x00000044   Code   RO           33    .text.stift         main.o
-    0x08001d00   0x08001d00   0x00000042   Code   RO           27    .text.tim2_Config   main.o
-    0x08001d42   0x08001d42   0x0000001a   Code   RO          716    x$fpl$fpinit        fz_wm.l(fpinit.o)
-    0x08001d5c   0x08001d5c   0x00000010   Data   RO          589    .rodata.AHBPrescTable  system_stm32f4xx.o
-    0x08001d6c   0x08001d6c   0x00000008   Data   RO          590    .rodata.APBPrescTable  system_stm32f4xx.o
-    0x08001d74   0x08001d74   0x00000008   Data   RO          111    .rodata.fullstep_pattern  main.o
-    0x08001d7c   0x08001d7c   0x00000008   Data   RO          112    .rodata.fullstep_pattern_2  main.o
-    0x08001d84   0x08001d84   0x00000010   Data   RO          113    .rodata.halfstep_pattern  main.o
-    0x08001d94   0x08001d94   0x00000010   Data   RO          114    .rodata.halfstep_pattern_2  main.o
-    0x08001da4   0x08001da4   0x00000020   Data   RO          777    Region$$Table       anon$$obj.o
+    0x08001280   0x08001280   0x0000026a   Code   RO           63    .text.TIM2_IRQHandler  main.o
+    0x080014ea   0x080014ea   0x00000002   PAD
+    0x080014ec   0x080014ec   0x0000019a   Code   RO           53    .text.USART2_IRQHandler  main.o
+    0x08001686   0x08001686   0x00000002   PAD
+    0x08001688   0x08001688   0x00000098   Code   RO           37    .text.USART_Config  main.o
+    0x08001720   0x08001720   0x00000004   Code   RO          149    .text.UsageFault_Handler  stm32f4xx_it.o
+    0x08001724   0x08001724   0x00000030   Code   RO           45    .text.__NVIC_EnableIRQ  main.o
+    0x08001754   0x08001754   0x00000010   Code   RO           23    .text.__NVIC_GetPriorityGrouping  main.o
+    0x08001764   0x08001764   0x00000042   Code   RO           19    .text.__NVIC_SetPriority  main.o
+    0x080017a6   0x080017a6   0x00000002   PAD
+    0x080017a8   0x080017a8   0x0000003c   Code   RO           17    .text.__NVIC_SetPriorityGrouping  main.o
+    0x080017e4   0x080017e4   0x000000be   Code   RO           61    .text.befehl        main.o
+    0x080018a2   0x080018a2   0x00000002   PAD
+    0x080018a4   0x080018a4   0x00000080   Code   RO           47    .text.gpio_Config   main.o
+    0x08001924   0x08001924   0x00000122   Code   RO           11    .text.main          main.o
+    0x08001a46   0x08001a46   0x00000002   PAD
+    0x08001a48   0x08001a48   0x00000118   Code   RO           35    .text.move          main.o
+    0x08001b60   0x08001b60   0x00000056   Code   RO           29    .text.setFrequency  main.o
+    0x08001bb6   0x08001bb6   0x00000002   PAD
+    0x08001bb8   0x08001bb8   0x00000082   Code   RO           31    .text.setFullstepHalfstep  main.o
+    0x08001c3a   0x08001c3a   0x00000002   PAD
+    0x08001c3c   0x08001c3c   0x00000044   Code   RO           33    .text.stift         main.o
+    0x08001c80   0x08001c80   0x00000042   Code   RO           27    .text.tim2_Config   main.o
+    0x08001cc2   0x08001cc2   0x0000001a   Code   RO          716    x$fpl$fpinit        fz_wm.l(fpinit.o)
+    0x08001cdc   0x08001cdc   0x00000010   Data   RO          589    .rodata.AHBPrescTable  system_stm32f4xx.o
+    0x08001cec   0x08001cec   0x00000008   Data   RO          590    .rodata.APBPrescTable  system_stm32f4xx.o
+    0x08001cf4   0x08001cf4   0x00000008   Data   RO          111    .rodata.fullstep_pattern  main.o
+    0x08001cfc   0x08001cfc   0x00000008   Data   RO          112    .rodata.fullstep_pattern_2  main.o
+    0x08001d04   0x08001d04   0x00000010   Data   RO          113    .rodata.halfstep_pattern  main.o
+    0x08001d14   0x08001d14   0x00000010   Data   RO          114    .rodata.halfstep_pattern_2  main.o
+    0x08001d24   0x08001d24   0x00000020   Data   RO          777    Region$$Table       anon$$obj.o
 
 
-    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x08001dc8, Size: 0x000006b0, Max: 0x00020000, ABSOLUTE)
+    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x08001d48, Size: 0x000006b0, Max: 0x00020000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x20000000   0x08001dc8   0x00000004   Data   RW          588    .data.SystemCoreClock  system_stm32f4xx.o
-    0x20000004   0x08001dcc   0x00000004   Data   RW          118    .data.direction_x   main.o
-    0x20000008   0x08001dd0   0x00000004   Data   RW          119    .data.direction_y   main.o
-    0x2000000c   0x08001dd4   0x00000001   Data   RW          115    .data.maxSteps      main.o
-    0x2000000d   0x08001dd5   0x00000003   PAD
-    0x20000010   0x08001dd8   0x00000004   Data   RW          120    .data.priority_grouping  main.o
-    0x20000014   0x08001ddc   0x00000004   PAD
-    0x20000018        -       0x00000060   Zero   RW          642    .bss                c_w.l(libspace.o)
-    0x20000078        -       0x00000004   Zero   RW          130    .bss.cmd            main.o
-    0x2000007c        -       0x00000001   Zero   RW          122    .bss.drawing        main.o
-    0x2000007d   0x08001ddc   0x00000003   PAD
-    0x20000080        -       0x00000004   Zero   RW          125    .bss.dx             main.o
-    0x20000084        -       0x00000004   Zero   RW          126    .bss.dy             main.o
-    0x20000088        -       0x00000008   Zero   RW          124    .bss.endCoord       main.o
-    0x20000090        -       0x00000004   Zero   RW          127    .bss.fehler         main.o
-    0x20000094        -       0x00000004   Zero   RW          129    .bss.i              main.o
-    0x20000098        -       0x00000004   Zero   RW          121    .bss.nSteps         main.o
-    0x2000009c        -       0x00000004   Zero   RW          131    .bss.pattern_1      main.o
-    0x200000a0        -       0x00000004   Zero   RW          132    .bss.pattern_2      main.o
-    0x200000a4        -       0x00000008   Zero   RW          123    .bss.startCoord     main.o
-    0x200000ac        -       0x00000001   Zero   RW          116    .bss.step_index_1   main.o
-    0x200000ad        -       0x00000001   Zero   RW          117    .bss.step_index_2   main.o
-    0x200000ae   0x08001ddc   0x00000002   PAD
+    0x20000000   0x08001d48   0x00000004   Data   RW          588    .data.SystemCoreClock  system_stm32f4xx.o
+    0x20000004   0x08001d4c   0x00000004   Data   RW          120    .data.direction_1   main.o
+    0x20000008   0x08001d50   0x00000004   Data   RW          121    .data.direction_2   main.o
+    0x2000000c   0x08001d54   0x00000001   Data   RW          117    .data.maxSteps      main.o
+    0x2000000d   0x08001d55   0x00000003   PAD
+    0x20000010   0x08001d58   0x00000004   Data   RW          115    .data.pattern_1     main.o
+    0x20000014   0x08001d5c   0x00000004   Data   RW          116    .data.pattern_2     main.o
+    0x20000018   0x08001d60   0x00000004   Data   RW          122    .data.priority_grouping  main.o
+    0x2000001c   0x08001d64   0x00000004   PAD
+    0x20000020        -       0x00000060   Zero   RW          642    .bss                c_w.l(libspace.o)
+    0x20000080        -       0x00000004   Zero   RW          132    .bss.cmd            main.o
+    0x20000084        -       0x00000004   Zero   RW          127    .bss.d1             main.o
+    0x20000088        -       0x00000004   Zero   RW          128    .bss.d2             main.o
+    0x2000008c        -       0x00000001   Zero   RW          124    .bss.drawing        main.o
+    0x2000008d   0x08001d64   0x00000003   PAD
+    0x20000090        -       0x00000008   Zero   RW          126    .bss.endCoord       main.o
+    0x20000098        -       0x00000004   Zero   RW          129    .bss.fehler         main.o
+    0x2000009c        -       0x00000004   Zero   RW          131    .bss.i              main.o
+    0x200000a0        -       0x00000004   Zero   RW          123    .bss.nSteps         main.o
+    0x200000a4        -       0x00000008   Zero   RW          125    .bss.startCoord     main.o
+    0x200000ac        -       0x00000001   Zero   RW          118    .bss.step_index_1   main.o
+    0x200000ad        -       0x00000001   Zero   RW          119    .bss.step_index_2   main.o
+    0x200000ae   0x08001d64   0x00000002   PAD
     0x200000b0        -       0x00000200   Zero   RW            2    HEAP                startup_stm32f446xx.o
     0x200002b0        -       0x00000400   Zero   RW            1    STACK               startup_stm32f446xx.o
 
@@ -1900,18 +1902,18 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
-      3680          0         48         13         51      14765   main.o
-        64         26        452          0       1536        840   startup_stm32f446xx.o
-        28          0          0          0          0       1002   stm32f4xx_it.o
-       918          0          0          0          0       5054   stm32f4xx_ll_gpio.o
-       600         14          0          0          0      10985   stm32f4xx_ll_rcc.o
-       464          0          0          0          0       9576   stm32f4xx_ll_tim.o
-       570          0          0          0          0       4997   stm32f4xx_ll_usart.o
-        94          0          0          0          0       7118   stm32f4xx_ll_utils.o
-        18          0         24          4          0       2583   system_stm32f4xx.o
+      3552          0         48         21         43      14729   main.o
+        64         26        452          0       1536        880   startup_stm32f446xx.o
+        28          0          0          0          0       1042   stm32f4xx_it.o
+       918          0          0          0          0       5094   stm32f4xx_ll_gpio.o
+       600         14          0          0          0      11025   stm32f4xx_ll_rcc.o
+       464          0          0          0          0       9616   stm32f4xx_ll_tim.o
+       570          0          0          0          0       5037   stm32f4xx_ll_usart.o
+        94          0          0          0          0       7158   stm32f4xx_ll_utils.o
+        18          0         24          4          0       2623   system_stm32f4xx.o
 
     ----------------------------------------------------------------------
-      6514         40        556         20       1596      56920   Object Totals
+      6386         40        556         28       1588      57204   Object Totals
          0          0         32          0          0          0   (incl. Generated)
         78          0          0          3          9          0   (incl. Padding)
 
@@ -1963,15 +1965,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-      7064         56        556         20       1692      57372   Grand Totals
-      7064         56        556         20       1692      57372   ELF Image Totals
-      7064         56        556         20          0          0   ROM Totals
+      6936         56        556         28       1684      57656   Grand Totals
+      6936         56        556         28       1684      57656   ELF Image Totals
+      6936         56        556         28          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                 7620 (   7.44kB)
+    Total RO  Size (Code + RO Data)                 7492 (   7.32kB)
     Total RW  Size (RW Data + ZI Data)              1712 (   1.67kB)
-    Total ROM Size (Code + RO Data + RW Data)       7640 (   7.46kB)
+    Total ROM Size (Code + RO Data + RW Data)       7520 (   7.34kB)
 
 ==============================================================================
 
