@@ -4,6 +4,9 @@ import turtle
 
 
 def to_c_list(py_list, linebreak=False):
+    if len(py_list) == 0:
+        return "{}"
+    
     if type(py_list[0]) == list:
         if linebreak:
             return "{" + ",\n".join(map(to_c_list, py_list)) + "}"
@@ -30,17 +33,34 @@ for name in glyph_names:
         glyph = glyf[name]
         coordinates, endPts, flags = glyph.getCoordinates(font["glyf"])
 
-        all_coords[ord(name)] = [[co[0], co[1]] for co in coordinates]
-        all_endpts[ord(name)] = endPts
+        coords = [[co[0], co[1]] for co in coordinates]
+        new_coords = []
+        new_endPts = []
+
+        for i in range(len(endPts)):
+            if i == 0:
+                ep = endPts[i]
+                new_coords.extend(coords[:int(ep/2)+1])
+                new_endPts.append(int(ep/2))
+            else:
+                ep = endPts[i]
+                ep1 = endPts[i-1]
+                start = ep1 + 1
+
+                new_coords.extend(coords[start:start + int((ep - start)/2)+1])
+                new_endPts.append(int(ep/2)+1)
+
+        all_coords[ord(name)] = new_coords
+        all_endpts[ord(name)] = new_endPts
         all_flags[ord(name)] = flags
 
 print(all_coords)
 
 with open(parent_path.joinpath("fontdata.txt"), mode='w', encoding='ascii') as f:
-    f.write("int coordinates[] = ")
+    f.write("int coordinates[][][] = ")
     f.write(to_c_list(all_coords, True))
     f.write("\n\n")
-    f.write("int endPts[] = ")
+    f.write("int endPts[][] = ")
     f.write(to_c_list(all_endpts))
     
 
