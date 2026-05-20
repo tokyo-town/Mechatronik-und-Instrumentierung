@@ -60,7 +60,7 @@ void befehl(char[4]);
 void setFrequency(int);
 void setFullstepHalfstep(uint8_t); // 0=Fullstep, 1=Halfstep
 void stift(uint8_t); // 0= Stift in der Luft, 1= Stift auf Papier
-void goTo(Coord);
+void move(Coord);
 void zeichne(Coord[100]);
 
 /* USER CODE END PFP */
@@ -106,8 +106,8 @@ volatile uint8_t maxSteps = 4; //mit setFullstepHalfstep veränderbar!
 
 volatile int8_t step_index_1 = 0;
 volatile int8_t step_index_2 = 0;
-int direction_x = 1; // 1,-1 oder 0 für festen Stopp
-int direction_y = 1;
+int direction_1 = 1; // 1,-1 oder 0 für festen Stopp
+int direction_2 = 1;
 
 int priority_grouping = 6;//2 Gruppen- und 8 Subprioritäten für NVIC
 
@@ -117,8 +117,8 @@ volatile uint8_t drawing = 0;
 
 volatile Coord startCoord = {0,0};
 volatile Coord endCoord = {0,0};
-volatile int dx = 0;
-volatile int dy = 0;
+volatile int d1 = 0;
+volatile int d2 = 0;
 volatile int fehler = 0;
 
 Coord rechteck[4] = { {100,0}, {100,100}, {0,100}, {0,0}};
@@ -169,63 +169,66 @@ int main(void)
 	
 	stift(1);
 	
-	/* schräges Quadrat im normalen Quadrat
-	goTo((Coord) {100,100});
-	goTo((Coord) {200,0});
-	goTo((Coord) {100,-100});
-	goTo((Coord) {0,0});
-	goTo((Coord) {100,-100});
-	goTo((Coord) {200,0});
-	goTo((Coord) {100,100});
-	goTo((Coord) {0,0});*/
-	goTo((Coord) {100,0});
-	goTo((Coord) {100,100});
-	goTo((Coord) {0,100});
-	goTo((Coord) {0,0});
+	/* schräges Quadrat im normalen Quadrat*/
+	move((Coord) {100,100});
+	move((Coord) {200,0});
+	move((Coord) {100,-100});
+	move((Coord) {0,0});
+	move((Coord) {100,-100});
+	move((Coord) {200,0});
+	move((Coord) {100,100});
+	move((Coord) {0,0});
+	move((Coord) {100,0});
+	move((Coord) {100,100});
+	move((Coord) {0,100});
+	move((Coord) {0,0});
 	
 	
-//	goTo((Coord) {100,10});
-//	goTo((Coord) {0,0});
-//	goTo((Coord) {100,10});
-//	goTo((Coord) {0,0});
-//	goTo((Coord) {100,10});
-//	goTo((Coord) {0,0});
-//	goTo((Coord) {100,10});
-//	goTo((Coord) {0,0});
-//	goTo((Coord) {100,10});
-//	goTo((Coord) {0,0});
+//	move((Coord) {100,10});
+//	move((Coord) {0,0});
+//	move((Coord) {100,10});
+//	move((Coord) {0,0});
+//	move((Coord) {100,10});
+//	move((Coord) {0,0});
+//	move((Coord) {100,10});
+//	move((Coord) {0,0});
+//	move((Coord) {100,10});
+//	move((Coord) {0,0});
 	
 	/* A 
-  goTo((Coord){100,200});
-  goTo((Coord){200,0});
-  goTo((Coord){150,100});
-  goTo((Coord){100,100});
-	goTo((Coord) {0,0});*/
+  move((Coord){100,200});
+  move((Coord){200,0});
+  move((Coord){150,100});
+  move((Coord){100,100});
+	move((Coord) {0,0});*/
 	
-	/* Zickzack
-	goTo( (Coord) {200,10});
-	goTo( (Coord) {0,20});
-	goTo( (Coord) {200,30});
-	goTo( (Coord) {0,40});
-	goTo( (Coord) {0,0});
-	goTo( (Coord) {200,-10});
-	goTo( (Coord) {0,-20});
-	goTo( (Coord) {200,-30});
-	goTo( (Coord) {0,-40});
-	goTo( (Coord) {0,0});*/
+	/* Zickzack 
+	move( (Coord) {200,10});
+	move( (Coord) {0,20});
+	move( (Coord) {200,30});
+	move( (Coord) {0,40});
+	move( (Coord) {0,0}); 
+	move( (Coord) {200,-10});
+	move( (Coord) {0,-20});
+	move( (Coord) {200,-30});
+	move( (Coord) {0,-40});
+	move( (Coord) {0,0});
+	*/
 	
 	/* Stern 
-	goTo((Coord){   0, 100});
-	goTo((Coord){  30,  30});
-	goTo((Coord){ 100,  30});
-	goTo((Coord){  45, -10});
-	goTo((Coord){  70,-100});
-	goTo((Coord){   0, -40});
-	goTo((Coord){ -70,-100});
-	goTo((Coord){ -45, -10});
-	goTo((Coord){-100,  30});
-	goTo((Coord){ -30,  30});
-	goTo((Coord){   0, 100});
+	stift(0);
+	move((Coord){   0, 100});
+	stift(1);
+	move((Coord){  30,  30});
+	move((Coord){ 100,  30});
+	move((Coord){  45, -10});
+	move((Coord){  70,-100});
+	move((Coord){   0, -40});
+	move((Coord){ -70,-100});
+	move((Coord){ -45, -10});
+	move((Coord){-100,  30});
+	move((Coord){ -30,  30});
+	move((Coord){   0, 100});
 	*/
 	
 	stift(0);
@@ -420,39 +423,21 @@ void TIM2_IRQHandler(){
 	
   // beide Motoren in gleiche Richtung -> x-Achse, beide Motoren entgegengesetzt -> y-Achse
   // Motor1 still und Motor2++ -> Diagonale y=x, Motor1++ und Motor2 still -> Diagonale y=-x
-  if(dx >= dy){
+  if(d1 >= d2){
 		//x-Schritt, da schnelle Richtung
-		step_index_1 += direction_x;
-		step_index_2 += direction_x;
-		fehler -= dy;
+		step_index_1 += direction_1;
+		fehler -= d2;
 		if(fehler <= 0){
-			fehler += dx;
-			if(direction_x*direction_y == 1){
-				//xy-Schritt -> Motor1 still
-				step_index_1 -= direction_x;
-			}
-			else if(direction_x*direction_y == -1){
-				// y=-x -> Motor2 still
-				step_index_2 -= direction_x;
-			}
+			step_index_2 += direction_2;
+			fehler += d1;
 		} 
   }
-  else{ // dx < dy
-		step_index_1 -= direction_y;
-		step_index_2 += direction_y;
-		fehler -= dx;
+  else{ // d1 < d2
+		step_index_2 += direction_2;
+		fehler -= d1;
 		if(fehler <= 0){
-			fehler += dy;
-			if(direction_x*direction_y == 1){
-				//xy-Schritt -> Motor1 still
-				step_index_1 += direction_y;
-			}
-			else if(direction_x*direction_y == -1){
-				// y=-x -> Motor2 still
-				step_index_2 -= direction_y;
-				// kann es sein, dass hier noch step_index_1 += 2*direction_y hingehört? Nein, weil dirY = -dirX
-				//step_index_1 += 2*direction_y;
-			}
+			step_index_1 += direction_1;
+			fehler += d2;
 		} 
   }
 
@@ -531,28 +516,28 @@ void stift(uint8_t in){
 	}
 }
 
-void goTo(Coord input){ // Bresenham Algorythmus
+void move(Coord input){ // Bresenham Algorythmus
 	endCoord = input;
-	dx = input.x - startCoord.x;
-	dy = input.y - startCoord.y;
+	d1 = (input.x - startCoord.x) + (input.y - startCoord.y); // = dx + dy
+	d2 = (input.x - startCoord.x) - (input.y - startCoord.y); // = dy - dy
 	
-	direction_x = (dx >= 0) ? 1 : -1;
-	direction_y = (dy >= 0) ? 1 : -1;
-	dx = dx * direction_x;
-	dy = dy * direction_y;
+	direction_1 = (d1 >= 0) ? 1 : -1;
+	direction_2 = (d2 >= 0) ? 1 : -1;
+	d1 = d1 * direction_1;
+	d2 = d2 * direction_2;
 
-	if(dx >= dy){
-		fehler = dx/2; // "/2", damit bei x:y=2:1 der y-Schritt in der Mitte passiert
-		nSteps = dx;
+	if(d1 >= d2){
+		fehler = d1/2; // "/2", damit bei x:y=2:1 der y-Schritt in der Mitte passiert
+		nSteps = d1;
 	}
 	else{
-		fehler = dy/2; // runden nicht schlimm?
-		nSteps = dy;
+		fehler = d2/2; // runden nicht schlimm?
+		nSteps = d2;
 	}
 	
 	drawing = 1;
 	LL_TIM_EnableCounter(TIM2);
-  while(drawing){} // busy-wait, damit nicht schon der nächste goTo ausgelöst wird
+  while(drawing){} // busy-wait, damit nicht schon der nächste move ausgelöst wird
 }
 
 void zeichne(Coord input[100]){
