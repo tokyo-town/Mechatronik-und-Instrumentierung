@@ -50,8 +50,8 @@ for name in glyph_names:
                 new_coords.extend(coords[start:start + int((ep - start)/2)+1])
                 new_endPts.append(int(ep/2)+1)
 
-        all_coords[ord(name)] = new_coords
-        all_endpts[ord(name)] = new_endPts
+        all_coords[ord(name)] = new_coords[::2]
+        all_endpts[ord(name)] = [int(ep/2) for ep in new_endPts]
         all_flags[ord(name)] = flags
 
 print(all_coords)

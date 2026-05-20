@@ -21,7 +21,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "letters.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -62,6 +62,15 @@ void setFullstepHalfstep(uint8_t); // 0=Fullstep, 1=Halfstep
 void stift(uint8_t); // 0= Stift in der Luft, 1= Stift auf Papier
 void move(Coord);
 void zeichne(Coord[100]);
+
+void travel(Coord co);
+void draw(Coord co);
+
+void drawLetter(char letter, Coord pos);
+void letterRect(char letter, float* x, float* y, float* w, float* h);
+void drawText(char* chars, Coord pos);
+
+float LETTER_SCALE = 0.08;
 
 /* USER CODE END PFP */
 
@@ -170,18 +179,18 @@ int main(void)
 	stift(1);
 	
 	/* schräges Quadrat im normalen Quadrat*/
-	move((Coord) {100,100});
-	move((Coord) {200,0});
-	move((Coord) {100,-100});
-	move((Coord) {0,0});
-	move((Coord) {100,-100});
-	move((Coord) {200,0});
-	move((Coord) {100,100});
-	move((Coord) {0,0});
-	move((Coord) {100,0});
-	move((Coord) {100,100});
-	move((Coord) {0,100});
-	move((Coord) {0,0});
+//	move((Coord) {100,100});
+//	move((Coord) {200,0});
+//	move((Coord) {100,-100});
+//	move((Coord) {0,0});
+//	move((Coord) {100,-100});
+//	move((Coord) {200,0});
+//	move((Coord) {100,100});
+//	move((Coord) {0,0});
+//	move((Coord) {100,0});
+//	move((Coord) {100,100});
+//	move((Coord) {0,100});
+//	move((Coord) {0,0});
 	
 	
 //	move((Coord) {100,10});
@@ -230,6 +239,9 @@ int main(void)
 	move((Coord){ -30,  30});
 	move((Coord){   0, 100});
 	*/
+	
+	//drawLetter('A', (Coord) {0, 0});
+	drawText("Mechatronik", (Coord) {0, 0});
 	
 	stift(0);
  
@@ -581,6 +593,150 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
+
+/* -------------------------------------
+   Draw Letters
+------------------------------------- */
+
+void drawLetter(char letter, Coord pos) {
+    int letterIndex;
+
+    short int (*coordinates)[100][2];
+    unsigned char (*endPts)[3];
+
+    int endpt_i = 0;
+    int endpt;
+
+    int i;
+
+    if (letter >= 'a') {
+        letterIndex = letter - 'a';
+				coordinates = &lowercase_letters_coordinates[letterIndex];
+				endPts = &lowercase_letters_endPts[letterIndex];
+
+    } else {
+        letterIndex = letter - 'A';
+        coordinates = &uppercase_letters_coordinates[letterIndex];
+        endPts = &uppercase_letters_endPts[letterIndex];
+    }
+
+    endpt = (*endPts)[endpt_i];
+
+    for (i = 0; i < 100; i++) {
+
+        if (&coordinates[i][0] == 0 && &coordinates[i][1] == 0) {
+            break;
+        }
+
+        Coord co;
+        co.x = (int) ( (*coordinates)[i][0] * LETTER_SCALE + pos.x);
+        co.y = (int) ( (*coordinates)[i][1] * LETTER_SCALE + pos.y);
+
+        if (i == 0 || i - 1 == endpt) {
+            travel(co);
+        } else {
+            draw(co);
+        }
+
+        if (i - 2 == endpt) {
+            endpt_i++;
+            endpt = (*endPts)[endpt_i];
+        }
+    }
+}
+
+
+void drawText(char* chars, Coord pos) {
+    Coord start = pos;
+    int i;
+
+    for (i = 0; chars[i] != '\0'; i++) {
+        char c = chars[i];
+
+        if (c == '\n') {
+            start.x = pos.x;
+            start.y -= 100;
+
+        } else if (c == ' ') {
+            start.x += 20;
+
+        } else {
+            float x, y, w, h;
+
+            drawLetter(c, start);
+            letterRect(c, &x, &y, &w, &h);
+
+            start.x += w;
+        }
+    }
+}
+
+
+void letterRect(
+    char letter,
+    float* x,
+    float* y,
+    float* w,
+    float* h
+) {
+    int letterIndex;
+
+    short int (*coordinates)[100][2];
+
+    int i;
+
+    int min_x;
+    int min_y;
+    int max_x;
+    int max_y;
+
+    if (letter >= 'a') {
+        letterIndex = letter - 'a';
+        coordinates = &lowercase_letters_coordinates[letterIndex];
+    } else {
+
+        letterIndex = letter - 'A';
+        coordinates = &uppercase_letters_coordinates[letterIndex];
+    }
+
+    min_x = (*coordinates)[0][0];
+    min_y = (*coordinates)[0][1];
+
+    max_x = (*coordinates)[0][0];
+    max_y = (*coordinates)[0][1];
+
+    for (i = 0; i < 400; i++) {
+        int px = (*coordinates)[i][0];
+        int py = (*coordinates)[i][1];
+
+        if (px == 0 && py == 0) {
+            break;
+        }
+
+        if (px < min_x) min_x = px;
+        if (py < min_y) min_y = py;
+
+        if (px > max_x) max_x = px;
+        if (py > max_y) max_y = py;
+    }
+
+    *x = min_x * LETTER_SCALE;
+    *y = min_y * LETTER_SCALE;
+
+    *w = (max_x - min_x) * LETTER_SCALE;
+    *h = (max_y - min_y) * LETTER_SCALE;
+}
+
+
+void travel(Coord co) {
+    stift(0);
+    move(co);
+}
+
+void draw(Coord co) {
+    stift(1);
+    move(co);
+}
 
 /* USER CODE END 4 */
 
