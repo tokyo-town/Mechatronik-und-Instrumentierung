@@ -9,7 +9,9 @@ STEP_PATTERN = [
     [0, 0]
 ]
 
-STEP_FACTOR = 1  # 1 ... full step, 0.5 ... half step, 0.25 ... quarter step, ...
+STEP_FACTOR = 1  # 1 ... full step, 0.5 ... 
+#
+# #äöhalf step, 0.25 ... quarter step, ...
 
 # FULL_STEP_SIZE_U = 10 * math.pi * 7.5 / 360
 # FULL_STEP_SIZE_V = 10 * math.pi * 7.5 / 360
@@ -294,7 +296,7 @@ def drawText(chars, pos):
     start = pos
     for char in chars:
         if char == "\n":
-            start = Coord(pos.x, pos.y - 100)
+            start = Coord(pos.x, start.y - 100)
         elif char == " ":
             start = Coord(start.x + 20, start.y)
         else:
