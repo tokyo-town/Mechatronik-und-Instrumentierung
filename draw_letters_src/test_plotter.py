@@ -219,21 +219,12 @@ def draw(co):
 # -------------------------------------
 
 def drawLetter(letter, pos):
-    if ord(letter) >= 97:
-        letterIndex = ord(letter) - 97
-        coordinates = lowercase_letters_coordinates
-        endPts = lowercase_letters_endPts
-    else:
-        letterIndex = ord(letter) - 65
-        coordinates = uppercase_letters_coordinates
-        endPts = uppercase_letters_endPts
+    letterIndex = ord(letter)
 
     endpt_i = 0
     endpt = endPts[letterIndex][endpt_i]
 
-    for i in range(400):
-        if len(coordinates[letterIndex]) <= i:
-            break
+    for i in range(len(coordinates[letterIndex])):
         # Stop if coordinate is (0,0)
         if coordinates[letterIndex][i][0] == 0 and coordinates[letterIndex][i][1] == 0:
             break
@@ -249,21 +240,19 @@ def drawLetter(letter, pos):
             draw(co)
         
         if i-2 == endpt:
-            if endpt_i < len(endPts[letterIndex]):
+            if endpt_i < len(endPts[letterIndex])-1:
                 endpt_i += 1
                 endpt = endPts[letterIndex][endpt_i]
 
 
-def letterRect(letter):
-    if ord(letter) >= 97:
-        letterIndex = ord(letter) - 97
-        coordinates = lowercase_letters_coordinates
-        endPts = lowercase_letters_endPts
-    else:
-        letterIndex = ord(letter) - 65
-        coordinates = uppercase_letters_coordinates
-        endPts = uppercase_letters_endPts
-    
+def letterSpace(letter):
+    letterIndex = ord(letter)
+    advance_width, left_side_bearing = hmtx[letterIndex]
+    return advance_width * LETTER_SCALE, left_side_bearing * LETTER_SCALE
+
+
+def letterRect(letter): 
+    letterIndex = ord(letter)   
     max_x = coordinates[letterIndex][0][0]
     max_y = coordinates[letterIndex][0][1]
     min_x = coordinates[letterIndex][0][0]
@@ -296,13 +285,11 @@ def drawText(chars, pos):
     start = pos
     for char in chars:
         if char == "\n":
-            start = Coord(pos.x, start.y - 100)
-        elif char == " ":
-            start = Coord(start.x + 20, start.y)
+            start = Coord(pos.x, start.y - 1000 * LETTER_SCALE)
         else:
             drawLetter(char, start)
-            x, y, w, h = letterRect(char)
-            start = Coord(start.x + w, start.y)
+            advance, lbearing = letterSpace(char)
+            start = Coord(start.x + advance - lbearing, start.y)
 
 
 # ---------------------------------
@@ -310,6 +297,9 @@ def drawText(chars, pos):
 # ---------------------------------
 
 travel(Coord(0, 0))
-drawText("Hello World\nThe quick brown fox jumps\nover the lazy dog", Coord(-350, 0))
+# drawText("Hello World\nThe quick brown fox jumps\nover the lazy dog", Coord(-350, 0))
+# drawText("!""#$%&'()*+,-./:;<=>?\n@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_\n`abcdefghijklmnopqrstuvwxyz{|}~", Coord(-350, 0))
+drawLetter("a", Coord(0, 0))
+
 
 turtle.done()

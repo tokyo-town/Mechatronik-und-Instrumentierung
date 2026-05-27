@@ -78,6 +78,13 @@ void drawLetter(char letter, Coord pos);
 void letterRect(char letter, float* x, float* y, float* w, float* h);
 void drawText(char* chars, Coord pos);
 
+void stift(uint8_t down) {
+    if (down) {
+        penDown();
+    } else {
+        penUp();
+    }
+}
 
 /*
     MOVEMENT
@@ -187,13 +194,13 @@ void TIM2_IRQHandler() {
 ----------------------------- */
 
 void travel(Coord co) {
-    penUp();
-    moveAbs(co);
+    stift(0);
+    move(co);
 }
 
 void draw(Coord co) {
-    penDown();
-    moveAbs(co);
+    stift(1);
+    move(co);
 }
 
 
@@ -205,8 +212,8 @@ void draw(Coord co) {
 void drawLetter(char letter, Coord pos) {
     int letterIndex;
 
-    const int (*coordinates)[2];
-    const int* endPts;
+    short int (*coordinates)[100][2];
+    unsigned char (*endPts)[3];
 
     int endpt_i = 0;
     int endpt;
@@ -215,26 +222,26 @@ void drawLetter(char letter, Coord pos) {
 
     if (letter >= 'a') {
         letterIndex = letter - 'a';
-        coordinates = lowercase_letters_coordinates[letterIndex];
-        endPts = lowercase_letters_endPts[letterIndex];
+				coordinates = &lowercase_letters_coordinates[letterIndex];
+				endPts = &lowercase_letters_endPts[letterIndex];
 
     } else {
         letterIndex = letter - 'A';
-        coordinates = uppercase_letters_coordinates[letterIndex];
-        endPts = uppercase_letters_endPts[letterIndex];
+        coordinates = &uppercase_letters_coordinates[letterIndex];
+        endPts = &uppercase_letters_endPts[letterIndex];
     }
 
-    endpt = endPts[endpt_i];
+    endpt = (*endPts)[endpt_i];
 
-    for (i = 0; i < 400; i++) {
+    for (i = 0; i < 100; i++) {
 
-        if (coordinates[i][0] == 0 && coordinates[i][1] == 0) {
+        if (&coordinates[i][0] == 0 && &coordinates[i][1] == 0) {
             break;
         }
 
         Coord co;
-        co.x = coordinates[i][0] * LETTER_SCALE + pos.x;
-        co.y = coordinates[i][1] * LETTER_SCALE + pos.y;
+        co.x = (int) ( (*coordinates)[i][0] * LETTER_SCALE + pos.x);
+        co.y = (int) ( (*coordinates)[i][1] * LETTER_SCALE + pos.y);
 
         if (i == 0 || i - 1 == endpt) {
             travel(co);
@@ -244,7 +251,7 @@ void drawLetter(char letter, Coord pos) {
 
         if (i - 2 == endpt) {
             endpt_i++;
-            endpt = endPts[endpt_i];
+            endpt = (*endPts)[endpt_i];
         }
     }
 }
@@ -285,7 +292,7 @@ void letterRect(
 ) {
     int letterIndex;
 
-    const int (*coordinates)[2];
+    short int (*coordinates)[100][2];
 
     int i;
 
@@ -296,22 +303,22 @@ void letterRect(
 
     if (letter >= 'a') {
         letterIndex = letter - 'a';
-        coordinates = lowercase_letters_coordinates[letterIndex];
+        coordinates = &lowercase_letters_coordinates[letterIndex];
     } else {
 
         letterIndex = letter - 'A';
-        coordinates = uppercase_letters_coordinates[letterIndex];
+        coordinates = &uppercase_letters_coordinates[letterIndex];
     }
 
-    min_x = coordinates[0][0];
-    min_y = coordinates[0][1];
+    min_x = (*coordinates)[0][0];
+    min_y = (*coordinates)[0][1];
 
-    max_x = coordinates[0][0];
-    max_y = coordinates[0][1];
+    max_x = (*coordinates)[0][0];
+    max_y = (*coordinates)[0][1];
 
     for (i = 0; i < 400; i++) {
-        int px = coordinates[i][0];
-        int py = coordinates[i][1];
+        int px = (*coordinates)[i][0];
+        int py = (*coordinates)[i][1];
 
         if (px == 0 && py == 0) {
             break;
@@ -330,6 +337,7 @@ void letterRect(
     *w = (max_x - min_x) * LETTER_SCALE;
     *h = (max_y - min_y) * LETTER_SCALE;
 }
+
 
 
 /* ---------------------------------
