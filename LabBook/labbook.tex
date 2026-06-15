@@ -152,6 +152,76 @@ Foto siehe Abbildung \ref{fig:vca}. Die Kennzahlen sind in Tabelle \ref{tab:vca}
 \includepdf[fitpaper=true]
 {images/Lichtschranke}     %file name of title page
 
+
+\chapter{Aufgabe}
+
+Ziel der Übung ist es nun, eine Schreibmaschine mit den analysierten Komponenten zu bauen.
+Ein Stift soll dabei entlang zwei Achsen bewegt werden, um auf einem Blatt Papier einen vom PC gesendeten Text in einer Schreibschrift zu schreiben.
+Dabei ist auch ein Heben und Senken des Stiftes notwendig.
+
+\chapter{Aufbau}
+
+Die Führung des Stiftes erfolgt nach dem Core-XY-Prinzip über Linearführungen, die mit zwei Stepper-Motoren angetrieben werden.
+
+Die Core-XY-Steuerung ist schematisch in Abbildung \ref{fig:corexy} dargestellt. Die Motoren bewegen die Achsen über zwei unabhängige Riemenschleifen.
+Bewegen sich beide Motoren in die gleiche Richtung, bewegt sich der Stift entlang der waagrechten Achse.
+Bewegen sich die Motoren in entgegengesetzte Richtungen, bewegt sich der Stift entlang der senkrechten Achse.
+Bewegt sich nur ein Motor, bewegt sich der Stift diagonal.
+Die diagonale Bewegung ist dabei stets eine Summe von Bewegungen entlang beider Achsen.
+Wird ein Motor beispielsweise um 10 Schritte gedreht, während der andere feststeht, bewegt sich der Stift um 10 Schritte entlang beider Achsen,
+also $10\cdot\sqrt{2}\approx 14.1$ Schritte diagonal.
+Die Unabhängigkeit der Achsen entkoppelt deren Dynamik und ermöglicht eine präzise, verzerrungsarme Bewegung.
+
+Das Heben und Seken des Stiftes erfolgt über einen Lorentz-Aktuator (VCA). Der Stift ist mit einer Feder nach oben vorgespannt, sodass er im unbestromten Zustand angehoben ist.
+Wird der Aktuator mit Strom versorgt, wirkt eine Kraft nach unten, die den Stift auf das Papier drückt.
+
+Der reale Aufbau ist in Abbildung \ref{fig:aufbau} zu sehen.
+
+\bild{htb}{0.7}{images/corexy}{Core-XY-Steuerung}{fig:corexy}
+\bild{htb}{0.7}{images/aufbau}{Aufbau der Schreibmaschine}{fig:aufbau}
+
+
+\chapter{Spezifikationen}
+
+Die minimale Auflösung der Maschene ist durch die Schrittweite der Stepper-Motoren gegeben. Im Fullstep-Betrieb beträgt die Schrittweite $\phi=7,5^{\circ}$.
+Werden die Riemen direkt über eine Riemenscheibe mit $d=\qty{10}{\milli\meter}$ Durchmesser geführt, ergibt sich eine Schrittweite von ca. $d\pi\cdot\frac{\phi}{360^\circ}\approx \qty{0.65}{\milli\meter}$ entlang der beiden Achsen.
+Die Auflösung entlang der Diagonalen beträgt damit ca. $\qty{0.93}{\milli\meter}$.
+
+Im Halfstep-Betrieb ist die Schrittweite halb so groß und die Auflösung (entlang der Achsen) kann auf ca. \qty{0.33}{\milli\meter} erhöht werden.
+Durch Microstepping mit PWM kann die Auflösung weiter erhöht werden, in der Praxis zeigt sich jedoch, dass dadurch eher die Linienqualität verbessert wird, während die tatsächliche Auflösung nicht wesentlich erhöht wird.
+
+Für die realistische Auflösung des Systems ist die Mechanik ausschlaggebend. Aufgrund von Toleranzen und Spiel der Stifthalterung, Linearführungen und Riemen kommt es zu
+Ungenauigkeiten, die die Auflösung auf ca. $\epsilon=\qty{1}{\milli\meter}$ begrenzen.
+
+
+Die Geschwindigkeit der Maschine ist durch die maximale Schrittfrequenz der Stepper-Motoren begrenzt. Die Motoren können im Fullstep- und Halfstep-Betrieb mit bis zu ca. $f=\qty{200}{\hertz}$ betrieben werden.
+Im Halfstep-Betrieb ergibt dies eine maximale Geschwindigkeit von ca. \qty{58}{\milli\meter\per\second} entlang der Achsen und \qty{41}{\milli\meter\per\second} entlang der Diagonalen.
+
+
+Um die Spezifikationen zu überprüfen, wird ein Testmuster (sh. Abb.~\ref{fig:testmuster}) gezeichnet.
+Es werden acht Linien in einem Sternmuster von außen zur Mitte gezeichnet, wobei die Linien jeweils um \qty{45}{\degree} zueinander versetzt sind.
+Das Muster ist 200x200 Steps groß, was einer Länge der vier axialen Segmente von $\qty{29}{\milli\meter}$ und der vier diagonalen Segmente (100 + 100 Steps) von $\qty{41}{\milli\meter}$ entspricht.
+Da der Stift von außen nach innen bewegt wird, beträgt die Gesamtstrecke $s=4\cdot 2 \cdot 100 + 4 \cdot 2 \dot 200 \,\text{Steps} = 2400 \,\text{Steps}$.
+
+\textbf{Rahmenbedingungen:} Es wird eine weitgehend vibrationsfreie Umgebung angenommen. Es erfolgen keine Störungen durch z.B. Stöße. Das Papier ist
+auf der Zeichenfläche mit Klebeband fixiert. Das Zeichnen erfolgt mit einem Fineliner. Dessen Strichstärke beträgt nominal \qty{0.4}{\mm}, aufgrund von Anpressdruck und
+Verlaufen der Farbe ins Papier beträgt die Strichstärke real ca. \qty{1}{\mm} - gerade an der mechanischen Toleranz.
+Da der Halfstep-Betrieb bereits hinreichend genau ist (Auflösung liegt deutlich unterhalb der mechanischen Toleranz), wird dieser Betriebsmodus für die Tests angenommen.
+
+\begin{itemize}
+\item \textbf{Genauigkeit:} Die Absolutgenauigkeit kann durch den Versatz der Linienenden in der Mitte des Sternmusters abgemessen werden. Dieser Versatz muss $\delta\le\qty{1}{\mm}$ betragen.
+\item \textbf{Wiederholbarkeit:} Die Wiederholgenauigkeit wird durch mehrfaches Überschreiben des Musters gemessen.
+Die Linien dürfen sich am Ende in keinem weiteren Radius als $\qty{1.25}{\mm}$ (mechanische Toleranz + Zusatztoleranz) von der ursprünglichen Linie bewegt haben.
+\item \textbf{Geschwindigkeit:} Die Geschwindigkeit wird durch die Zeitmessung für das Zeichnen des Musters überprüft. Sie muss $t=\frac{s}{f}=\qty{12}{\second}\pm\qty{0.5}{\s}$ betragen.
+\end{itemize}
+
+Für einen Text in Schreibschrift mit einer Zeilenhöhe von ca. $\qty{10}{\milli\meter}$ wird eine Kurvenlänge von durchschnittlich $\qty{25}{\mm}$ pro Buchstabe angenommen.
+Unter der Annahme, dass nur die Diagonalgeschwindigkeit erreicht werden kann, ergibt sich eine Schreibgeschwindigkeit von ca. $\frac{25}{41}\approx 0.6 \,\frac{\text{Buchstaben}}{\text{s}}$.
+
+Der Text "Mechatronik und Instrumentierung" besteht aus 32 Zeichen (inklusive Leerzeichen) und wird damit in ca. \qty{19.5}{\s} geschrieben.
+
+\bild{htb}{0.7}{images/test_pattern}{Testmuster}{fig:testmuster}
+
 % \bibliographystyle{plain}
 % \bibliography{Literatur}
 \end{document}
