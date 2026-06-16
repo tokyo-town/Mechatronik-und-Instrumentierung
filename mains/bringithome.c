@@ -60,14 +60,14 @@ const uint16_t sinusTabelle[256] = { // nur positive Sinushalbwelle, Werte von 0
 383,371,360,348,337,325,314,302,290,279,267,255,243,231,219,207,
 195,183,171,159,147,135,122,110,98,86,74,61,49,37,25,12
 };
-uint8_t amplitude = 30; // Amplitude für PWM-Signal von 0 bis 100, werden im TimerHandler gesetzt!!!!!!
+uint8_t amplitude = 30; // Amplitude fï¿½r PWM-Signal von 0 bis 100, werden im TimerHandler gesetzt!!!!!!
 //uint8_t amplitude_2 = 30;
 uint8_t runAmplitude  = 40;
 uint8_t holdAmplitude = 10;
 
 volatile int16_t step_index_1 = 0;
 volatile int16_t step_index_2 = 0;
-int direction_1 = 1; // 1,-1 oder 0 für festen Stopp
+int direction_1 = 1; // 1,-1 oder 0 fï¿½r festen Stopp
 int direction_2 = 1;
 
 volatile uint8_t drawing = 0;
@@ -77,7 +77,7 @@ volatile Coord endCoord = {0,0};
 volatile int d1 = 0;
 volatile int d2 = 0;
 volatile int fehler = 0;
-//gleiche Berechnung für nächste Befehle im Voraus abspeichern?
+//gleiche Berechnung fï¿½r nï¿½chste Befehle im Voraus abspeichern?
 
 int main(void)
 {
@@ -167,7 +167,7 @@ void gpio_Config()
     GPIO_InitStructure.Speed = LL_GPIO_SPEED_FREQ_HIGH;
     GPIO_InitStructure.OutputType = LL_GPIO_OUTPUT_PUSHPULL;
     GPIO_InitStructure.Pull = LL_GPIO_PULL_NO;
-    GPIO_InitStructure.Alternate = LL_GPIO_AF_2;  // abhängig von Pin-Wahl!
+    GPIO_InitStructure.Alternate = LL_GPIO_AF_2;  // abhï¿½ngig von Pin-Wahl!
 
     LL_GPIO_Init(GPIOB, &GPIO_InitStructure);
 
@@ -334,7 +334,7 @@ void tim3und4_Config()
     LL_TIM_OC_EnablePreload(TIM3, LL_TIM_CHANNEL_CH4);
 
     /****************************************************************
-     * Kanäle aktivieren
+     * Kanï¿½le aktivieren
      ****************************************************************/
 
     LL_TIM_CC_EnableChannel(TIM4,
@@ -349,7 +349,7 @@ void tim3und4_Config()
           LL_TIM_CHANNEL_CH3 |
           LL_TIM_CHANNEL_CH4);
 
-    LL_TIM_EnableARRPreload(TIM4);//ARR lässt sich nun direkt überschreiben
+    LL_TIM_EnableARRPreload(TIM4);//ARR lï¿½sst sich nun direkt ï¿½berschreiben
     LL_TIM_EnableARRPreload(TIM3);
 }
 
@@ -372,7 +372,7 @@ void tim6_Config(){
 	
 	LL_TIM_Init(TIM6, &tim6);
 	
-	LL_TIM_EnableARRPreload(TIM6);//ARR lässt sich nun direkt überschreiben
+	LL_TIM_EnableARRPreload(TIM6);//ARR lï¿½sst sich nun direkt ï¿½berschreiben
 	
   LL_TIM_EnableIT_UPDATE(TIM6);
 	
@@ -489,10 +489,10 @@ void USART2_IRQHandler(){ // parsed bis \n oder bis 32 chars
 }
 
 void setPWMs(uint16_t step, uint8_t motor){
-    uint16_t faktor = maxSteps/(4*microsteps); // ein Fullstep = 90° und dieser wird in Microsteps aufgeteilt
+    uint16_t faktor = maxSteps/(4*microsteps); // ein Fullstep = 90ï¿½ und dieser wird in Microsteps aufgeteilt
 	
     uint16_t a = sinusTabelle[(faktor*step)% (maxSteps/2)]; // statt % lieber &0xFF ?
-    uint16_t b = sinusTabelle[(faktor*step + maxSteps/4) % (maxSteps/2)]; // 90°-Verschiebung -> Kosinus
+    uint16_t b = sinusTabelle[(faktor*step + maxSteps/4) % (maxSteps/2)]; // 90ï¿½-Verschiebung -> Kosinus
 
     TIM_TypeDef *tim;
     if(motor == 1){tim = TIM4;}
@@ -538,7 +538,9 @@ void setFrequency(int zahl){ // maximale Frequenz bei 500kHz, stepper schaffen e
 	else{
 		if(zahl > 500000){
 			zahl = 500000;
-		}
+		}else if(zahl < 16){  // ARR darf maximal 2^16-1=65535 groÃŸ sein
+      zahl = 16;
+    }
 		LL_TIM_SetCounter(TIM6,0);
 		LL_TIM_SetAutoReload(TIM6, (1000000/zahl) -1); // T = 1MHz/f
 		LL_TIM_EnableCounter(TIM6);
@@ -646,7 +648,7 @@ void move(Coord input){ // Bresenham Algorythmus
 	
 	drawing = 1;
 	LL_TIM_EnableCounter(TIM6);
-  while(drawing){} // busy-wait, damit nicht schon der nächste move ausgelöst wird
+  while(drawing){} // busy-wait, damit nicht schon der nï¿½chste move ausgelï¿½st wird
 }
 
 void homing(){
@@ -669,7 +671,7 @@ void homing(){
 	
 	reportString("home");
   // move((Coord){0,0});
-  //TODO: Richtige Routine einfügen
+  //TODO: Richtige Routine einfï¿½gen
 }
 
 /**
