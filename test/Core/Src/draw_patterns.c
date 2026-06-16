@@ -2,7 +2,7 @@
 
 void move_pattern(enum Pattern pattern) {
 	switch(pattern) {
-		case RECTANGLE:
+		case SQUARE:
 			move((Coord) {100,0});
 			move((Coord) {100,100});
 			move((Coord) {0,100});

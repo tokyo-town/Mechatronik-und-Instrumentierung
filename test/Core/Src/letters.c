@@ -31,7 +31,7 @@ void drawLetter(char letter, Coord pos) {
 
     for (i = 0; i < 100; i++) {
 
-        if (&coordinates[i][0] == 0 && &coordinates[i][1] == 0) {
+        if ((*coordinates)[i][0] == 0 && (*coordinates)[i][1] == 0) {
             break;
         }
 
@@ -39,15 +39,15 @@ void drawLetter(char letter, Coord pos) {
         co.x = (int) ( (*coordinates)[i][0] * LETTER_SCALE + pos.x);
         co.y = (int) ( (*coordinates)[i][1] * LETTER_SCALE + pos.y);
 
-        if (i == 0 || i - 1 == endpt) {
+        if (i == 0) {
+						travel(co);
+				} else if (i - 1 == endpt) {
             travel(co);
-        } else {
-            draw(co);
-        }
-
-        if (i - 2 == endpt) {
+					
             endpt_i++;
             endpt = (*endPts)[endpt_i];
+        } else {
+            draw(co);
         }
     }
 }

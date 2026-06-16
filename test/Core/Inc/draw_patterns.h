@@ -5,7 +5,7 @@
 #define __DRAW_PATTERNS
 
 enum Pattern {
-	RECTANGLE,
+	SQUARE,
 	DOUBLE_SQUARE,
 	LETTER_A,
 	ZIG_ZAG,
