@@ -3,7 +3,7 @@
   ******************************************************************************
   * @file           : main.c
   * @brief          : PWM Motorsteuerung mit Richtungssteuerung
-  * @todo           : Homing Routine, Busy-wait (drawing) entfernen, Move-Queue, Beschleunigung, tim6-Handler entlasten
+  * @todo           : Homing Routine, Busy-wait (drawing) entfernen, Move-Queue, amplitude-Frequenz, Beschleunigung, tim6-Handler entlasten
   ******************************************************************************
   */
 /* USER CODE END Header */
@@ -33,6 +33,7 @@ void stift(uint8_t); // 0= Stift in der Luft, 1= Stift auf Papier
 void move(Coord);
 void homing();
 void report(char symbol);
+void reportString(char *string);
 
 /* Private variables ---------------------------------------------------------*/
 uint32_t nSteps = 0; //nur positive Zahlen!
@@ -61,7 +62,7 @@ const uint16_t sinusTabelle[256] = { // nur positive Sinushalbwelle, Werte von 0
 };
 uint8_t amplitude = 30; // Amplitude für PWM-Signal von 0 bis 100, werden im TimerHandler gesetzt!!!!!!
 //uint8_t amplitude_2 = 30;
-uint8_t runAmplitude  = 80;
+uint8_t runAmplitude  = 40;
 uint8_t holdAmplitude = 10;
 
 volatile int16_t step_index_1 = 0;
@@ -99,24 +100,24 @@ int main(void)
   tim3und4_Config(); // beide PWMs
   tim6_Config();
 
-  setMicrosteps(1);
+  setMicrosteps(16);
 	//nSteps = 48*microsteps*5; // 5 Umdrehungen
-	setFrequency(250*microsteps); // damit man auf 200Hz pro Fullstep kommt
+	setFrequency(100*microsteps); // damit man auf 200Hz pro Fullstep kommt
   // PWM und Steps trennen!!! PWM bei ~20kHz und steps bei so 1-5kHz laut Chat
   LL_TIM_EnableCounter(TIM4); // start PWM
   LL_TIM_EnableCounter(TIM3); // start PWM
   //LL_TIM_EnableCounter(TIM6); // start steps
 
-  /*stift(1);
+  /**/stift(1);
 	move((Coord){   0, 100});
 	move((Coord){   100, 100});
 	move((Coord){   100, 0});
 	move((Coord){   0, 0});
-  stift(0);*/
+  stift(0);
+	
+	reportString("Start");
 
-LL_USART_TransmitData8(USART2,'H');
-
-/* Stern */
+/* Stern 
 	stift(0);
 	move((Coord){   0, 100});
 	stift(1);
@@ -130,7 +131,9 @@ LL_USART_TransmitData8(USART2,'H');
 	move((Coord){-100,  30});
 	move((Coord){ -30,  30});
 	move((Coord){   0, 100});
-  stift(0);
+  stift(0);*/
+	
+	//homing();
 	
   while (1)
   {
@@ -215,6 +218,35 @@ void gpio_Config()
 	  GPIO_InitStructure.Alternate = LL_GPIO_AF_7;//verbindet A2 und A3 mit USART2
 	  
 	  LL_GPIO_Init(GPIOA,&GPIO_InitStructure);
+		
+		
+		
+		// Light barrier
+	  LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOA);
+
+    GPIO_InitStructure.Mode = LL_GPIO_MODE_INPUT;
+	  GPIO_InitStructure.Pin = LL_GPIO_PIN_15;
+	  GPIO_InitStructure.Pull = LL_GPIO_PULL_NO;
+	  GPIO_InitStructure.Speed = LL_GPIO_SPEED_FREQ_HIGH;
+	  GPIO_InitStructure.Alternate = 0;
+	  
+	  LL_GPIO_Init(GPIOA,&GPIO_InitStructure);
+		
+		
+		LL_SYSCFG_SetEXTISource(LL_SYSCFG_EXTI_PORTA, LL_SYSCFG_EXTI_LINE15);
+		
+		LL_EXTI_InitTypeDef EXTI_InitStruct;
+		EXTI_InitStruct.Line_0_31 = LL_EXTI_LINE_15;
+		EXTI_InitStruct.Mode = LL_EXTI_MODE_IT;
+		EXTI_InitStruct.Trigger = LL_EXTI_TRIGGER_RISING;
+		
+		EXTI_InitStruct.LineCommand = ENABLE;
+		
+		LL_EXTI_Init(&EXTI_InitStruct);
+		
+		NVIC_SetPriority(EXTI15_10_IRQn, 0);
+		NVIC_EnableIRQ(EXTI15_10_IRQn);
+		
 
 }
 
@@ -242,7 +274,7 @@ void USART_Config(){
 	LL_USART_EnableIT_RXNE(USART2);
 	
 	//int encoded_priority = NVIC_EncodePriority(priority_grouping,1,1);//Gruppe=1, Sub=1
-	NVIC_SetPriority(USART2_IRQn, 1);//encoded_priority);
+	NVIC_SetPriority(USART2_IRQn, 2);//encoded_priority);
   NVIC_EnableIRQ(USART2_IRQn);
 }
 
@@ -346,11 +378,11 @@ void tim6_Config(){
 	
  // int encoded_priority = NVIC_EncodePriority(priority_grouping,1,3);//Gruppe=1, Sub=1
 //	NVIC_SetPriority(TIM6_DAC_IRQn, encoded_priority);
-	NVIC_SetPriority(TIM6_DAC_IRQn, 0);
+	NVIC_SetPriority(TIM6_DAC_IRQn, 1);
 	NVIC_EnableIRQ(TIM6_DAC_IRQn);	
 }
 
-void TIM6_DAC_IRQHandler(){	
+void TIM6_DAC_IRQHandler(){
 	if(nSteps > 0){
 	  amplitude = runAmplitude;
 	  setPWMs(step_index_1,1);
@@ -389,7 +421,7 @@ void TIM6_DAC_IRQHandler(){
 	  }
 		nSteps--;
 	}
-	else if(nSteps == 0){
+	else{
 		amplitude = holdAmplitude;
 	  setPWMs(step_index_1,1);
 	  setPWMs(step_index_2,2);
@@ -397,6 +429,7 @@ void TIM6_DAC_IRQHandler(){
 		LL_TIM_SetCounter(TIM6, 0);
     startCoord = endCoord;
 		drawing = 0;
+		nSteps = 0;
 		
 		report('K');
 	}
@@ -405,10 +438,30 @@ void TIM6_DAC_IRQHandler(){
 	LL_TIM_ClearFlag_UPDATE(TIM6);
 }
 
+void EXTI15_10_IRQHandler() {
+	if (LL_EXTI_IsActiveFlag_0_31(LL_EXTI_LINE_15)) {
+		nSteps = 0;
+//		startCoord.x = 0;
+		LL_EXTI_ClearFlag_0_31(LL_EXTI_LINE_15);	
+	}
+	else if (LL_EXTI_IsActiveFlag_0_31(LL_EXTI_LINE_15)) {
+		nSteps = 0;
+//		startCoord.y = 0;
+		LL_EXTI_ClearFlag_0_31(LL_EXTI_LINE_15);	
+	}
+}
+
+
 void report(char symbol) {
 	while(!LL_USART_IsActiveFlag_TXE(USART2)){};//warten bis Transmit register wieder frei ist
 	LL_USART_TransmitData8(USART2,symbol);
+}
+
+void reportString(char *string) {
+	while (*string) {
+		report(*string++);
 	}
+}
 
 void USART2_IRQHandler(){ // parsed bis \n oder bis 32 chars
 	static char cmd[32];
@@ -597,7 +650,25 @@ void move(Coord input){ // Bresenham Algorythmus
 }
 
 void homing(){
-  move((Coord){0,0});
+//	while (1) {
+//		report((char) LL_GPIO_IsInputPinSet(GPIOA, LL_GPIO_PIN_15));
+//		LL_mDelay(50);
+//	}
+	
+//	int i = -1;
+	
+	reportString("homing");
+//	while (!LL_GPIO_IsInputPinSet(GPIOA, LL_GPIO_PIN_15)) {
+//		move((Coord){i--,0});
+//	}
+	
+	move((Coord) {-10000,0});
+	startCoord = (Coord) {0,0};
+	move((Coord) {0,-10000});
+	startCoord = (Coord) {0,0};
+	
+	reportString("home");
+  // move((Coord){0,0});
   //TODO: Richtige Routine einfügen
 }
 
