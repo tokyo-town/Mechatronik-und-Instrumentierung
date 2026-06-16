@@ -27,15 +27,19 @@ void setPWMs(uint16_t step, uint8_t motor);
 void setFrequency(int zahl);
 void setMicrosteps(uint16_t ms);
 static int parseInt(const char *s, int *i);
-void befehl(char[32]);
+//void befehl(char[32]);
+void befehl(char input[32]);
 void stift(uint8_t); // 0= Stift in der Luft, 1= Stift auf Papier
 void move(Coord);
 void homing();
+void report(char symbol);
 
 /* Private variables ---------------------------------------------------------*/
 uint32_t nSteps = 0; //nur positive Zahlen!
 uint16_t microsteps = 4; // bei 8 microsteps wird der erste und letzte "verschluckt"
 const uint16_t maxSteps = 512;
+const char EOL_CHAR = '$';
+
 
 const uint16_t sinusTabelle[256] = { // nur positive Sinushalbwelle, Werte von 0 bis 1000
 0,12,25,37,49,61,74,86,98,110,122,135,147,159,171,183,
@@ -91,10 +95,11 @@ int main(void)
 
   
   gpio_Config();
+  USART_Config();
   tim3und4_Config(); // beide PWMs
   tim6_Config();
 
-  setMicrosteps(4);
+  setMicrosteps(1);
 	//nSteps = 48*microsteps*5; // 5 Umdrehungen
 	setFrequency(250*microsteps); // damit man auf 200Hz pro Fullstep kommt
   // PWM und Steps trennen!!! PWM bei ~20kHz und steps bei so 1-5kHz laut Chat
@@ -109,7 +114,7 @@ int main(void)
 	move((Coord){   0, 0});
   stift(0);*/
 
-
+LL_USART_TransmitData8(USART2,'H');
 
 /* Stern */
 	stift(0);
@@ -236,8 +241,8 @@ void USART_Config(){
 	//Interrupt wenn receive register not empty
 	LL_USART_EnableIT_RXNE(USART2);
 	
-	int encoded_priority = NVIC_EncodePriority(priority_grouping,1,1);//Gruppe=1, Sub=1
-	NVIC_SetPriority(USART2_IRQn, encoded_priority);
+	//int encoded_priority = NVIC_EncodePriority(priority_grouping,1,1);//Gruppe=1, Sub=1
+	NVIC_SetPriority(USART2_IRQn, 1);//encoded_priority);
   NVIC_EnableIRQ(USART2_IRQn);
 }
 
@@ -392,22 +397,27 @@ void TIM6_DAC_IRQHandler(){
 		LL_TIM_SetCounter(TIM6, 0);
     startCoord = endCoord;
 		drawing = 0;
-    while(!LL_USART_IsActiveFlag_TXE(USART2)){};//warten bis Transmit register wieder frei ist
-	  LL_USART_TransmitData8(USART2,'K');
+		
+		report('K');
 	}
 
 	// SEHR WICHTIG!!!
 	LL_TIM_ClearFlag_UPDATE(TIM6);
 }
 
-volatile char cmd[32];
-volatile uint8_t i = 0;
+void report(char symbol) {
+	while(!LL_USART_IsActiveFlag_TXE(USART2)){};//warten bis Transmit register wieder frei ist
+	LL_USART_TransmitData8(USART2,symbol);
+	}
 
 void USART2_IRQHandler(){ // parsed bis \n oder bis 32 chars
+	static char cmd[32];
+	static uint8_t i = 0;
+	
 	if(LL_USART_IsActiveFlag_RXNE(USART2)){
     int recvd = LL_USART_ReceiveData8(USART2);//empfangenes Datenwort wird ausgelesen -> pending-bit wird hardware-seitig resetted
 	  
-    if(recvd == '\n'){
+    if(recvd == EOL_CHAR){
       cmd[i] = '\0'; // String terminieren
       i = 0;
       befehl(cmd);
@@ -528,7 +538,12 @@ void befehl(char input[32]){
       int i = 2;
       while(input[i] == ' ') i++;
       if(input[i] == 'F' || input[i] == 'f'){
-        setFrequency(parseInt(input, &i));
+				i++;
+				int f = parseInt(input, &i);
+        setFrequency(f);
+				
+				report('f');
+				report(f);
         return;
       }
       else if(input[i] == 'X' || input[i] == 'x'){
@@ -546,8 +561,7 @@ void befehl(char input[32]){
   } 
   
 
-	while(!LL_USART_IsActiveFlag_TXE(USART2)){};//warten bis Transmit register wieder frei ist
-	LL_USART_TransmitData8(USART2,'F');
+	report('F');
 }
 
 void stift(uint8_t in){
