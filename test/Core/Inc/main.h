@@ -46,7 +46,9 @@ extern "C" {
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "coords.h"
+#include "draw_patterns.h"
+#include "letters.h"
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
@@ -61,6 +63,14 @@ extern "C" {
 
 /* Exported macro ------------------------------------------------------------*/
 /* USER CODE BEGIN EM */
+
+void befehl(char[4]);
+void setFrequency(int);
+void setFullstepHalfstep(uint8_t); // 0=Fullstep, 1=Halfstep
+void stift(uint8_t in); // 0= Stift in der Luft, 1= Stift auf Papier
+void move(Coord input);
+
+void homing();
 
 /* USER CODE END EM */
 

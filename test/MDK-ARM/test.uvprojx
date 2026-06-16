@@ -409,6 +409,21 @@
               <FileType>1</FileType>
               <FilePath>..\Core\Src\letters.c</FilePath>
             </File>
+            <File>
+              <FileName>draw_patterns.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Core\Src\draw_patterns.c</FilePath>
+            </File>
+            <File>
+              <FileName>coords.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Core\Src\coords.c</FilePath>
+            </File>
+            <File>
+              <FileName>EsIstVollbrachtGeldGutInvestiertCL500AbJetztWirdRasiert.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Core\Src\EsIstVollbrachtGeldGutInvestiertCL500AbJetztWirdRasiert.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -485,5 +500,14 @@
     </components>
     <files/>
   </RTE>
+
+  <LayerInfo>
+    <Layers>
+      <Layer>
+        <LayName>test</LayName>
+        <LayPrjMark>1</LayPrjMark>
+      </Layer>
+    </Layers>
+  </LayerInfo>
 
 </Project>

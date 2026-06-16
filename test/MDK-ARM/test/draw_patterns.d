@@ -1,4 +1,5 @@
-test/stm32f4xx_it.o: ..\Core\Src\stm32f4xx_it.c ..\Core\Inc\main.h \
+test/draw_patterns.o: ..\Core\Src\draw_patterns.c \
+  ..\Core\Inc\draw_patterns.h ..\Core\Inc\letters.h ..\Core\Inc\main.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_rcc.h \
   ..\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h \
   ..\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f446xx.h \
@@ -13,5 +14,4 @@ test/stm32f4xx_it.o: ..\Core\Src\stm32f4xx_it.c ..\Core\Inc\main.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_adc.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_tim.h \
   ..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_usart.h \
-  ..\Core\Inc\coords.h ..\Core\Inc\draw_patterns.h ..\Core\Inc\letters.h \
-  ..\Core\Inc\stm32f4xx_it.h
+  ..\Core\Inc\coords.h
