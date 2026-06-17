@@ -10,11 +10,18 @@ ser = serial.Serial(
     timeout=1
 )
 
-def coordsToGcode(coords):
+def coordsToGcode(coords, endPts):
     Gcodes = ['M3'+endCmd]
-    for x, y in coords:                      # Unterscheidung zwischen G0 und M Befehlen fehlt!!!
+    for i, (x, y) in enumerate(coords):                      # Unterscheidung zwischen G0 und M Befehlen fehlt!!!
+        if i-1 in endPts:
+            Gcodes.append(f'M3{endCmd}')
+        
         Gcodes.append(f'G0 X{x} Y{y}{endCmd}')
-    Gcodes.append('M5' + endCmd)
+
+        if i in endPts:
+            Gcodes.append(f'M5{endCmd}')
+
+    # Gcodes.append('M5' + endCmd)
     return Gcodes
 
 #commands = ['M3'+endCmd, 'G0 X100 Y100'+endCmd, 'G0 X200 Y0'+endCmd, 'G0 X100 Y-100'+endCmd, 'G0 X0 Y0'+endCmd, 'M5'+endCmd]
@@ -27,7 +34,7 @@ commands = coordsToGcode([
 			(200,100),
 			(200,-100),
 			(0,-100),
-			(0,0)])  # Beispielkoordinaten
+			(0,0)], [8])  # Beispielkoordinaten
 cmd_index = 0
 
 while cmd_index < len(commands):
