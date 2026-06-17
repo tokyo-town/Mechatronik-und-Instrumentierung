@@ -419,11 +419,6 @@
               <FileType>1</FileType>
               <FilePath>..\Core\Src\coords.c</FilePath>
             </File>
-            <File>
-              <FileName>EsIstVollbrachtGeldGutInvestiertCL500AbJetztWirdRasiert.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Core\Src\EsIstVollbrachtGeldGutInvestiertCL500AbJetztWirdRasiert.c</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>

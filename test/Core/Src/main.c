@@ -27,7 +27,7 @@ void setPWMs(uint16_t step, uint8_t motor);
 void setFrequency(int zahl);
 void setMicrosteps(uint16_t ms);
 static int parseInt(const char *s, int *i);
-//void befehl(char[32]);
+static float parseFloat(const char *s, int *i);
 void befehl(char input[32]);
 void stift(uint8_t); // 0= Stift in der Luft, 1= Stift auf Papier
 void move(Coord);
@@ -39,8 +39,10 @@ void reportString(char *string);
 uint32_t nSteps = 0; //nur positive Zahlen!
 uint16_t microsteps = 4; // bei 8 microsteps wird der erste und letzte "verschluckt"
 const uint16_t maxSteps = 512;
-const char EOL_CHAR = '$';
-
+const char EOL_CHAR = '\n';
+const uint16_t umProFullstep = 589; // ein Fullstep hat ~0,655mm
+uint32_t maxX = 420000/umProFullstep;	// 40cm in x
+uint32_t maxY = 300000/umProFullstep; // 32cm in y
 
 const uint16_t sinusTabelle[256] = { // nur positive Sinushalbwelle, Werte von 0 bis 1000
 0,12,25,37,49,61,74,86,98,110,122,135,147,159,171,183,
@@ -61,7 +63,6 @@ const uint16_t sinusTabelle[256] = { // nur positive Sinushalbwelle, Werte von 0
 195,183,171,159,147,135,122,110,98,86,74,61,49,37,25,12
 };
 uint8_t amplitude = 30; // Amplitude f?r PWM-Signal von 0 bis 100, werden im TimerHandler gesetzt!!!!!!
-//uint8_t amplitude_2 = 30;
 uint8_t runAmplitude  = 40;
 uint8_t holdAmplitude = 10;
 
@@ -108,15 +109,15 @@ int main(void)
   LL_TIM_EnableCounter(TIM3); // start PWM
   //LL_TIM_EnableCounter(TIM6); // start steps
 
-
-	reportString("Start");
+	report('K');
+	//reportString("Start");
 	//homing();
 	
-	draw_pattern(SQUARE);	
+//	draw_pattern(SQUARE);	
 	//draw_pattern(STAR);
 	
-	drawLetter('A', (Coord){0,0});
-	drawText("Mechatronik und\nInstrumentierung", (Coord){0,0});
+//	drawLetter('A', (Coord){0,0});
+//	drawText("Mechatronik", (Coord){0,0});
 
 	
   while (1)
@@ -205,11 +206,11 @@ void gpio_Config()
 		
 		
 		
-		// Light barrier
+		// Lichtschranken auf Pins A0 und A1
 	  LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOA);
 
     GPIO_InitStructure.Mode = LL_GPIO_MODE_INPUT;
-	  GPIO_InitStructure.Pin = LL_GPIO_PIN_15;
+	  GPIO_InitStructure.Pin = LL_GPIO_PIN_0 | LL_GPIO_PIN_1;
 	  GPIO_InitStructure.Pull = LL_GPIO_PULL_NO;
 	  GPIO_InitStructure.Speed = LL_GPIO_SPEED_FREQ_HIGH;
 	  GPIO_InitStructure.Alternate = 0;
@@ -217,10 +218,11 @@ void gpio_Config()
 	  LL_GPIO_Init(GPIOA,&GPIO_InitStructure);
 		
 		
-		LL_SYSCFG_SetEXTISource(LL_SYSCFG_EXTI_PORTA, LL_SYSCFG_EXTI_LINE15);
+		LL_SYSCFG_SetEXTISource(LL_SYSCFG_EXTI_PORTA, LL_SYSCFG_EXTI_LINE0);
+		LL_SYSCFG_SetEXTISource(LL_SYSCFG_EXTI_PORTA, LL_SYSCFG_EXTI_LINE1);
 		
 		LL_EXTI_InitTypeDef EXTI_InitStruct;
-		EXTI_InitStruct.Line_0_31 = LL_EXTI_LINE_15;
+		EXTI_InitStruct.Line_0_31 = LL_EXTI_LINE_0 | LL_EXTI_LINE_1;
 		EXTI_InitStruct.Mode = LL_EXTI_MODE_IT;
 		EXTI_InitStruct.Trigger = LL_EXTI_TRIGGER_RISING;
 		
@@ -228,10 +230,10 @@ void gpio_Config()
 		
 		LL_EXTI_Init(&EXTI_InitStruct);
 		
-		NVIC_SetPriority(EXTI15_10_IRQn, 0);
-		NVIC_EnableIRQ(EXTI15_10_IRQn);
-		
-
+		NVIC_SetPriority(EXTI0_IRQn, 0);
+		NVIC_SetPriority(EXTI1_IRQn, 0);
+		NVIC_EnableIRQ(EXTI0_IRQn);
+		NVIC_EnableIRQ(EXTI1_IRQn);
 }
 
 	 // --------------------------USART ---------------------------------
@@ -242,7 +244,7 @@ void USART_Config(){
   LL_USART_InitTypeDef    usart2;
 	LL_USART_StructInit(&usart2);
 	
-	usart2.BaudRate = 9600;
+	usart2.BaudRate = 115200;
 	usart2.DataWidth = LL_USART_DATAWIDTH_8B;
 	usart2.StopBits = LL_USART_STOPBITS_1;
 	usart2.Parity = LL_USART_PARITY_NONE;
@@ -422,19 +424,17 @@ void TIM6_DAC_IRQHandler(){
 	LL_TIM_ClearFlag_UPDATE(TIM6);
 }
 
-void EXTI15_10_IRQHandler() {
-	if (LL_EXTI_IsActiveFlag_0_31(LL_EXTI_LINE_15)) {
-		nSteps = 0;
-//		startCoord.x = 0;
-		LL_EXTI_ClearFlag_0_31(LL_EXTI_LINE_15);	
-	}
-	else if (LL_EXTI_IsActiveFlag_0_31(LL_EXTI_LINE_15)) {
-		nSteps = 0;
-//		startCoord.y = 0;
-		LL_EXTI_ClearFlag_0_31(LL_EXTI_LINE_15);	
-	}
+void EXTI0_IRQHandler() {
+	nSteps = 0;
+//  startCoord.x = 0;
+	LL_EXTI_ClearFlag_0_31(LL_EXTI_LINE_0);	
 }
 
+void EXTI1_IRQHandler() {
+	nSteps = 0;
+//  startCoord.x = 0;
+	LL_EXTI_ClearFlag_0_31(LL_EXTI_LINE_1);	
+}
 
 void report(char symbol) {
 	while(!LL_USART_IsActiveFlag_TXE(USART2)){};//warten bis Transmit register wieder frei ist
@@ -522,6 +522,8 @@ void setFrequency(int zahl){ // maximale Frequenz bei 500kHz, stepper schaffen e
 	else{
 		if(zahl > 500000){
 			zahl = 500000;
+		}else if(zahl < 16){
+			zahl = 16;
 		}
 		LL_TIM_SetCounter(TIM6,0);
 		LL_TIM_SetAutoReload(TIM6, (1000000/zahl) -1); // T = 1MHz/f
@@ -556,13 +558,47 @@ static int parseInt(const char *s, int *i)
     return sign * result;
 }
 
+static float parseFloat(const char *s, int *i)
+{
+    float sign = 1.0f;
+    float result = 0.0f;
+
+    if(s[*i] == '-'){
+        sign = -1.0f;
+        (*i)++;
+    }
+
+    // Ganzzahlteil
+    while(s[*i] >= '0' && s[*i] <= '9'){
+        result = result * 10.0f + (float)(s[*i] - '0');
+        (*i)++;
+    }
+
+    // Nachkommastellen
+    if(s[*i] == '.'){
+        (*i)++;
+
+        float factor = 0.1f;
+
+        while(s[*i] >= '0' && s[*i] <= '9'){
+            result += (float)(s[*i] - '0') * factor;
+            factor *= 0.1f;
+            (*i)++;
+        }
+    }
+
+    return sign * result;
+}
+
 void befehl(char input[32]){	
 	if(input[0] == 'M'){
 		if(input[1] == '3'){
       stift(1);
+			report('K');
       return;
     }else if(input[1] == '5'){
       stift(0);
+			report('K');
       return;
     }
 	}
@@ -578,18 +614,19 @@ void befehl(char input[32]){
 				i++;
 				int f = parseInt(input, &i);
         setFrequency(f);
+				report('K');
 				
-				report('f');
-				report(f);
+				//report('f');
+				//report(f);
         return;
       }
       else if(input[i] == 'X' || input[i] == 'x'){
         i++;
-        int x = parseInt(input, &i);
+        int x = (int) (parseFloat(input, &i) * 1000.0f); // mm * 1000 = um
         while(input[i] == ' ') i++;
         if(input[i] == 'Y' || input[i] == 'y'){
           i++;
-          int y = parseInt(input, &i);
+          int y = (int) (parseFloat(input, &i) * 1000.0f);
           move((Coord){x,y});
           return;
         }
@@ -599,6 +636,7 @@ void befehl(char input[32]){
   
 
 	report('F');
+	reportString(input);
 }
 
 void stift(uint8_t in){
@@ -609,10 +647,13 @@ void stift(uint8_t in){
 	}
 }
 
-void move(Coord input){ // Bresenham Algorythmus
-	endCoord = input;
-	d1 = (input.x - startCoord.x) + (input.y - startCoord.y); // = dx + dy
-	d2 = (input.x - startCoord.x) - (input.y - startCoord.y); // = dy - dy
+void move(Coord input){ // Bresenham Algorythmus, Koordinaten in um
+	endCoord = (Coord) {input.x /umProFullstep, input.y /umProFullstep}; // Umrechnung um zu steps
+	if(endCoord.x > maxX){endCoord.x = maxX;};//else if(endCoord.x < 0){endCoord.x = 0;}
+	if(endCoord.y > maxY){endCoord.y = maxY;};//else if(endCoord.y < 0){endCoord.y = 0;}		
+	
+	d1 = (endCoord.x - startCoord.x) + (endCoord.y - startCoord.y); // = dx + dy
+	d2 = (endCoord.x - startCoord.x) - (endCoord.y - startCoord.y); // = dy - dy
 	
 	direction_1 = (d1 >= 0) ? 1 : -1;
 	direction_2 = (d2 >= 0) ? 1 : -1;
@@ -634,14 +675,14 @@ void move(Coord input){ // Bresenham Algorythmus
 }
 
 void homing(){	
-	reportString("homing");
+	//reportString("homing");
 	
-	move((Coord) {-10000,0});
+	move((Coord) {-10000000,0});
 	startCoord = (Coord) {0,0};
-	move((Coord) {0,-10000});
+	move((Coord) {0,-10000000});
 	startCoord = (Coord) {0,0};
 	
-	reportString("home");
+	//reportString("home");
 }
 
 /**
