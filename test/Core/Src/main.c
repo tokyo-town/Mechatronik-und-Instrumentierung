@@ -648,8 +648,8 @@ void stift(uint8_t in){
 }
 
 void move(Coord input){ // Bresenham Algorythmus, Koordinaten in um
-	if(endCoord.x > maxX){endCoord.x = maxX;}else if(endCoord.x < 0){endCoord.x = 0;}
-	if(endCoord.y > maxY){endCoord.y = maxY;}else if(endCoord.y < 0){endCoord.y = 0;}
+	if(input.x > maxX){input.x = maxX;}else if(input.x < 0){input.x = 0;}
+	if(input.y > maxY){input.y = maxY;}else if(input.y < 0){input.y = 0;}
 	endCoord = (Coord) {input.x /umProFullstep, input.y /umProFullstep}; // Umrechnung um zu steps	
 	
 	d1 = (endCoord.x - startCoord.x) + (endCoord.y - startCoord.y); // = dx + dy
