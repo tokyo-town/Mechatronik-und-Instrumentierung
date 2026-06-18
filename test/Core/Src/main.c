@@ -41,8 +41,8 @@ uint16_t microsteps = 4; // bei 8 microsteps wird der erste und letzte "verschlu
 const uint16_t maxSteps = 512;
 const char EOL_CHAR = '\n';
 const uint16_t umProFullstep = 589; // ein Fullstep hat ~0,655mm
-uint32_t maxX = 420000/umProFullstep;	// 40cm in x
-uint32_t maxY = 300000/umProFullstep; // 32cm in y
+uint32_t maxX = 420000;	// 42cm in x in um
+uint32_t maxY = 300000; // 30cm in y in um
 
 const uint16_t sinusTabelle[256] = { // nur positive Sinushalbwelle, Werte von 0 bis 1000
 0,12,25,37,49,61,74,86,98,110,122,135,147,159,171,183,
@@ -426,13 +426,13 @@ void TIM6_DAC_IRQHandler(){
 
 void EXTI0_IRQHandler() {
 	nSteps = 0;
-//  startCoord.x = 0;
+  startCoord.x = 0;
 	LL_EXTI_ClearFlag_0_31(LL_EXTI_LINE_0);	
 }
 
 void EXTI1_IRQHandler() {
 	nSteps = 0;
-//  startCoord.x = 0;
+  startCoord.y = 0;
 	LL_EXTI_ClearFlag_0_31(LL_EXTI_LINE_1);	
 }
 
@@ -648,9 +648,9 @@ void stift(uint8_t in){
 }
 
 void move(Coord input){ // Bresenham Algorythmus, Koordinaten in um
-	endCoord = (Coord) {input.x /umProFullstep, input.y /umProFullstep}; // Umrechnung um zu steps
-	if(endCoord.x > maxX){endCoord.x = maxX;};//else if(endCoord.x < 0){endCoord.x = 0;}
-	if(endCoord.y > maxY){endCoord.y = maxY;};//else if(endCoord.y < 0){endCoord.y = 0;}		
+	if(endCoord.x > maxX){endCoord.x = maxX;}else if(endCoord.x < 0){endCoord.x = 0;}
+	if(endCoord.y > maxY){endCoord.y = maxY;}else if(endCoord.y < 0){endCoord.y = 0;}
+	endCoord = (Coord) {input.x /umProFullstep, input.y /umProFullstep}; // Umrechnung um zu steps	
 	
 	d1 = (endCoord.x - startCoord.x) + (endCoord.y - startCoord.y); // = dx + dy
 	d2 = (endCoord.x - startCoord.x) - (endCoord.y - startCoord.y); // = dy - dy
@@ -677,9 +677,14 @@ void move(Coord input){ // Bresenham Algorythmus, Koordinaten in um
 void homing(){	
 	//reportString("homing");
 	
-	move((Coord) {-10000000,0});
-	startCoord = (Coord) {0,0};
-	move((Coord) {0,-10000000});
+	if(!LL_GPIO_IsInputPinSet(GPIOA, LL_GPIO_PIN_0)){
+		startCoord = (Coord) {90000,0};
+		move((Coord) {0,0});
+	}else{report('K');}
+	if(!LL_GPIO_IsInputPinSet(GPIOA, LL_GPIO_PIN_1)){
+		startCoord = (Coord) {0,90000};
+		move((Coord) {0,0});
+	}else{report('K');}
 	startCoord = (Coord) {0,0};
 	
 	//reportString("home");

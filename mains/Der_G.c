@@ -3,7 +3,7 @@
   ******************************************************************************
   * @file           : main.c
   * @brief          : PWM Motorsteuerung mit Richtungssteuerung
-  * @todo           : Homing Routine, Busy-wait (drawing) entfernen, Move-Queue, Beschleunigung, tim6-Handler entlasten
+  * @todo           : Homing Routine, Busy-wait (drawing) entfernen, Move-Queue, amplitude-Frequenz, Beschleunigung, tim6-Handler entlasten
   ******************************************************************************
   */
 /* USER CODE END Header */
@@ -13,10 +13,10 @@
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 
-typedef struct Coord{
-	int x;
-	int y;
-} Coord;
+//typedef struct Coord{
+//	int x;
+//	int y;
+//} Coord;
 
 void gpio_Config(void);
 void USART_Config(void);
@@ -27,19 +27,22 @@ void setPWMs(uint16_t step, uint8_t motor);
 void setFrequency(int zahl);
 void setMicrosteps(uint16_t ms);
 static int parseInt(const char *s, int *i);
-//void befehl(char[32]);
+static float parseFloat(const char *s, int *i);
 void befehl(char input[32]);
 void stift(uint8_t); // 0= Stift in der Luft, 1= Stift auf Papier
 void move(Coord);
 void homing();
 void report(char symbol);
+void reportString(char *string);
 
 /* Private variables ---------------------------------------------------------*/
 uint32_t nSteps = 0; //nur positive Zahlen!
 uint16_t microsteps = 4; // bei 8 microsteps wird der erste und letzte "verschluckt"
 const uint16_t maxSteps = 512;
-const char EOL_CHAR = '$';
-
+const char EOL_CHAR = '\n';
+const uint16_t umProFullstep = 589; // ein Fullstep hat ~0,655mm
+uint32_t maxX = 420000;	// 42cm in x in um
+uint32_t maxY = 300000; // 30cm in y in um
 
 const uint16_t sinusTabelle[256] = { // nur positive Sinushalbwelle, Werte von 0 bis 1000
 0,12,25,37,49,61,74,86,98,110,122,135,147,159,171,183,
@@ -59,14 +62,13 @@ const uint16_t sinusTabelle[256] = { // nur positive Sinushalbwelle, Werte von 0
 383,371,360,348,337,325,314,302,290,279,267,255,243,231,219,207,
 195,183,171,159,147,135,122,110,98,86,74,61,49,37,25,12
 };
-uint8_t amplitude = 30; // Amplitude für PWM-Signal von 0 bis 100, werden im TimerHandler gesetzt!!!!!!
-//uint8_t amplitude_2 = 30;
-uint8_t runAmplitude  = 80;
+uint8_t amplitude = 30; // Amplitude f?r PWM-Signal von 0 bis 100, werden im TimerHandler gesetzt!!!!!!
+uint8_t runAmplitude  = 40;
 uint8_t holdAmplitude = 10;
 
 volatile int16_t step_index_1 = 0;
 volatile int16_t step_index_2 = 0;
-int direction_1 = 1; // 1,-1 oder 0 für festen Stopp
+int direction_1 = 1; // 1,-1 oder 0 f?r festen Stopp
 int direction_2 = 1;
 
 volatile uint8_t drawing = 0;
@@ -76,7 +78,7 @@ volatile Coord endCoord = {0,0};
 volatile int d1 = 0;
 volatile int d2 = 0;
 volatile int fehler = 0;
-//gleiche Berechnung für nächste Befehle im Voraus abspeichern?
+//gleiche Berechnung f?r n?chste Befehle im Voraus abspeichern?
 
 int main(void)
 {
@@ -99,38 +101,24 @@ int main(void)
   tim3und4_Config(); // beide PWMs
   tim6_Config();
 
-  setMicrosteps(1);
+  setMicrosteps(16);
 	//nSteps = 48*microsteps*5; // 5 Umdrehungen
-	setFrequency(250*microsteps); // damit man auf 200Hz pro Fullstep kommt
+	setFrequency(100*microsteps); // damit man auf 200Hz pro Fullstep kommt
   // PWM und Steps trennen!!! PWM bei ~20kHz und steps bei so 1-5kHz laut Chat
   LL_TIM_EnableCounter(TIM4); // start PWM
   LL_TIM_EnableCounter(TIM3); // start PWM
   //LL_TIM_EnableCounter(TIM6); // start steps
 
-  /*stift(1);
-	move((Coord){   0, 100});
-	move((Coord){   100, 100});
-	move((Coord){   100, 0});
-	move((Coord){   0, 0});
-  stift(0);*/
+	report('K');
+	//reportString("Start");
+	//homing();
+	
+//	draw_pattern(SQUARE);	
+	//draw_pattern(STAR);
+	
+//	drawLetter('A', (Coord){0,0});
+//	drawText("Mechatronik", (Coord){0,0});
 
-LL_USART_TransmitData8(USART2,'H');
-
-/* Stern */
-	stift(0);
-	move((Coord){   0, 100});
-	stift(1);
-	move((Coord){  30,  30});
-	move((Coord){ 100,  30});
-	move((Coord){  45, -10});
-	move((Coord){  70,-100});
-	move((Coord){   0, -40});
-	move((Coord){ -70,-100});
-	move((Coord){ -45, -10});
-	move((Coord){-100,  30});
-	move((Coord){ -30,  30});
-	move((Coord){   0, 100});
-  stift(0);
 	
   while (1)
   {
@@ -164,7 +152,7 @@ void gpio_Config()
     GPIO_InitStructure.Speed = LL_GPIO_SPEED_FREQ_HIGH;
     GPIO_InitStructure.OutputType = LL_GPIO_OUTPUT_PUSHPULL;
     GPIO_InitStructure.Pull = LL_GPIO_PULL_NO;
-    GPIO_InitStructure.Alternate = LL_GPIO_AF_2;  // abhängig von Pin-Wahl!
+    GPIO_InitStructure.Alternate = LL_GPIO_AF_2;  // abh?ngig von Pin-Wahl!
 
     LL_GPIO_Init(GPIOB, &GPIO_InitStructure);
 
@@ -215,7 +203,37 @@ void gpio_Config()
 	  GPIO_InitStructure.Alternate = LL_GPIO_AF_7;//verbindet A2 und A3 mit USART2
 	  
 	  LL_GPIO_Init(GPIOA,&GPIO_InitStructure);
+		
+		
+		
+		// Lichtschranken auf Pins A0 und A1
+	  LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOA);
 
+    GPIO_InitStructure.Mode = LL_GPIO_MODE_INPUT;
+	  GPIO_InitStructure.Pin = LL_GPIO_PIN_0 | LL_GPIO_PIN_1;
+	  GPIO_InitStructure.Pull = LL_GPIO_PULL_NO;
+	  GPIO_InitStructure.Speed = LL_GPIO_SPEED_FREQ_HIGH;
+	  GPIO_InitStructure.Alternate = 0;
+	  
+	  LL_GPIO_Init(GPIOA,&GPIO_InitStructure);
+		
+		
+		LL_SYSCFG_SetEXTISource(LL_SYSCFG_EXTI_PORTA, LL_SYSCFG_EXTI_LINE0);
+		LL_SYSCFG_SetEXTISource(LL_SYSCFG_EXTI_PORTA, LL_SYSCFG_EXTI_LINE1);
+		
+		LL_EXTI_InitTypeDef EXTI_InitStruct;
+		EXTI_InitStruct.Line_0_31 = LL_EXTI_LINE_0 | LL_EXTI_LINE_1;
+		EXTI_InitStruct.Mode = LL_EXTI_MODE_IT;
+		EXTI_InitStruct.Trigger = LL_EXTI_TRIGGER_RISING;
+		
+		EXTI_InitStruct.LineCommand = ENABLE;
+		
+		LL_EXTI_Init(&EXTI_InitStruct);
+		
+		NVIC_SetPriority(EXTI0_IRQn, 0);
+		NVIC_SetPriority(EXTI1_IRQn, 0);
+		NVIC_EnableIRQ(EXTI0_IRQn);
+		NVIC_EnableIRQ(EXTI1_IRQn);
 }
 
 	 // --------------------------USART ---------------------------------
@@ -226,7 +244,7 @@ void USART_Config(){
   LL_USART_InitTypeDef    usart2;
 	LL_USART_StructInit(&usart2);
 	
-	usart2.BaudRate = 9600;
+	usart2.BaudRate = 115200;
 	usart2.DataWidth = LL_USART_DATAWIDTH_8B;
 	usart2.StopBits = LL_USART_STOPBITS_1;
 	usart2.Parity = LL_USART_PARITY_NONE;
@@ -242,7 +260,7 @@ void USART_Config(){
 	LL_USART_EnableIT_RXNE(USART2);
 	
 	//int encoded_priority = NVIC_EncodePriority(priority_grouping,1,1);//Gruppe=1, Sub=1
-	NVIC_SetPriority(USART2_IRQn, 1);//encoded_priority);
+	NVIC_SetPriority(USART2_IRQn, 2);//encoded_priority);
   NVIC_EnableIRQ(USART2_IRQn);
 }
 
@@ -302,7 +320,7 @@ void tim3und4_Config()
     LL_TIM_OC_EnablePreload(TIM3, LL_TIM_CHANNEL_CH4);
 
     /****************************************************************
-     * Kanäle aktivieren
+     * Kan?le aktivieren
      ****************************************************************/
 
     LL_TIM_CC_EnableChannel(TIM4,
@@ -317,7 +335,7 @@ void tim3und4_Config()
           LL_TIM_CHANNEL_CH3 |
           LL_TIM_CHANNEL_CH4);
 
-    LL_TIM_EnableARRPreload(TIM4);//ARR lässt sich nun direkt überschreiben
+    LL_TIM_EnableARRPreload(TIM4);//ARR l?sst sich nun direkt ?berschreiben
     LL_TIM_EnableARRPreload(TIM3);
 }
 
@@ -340,17 +358,17 @@ void tim6_Config(){
 	
 	LL_TIM_Init(TIM6, &tim6);
 	
-	LL_TIM_EnableARRPreload(TIM6);//ARR lässt sich nun direkt überschreiben
+	LL_TIM_EnableARRPreload(TIM6);//ARR l?sst sich nun direkt ?berschreiben
 	
   LL_TIM_EnableIT_UPDATE(TIM6);
 	
  // int encoded_priority = NVIC_EncodePriority(priority_grouping,1,3);//Gruppe=1, Sub=1
 //	NVIC_SetPriority(TIM6_DAC_IRQn, encoded_priority);
-	NVIC_SetPriority(TIM6_DAC_IRQn, 0);
+	NVIC_SetPriority(TIM6_DAC_IRQn, 1);
 	NVIC_EnableIRQ(TIM6_DAC_IRQn);	
 }
 
-void TIM6_DAC_IRQHandler(){	
+void TIM6_DAC_IRQHandler(){
 	if(nSteps > 0){
 	  amplitude = runAmplitude;
 	  setPWMs(step_index_1,1);
@@ -389,7 +407,7 @@ void TIM6_DAC_IRQHandler(){
 	  }
 		nSteps--;
 	}
-	else if(nSteps == 0){
+	else{
 		amplitude = holdAmplitude;
 	  setPWMs(step_index_1,1);
 	  setPWMs(step_index_2,2);
@@ -397,6 +415,7 @@ void TIM6_DAC_IRQHandler(){
 		LL_TIM_SetCounter(TIM6, 0);
     startCoord = endCoord;
 		drawing = 0;
+		nSteps = 0;
 		
 		report('K');
 	}
@@ -405,10 +424,28 @@ void TIM6_DAC_IRQHandler(){
 	LL_TIM_ClearFlag_UPDATE(TIM6);
 }
 
+void EXTI0_IRQHandler() {
+	nSteps = 0;
+  startCoord.x = 0;
+	LL_EXTI_ClearFlag_0_31(LL_EXTI_LINE_0);	
+}
+
+void EXTI1_IRQHandler() {
+	nSteps = 0;
+  startCoord.y = 0;
+	LL_EXTI_ClearFlag_0_31(LL_EXTI_LINE_1);	
+}
+
 void report(char symbol) {
 	while(!LL_USART_IsActiveFlag_TXE(USART2)){};//warten bis Transmit register wieder frei ist
 	LL_USART_TransmitData8(USART2,symbol);
+}
+
+void reportString(char *string) {
+	while (*string) {
+		report(*string++);
 	}
+}
 
 void USART2_IRQHandler(){ // parsed bis \n oder bis 32 chars
 	static char cmd[32];
@@ -436,10 +473,10 @@ void USART2_IRQHandler(){ // parsed bis \n oder bis 32 chars
 }
 
 void setPWMs(uint16_t step, uint8_t motor){
-    uint16_t faktor = maxSteps/(4*microsteps); // ein Fullstep = 90° und dieser wird in Microsteps aufgeteilt
+    uint16_t faktor = maxSteps/(4*microsteps); // ein Fullstep = 90? und dieser wird in Microsteps aufgeteilt
 	
     uint16_t a = sinusTabelle[(faktor*step)% (maxSteps/2)]; // statt % lieber &0xFF ?
-    uint16_t b = sinusTabelle[(faktor*step + maxSteps/4) % (maxSteps/2)]; // 90°-Verschiebung -> Kosinus
+    uint16_t b = sinusTabelle[(faktor*step + maxSteps/4) % (maxSteps/2)]; // 90?-Verschiebung -> Kosinus
 
     TIM_TypeDef *tim;
     if(motor == 1){tim = TIM4;}
@@ -485,6 +522,8 @@ void setFrequency(int zahl){ // maximale Frequenz bei 500kHz, stepper schaffen e
 	else{
 		if(zahl > 500000){
 			zahl = 500000;
+		}else if(zahl < 16){
+			zahl = 16;
 		}
 		LL_TIM_SetCounter(TIM6,0);
 		LL_TIM_SetAutoReload(TIM6, (1000000/zahl) -1); // T = 1MHz/f
@@ -519,13 +558,47 @@ static int parseInt(const char *s, int *i)
     return sign * result;
 }
 
+static float parseFloat(const char *s, int *i)
+{
+    float sign = 1.0f;
+    float result = 0.0f;
+
+    if(s[*i] == '-'){
+        sign = -1.0f;
+        (*i)++;
+    }
+
+    // Ganzzahlteil
+    while(s[*i] >= '0' && s[*i] <= '9'){
+        result = result * 10.0f + (float)(s[*i] - '0');
+        (*i)++;
+    }
+
+    // Nachkommastellen
+    if(s[*i] == '.'){
+        (*i)++;
+
+        float factor = 0.1f;
+
+        while(s[*i] >= '0' && s[*i] <= '9'){
+            result += (float)(s[*i] - '0') * factor;
+            factor *= 0.1f;
+            (*i)++;
+        }
+    }
+
+    return sign * result;
+}
+
 void befehl(char input[32]){	
 	if(input[0] == 'M'){
 		if(input[1] == '3'){
       stift(1);
+			report('K');
       return;
     }else if(input[1] == '5'){
       stift(0);
+			report('K');
       return;
     }
 	}
@@ -541,18 +614,19 @@ void befehl(char input[32]){
 				i++;
 				int f = parseInt(input, &i);
         setFrequency(f);
+				report('K');
 				
-				report('f');
-				report(f);
+				//report('f');
+				//report(f);
         return;
       }
       else if(input[i] == 'X' || input[i] == 'x'){
         i++;
-        int x = parseInt(input, &i);
+        int x = (int) (parseFloat(input, &i) * 1000.0f); // mm * 1000 = um
         while(input[i] == ' ') i++;
         if(input[i] == 'Y' || input[i] == 'y'){
           i++;
-          int y = parseInt(input, &i);
+          int y = (int) (parseFloat(input, &i) * 1000.0f);
           move((Coord){x,y});
           return;
         }
@@ -562,6 +636,7 @@ void befehl(char input[32]){
   
 
 	report('F');
+	reportString(input);
 }
 
 void stift(uint8_t in){
@@ -572,10 +647,13 @@ void stift(uint8_t in){
 	}
 }
 
-void move(Coord input){ // Bresenham Algorythmus
-	endCoord = input;
-	d1 = (input.x - startCoord.x) + (input.y - startCoord.y); // = dx + dy
-	d2 = (input.x - startCoord.x) - (input.y - startCoord.y); // = dy - dy
+void move(Coord input){ // Bresenham Algorythmus, Koordinaten in um
+	if(input.x > maxX){endCoord.x = maxX;}else if(input.x < 0){endCoord.x = 0;}
+	if(input.y > maxY){endCoord.y = maxY;}else if(input.y < 0){endCoord.y = 0;}
+	endCoord = (Coord) {input.x /umProFullstep, input.y /umProFullstep}; // Umrechnung um zu steps	
+	
+	d1 = (endCoord.x - startCoord.x) + (endCoord.y - startCoord.y); // = dx + dy
+	d2 = (endCoord.x - startCoord.x) - (endCoord.y - startCoord.y); // = dy - dy
 	
 	direction_1 = (d1 >= 0) ? 1 : -1;
 	direction_2 = (d2 >= 0) ? 1 : -1;
@@ -593,12 +671,23 @@ void move(Coord input){ // Bresenham Algorythmus
 	
 	drawing = 1;
 	LL_TIM_EnableCounter(TIM6);
-  while(drawing){} // busy-wait, damit nicht schon der nächste move ausgelöst wird
+  while(drawing){} // busy-wait, damit nicht schon der n?chste move ausgel?st wird
 }
 
-void homing(){
-  move((Coord){0,0});
-  //TODO: Richtige Routine einfügen
+void homing(){	
+	//reportString("homing");
+	
+	if(!LL_GPIO_IsInputPinSet(GPIOA, LL_GPIO_PIN_0)){
+		startCoord = (Coord) {90000,0};
+		move((Coord) {0,0});
+	}else{report('K');}
+	if(!LL_GPIO_IsInputPinSet(GPIOA, LL_GPIO_PIN_1)){
+		startCoord = (Coord) {0,90000};
+		move((Coord) {0,0});
+	}else{report('K');}
+	startCoord = (Coord) {0,0};
+	
+	//reportString("home");
 }
 
 /**
