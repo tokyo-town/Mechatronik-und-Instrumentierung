@@ -40,7 +40,8 @@ void reportString(char *string);
 /* Private variables ---------------------------------------------------------*/
 uint32_t nSteps = 0; //nur positive Zahlen!
 uint16_t microsteps = 4; // bei 8 microsteps wird der erste und letzte "verschluckt"
-uint16_t frequency = 100; // Frequenz pro Fullstep
+uint16_t stepAuflösung = 4; // bei wie vielen microsteps er stehenbleiben kann
+uint16_t frequency = 200; // Frequenz pro Fullstep
 const uint16_t maxSteps = 512;
 const char EOL_CHAR = '\n';
 const uint16_t umProFullstep = 589; // ein Fullstep hat ~0,655mm
@@ -552,6 +553,11 @@ void setFrequency(int zahl){ // maximale Frequenz bei 500kHz, stepper schaffen e
 
 void setMicrosteps(uint16_t ms){
     microsteps = ms;
+    if(ms > stepAuflösung){
+      microsteps = stepAuflösung;
+    }else{
+      microsteps = ms;
+    }
 }
 
 // parsed eine Zahl aus einem String s, beginnend an Index i. i wird auf das erste Zeichen nach der Zahl gesetzt.
@@ -643,7 +649,7 @@ void switch_tool(int tool){
 }
 
 void befehl(char input[32]){	
-	if(input[0] == 'M'){
+	if(input[0] == 'M' || input[0] == 'm'){
 		if(input[1] == '3'){
       stift(1);
 			report('K');
@@ -693,7 +699,6 @@ void befehl(char input[32]){
     return;
   }
   
-
 	report('F');
 	reportString(input);
 }
@@ -709,15 +714,15 @@ void stift(uint8_t in){
 void move(Coord input){ // Bresenham Algorythmus, Koordinaten in um
 	if(input.x > maxX){input.x = maxX;}else if(input.x < 0){input.x = 0;}
 	if(input.y > maxY){input.y = maxY;}else if(input.y < 0){input.y = 0;}
-	endCoord = (Coord) {input.x /umProFullstep, input.y /umProFullstep}; // Umrechnung um zu steps	
+	endCoord = (Coord) {input.x * stepAuflösung /umProFullstep, input.y * stepAuflösung /umProFullstep}; // Umrechnung um zu steps	
 	
 	d1 = (endCoord.x - startCoord.x) + (endCoord.y - startCoord.y); // = dx + dy
 	d2 = (endCoord.x - startCoord.x) - (endCoord.y - startCoord.y); // = dy - dy
 	
 	direction_1 = (d1 >= 0) ? 1 : -1;
 	direction_2 = (d2 >= 0) ? 1 : -1;
-	d1 = d1 * direction_1 * microsteps;
-	d2 = d2 * direction_2 * microsteps;
+	d1 = d1 * direction_1 * microsteps /stepAuflösung; // nur positive Zahlen!
+	d2 = d2 * direction_2 * microsteps /stepAuflösung;
 
 	if(d1 >= d2){
 		fehler = d1/2; // "/2", damit bei x:y=2:1 der y-Schritt in der Mitte passiert
