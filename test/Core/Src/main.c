@@ -28,6 +28,8 @@ void setFrequency(int zahl);
 void setMicrosteps(uint16_t ms);
 static int parseInt(const char *s, int *i);
 static float parseFloat(const char *s, int *i);
+void dock_tool(Coord dock_coords);
+void switch_tool(int tool);
 void befehl(char input[32]);
 void stift(uint8_t); // 0= Stift in der Luft, 1= Stift auf Papier
 void move(Coord);
@@ -38,6 +40,7 @@ void reportString(char *string);
 /* Private variables ---------------------------------------------------------*/
 uint32_t nSteps = 0; //nur positive Zahlen!
 uint16_t microsteps = 4; // bei 8 microsteps wird der erste und letzte "verschluckt"
+uint16_t frequency = 100; // Frequenz pro Fullstep
 const uint16_t maxSteps = 512;
 const char EOL_CHAR = '\n';
 const uint16_t umProFullstep = 589; // ein Fullstep hat ~0,655mm
@@ -81,10 +84,10 @@ volatile int fehler = 0;
 //gleiche Berechnung f?r n?chste Befehle im Voraus abspeichern?
 
 
-volatile Coord tool00 = {5500,100};
-volatile Coord tool01 = {5500,150};
+volatile Coord tool00 = {420000,10000};
+volatile Coord tool01 = {420000,15000};
 volatile int toolIndex = 0;
-volatile Coord currentTool = {5500,100};
+volatile Coord currentTool = {550000,10000};
 
 volatile int nextMoveSendAck = 1;
 
@@ -111,7 +114,7 @@ int main(void)
 
   setMicrosteps(16);
 	//nSteps = 48*microsteps*5; // 5 Umdrehungen
-	setFrequency(100*microsteps); // damit man auf 200Hz pro Fullstep kommt
+	setFrequency(200*microsteps); // damit man auf 200Hz pro Fullstep kommt
   // PWM und Steps trennen!!! PWM bei ~20kHz und steps bei so 1-5kHz laut Chat
   LL_TIM_EnableCounter(TIM4); // start PWM
   LL_TIM_EnableCounter(TIM3); // start PWM
@@ -127,8 +130,8 @@ int main(void)
 //	drawLetter('A', (Coord){0,0});
 //	drawText("Mechatronik", (Coord){0,0});
 
-    switch_tool(1);
-    switch_tool(0);
+//    switch_tool(1);
+//    switch_tool(0);
 	
   while (1)
   {
@@ -380,6 +383,7 @@ void tim6_Config(){
 
 void TIM6_DAC_IRQHandler(){
 	if(nSteps > 0){
+		//if(nSteps == 1 && frequency>150){ setFrequency(150*microsteps);} // wird bei n=0 wieder auf alte Frequenz gesetzt
 	  amplitude = runAmplitude;
 	  setPWMs(step_index_1,1);
 	  setPWMs(step_index_2,2);
@@ -417,11 +421,12 @@ void TIM6_DAC_IRQHandler(){
 	  }
 		nSteps--;
 	}
-	else{
+	else{ // n=0
 		amplitude = holdAmplitude;
 	  setPWMs(step_index_1,1);
 	  setPWMs(step_index_2,2);
 		LL_TIM_DisableCounter(TIM6);
+//		setFrequency(frequency*microsteps);
 		LL_TIM_SetCounter(TIM6, 0);
     startCoord = endCoord;
 		drawing = 0;
@@ -429,9 +434,9 @@ void TIM6_DAC_IRQHandler(){
 		
     if (nextMoveSendAck == 1){
 		  report('K');
-    } else {
+    }/* else {
       nextMoveSendAck = 1;
-    }
+    }*/
 	}
 
 	// SEHR WICHTIG!!!
@@ -605,13 +610,11 @@ static float parseFloat(const char *s, int *i)
 }
 
 void dock_tool(Coord dock_coords){
-	Coord dock_start = {dock_coords.x - 30, dock_coords.y};
-
-  nextMoveSendAck = 0;
+	Coord dock_start = {dock_coords.x - 30000, dock_coords.y};
+	
+	stift(0);
 	move(dock_start);
-  nextMoveSendAck = 0;
 	move(dock_coords);
-  
 	move(dock_start);
 }
 
@@ -620,14 +623,20 @@ void switch_tool(int tool){
     return; // No need to switch if the tool is already selected
   }
 	if (tool == 0){
+		nextMoveSendAck = 0;
 		dock_tool(currentTool);
 		dock_tool(tool00);
+		nextMoveSendAck = 1;
+		report('K');
     toolIndex = 0;
     currentTool = tool00;
 	}
 	else if (tool == 1){
+		nextMoveSendAck = 0;
 		dock_tool(currentTool);
 		dock_tool(tool01);
+		nextMoveSendAck = 1;
+		report('K');
     toolIndex = 1;
     currentTool = tool01;
 	}
@@ -676,7 +685,7 @@ void befehl(char input[32]){
       }
     }
   }
-  else if(input[0] == 'T'){
+  else if(input[0] == 'T' || input[0] == 't'){
     int i = 1;
     while(input[i] == ' ') i++;
     int tool = parseInt(input, &i);
@@ -724,20 +733,21 @@ void move(Coord input){ // Bresenham Algorythmus, Koordinaten in um
   while(drawing){} // busy-wait, damit nicht schon der n?chste move ausgel?st wird
 }
 
-void homing(){	
-	//reportString("homing");
+void homing(){
+	nextMoveSendAck = 0;
 	
 	if(!LL_GPIO_IsInputPinSet(GPIOA, LL_GPIO_PIN_0)){
 		startCoord = (Coord) {90000,0};
 		move((Coord) {0,0});
-	}else{report('K');}
+	}//else{report('K');}
 	if(!LL_GPIO_IsInputPinSet(GPIOA, LL_GPIO_PIN_1)){
 		startCoord = (Coord) {0,90000};
 		move((Coord) {0,0});
-	}else{report('K');}
+	}//else{report('K');}
 	startCoord = (Coord) {0,0};
 	
-	//reportString("home");
+	nextMoveSendAck = 1;
+	report('K');
 }
 
 /**
