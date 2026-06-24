@@ -80,6 +80,13 @@ volatile int d2 = 0;
 volatile int fehler = 0;
 //gleiche Berechnung f?r n?chste Befehle im Voraus abspeichern?
 
+
+volatile Coord tool00 = {5500,100};
+volatile Coord tool01 = {5500,150};
+volatile int toolIndex = 0;
+volatile Coord currentTool = {5500,100};
+
+
 int main(void)
 {
   /* MCU Configuration--------------------------------------------------------*/
@@ -119,6 +126,7 @@ int main(void)
 //	drawLetter('A', (Coord){0,0});
 //	drawText("Mechatronik", (Coord){0,0});
 
+    switch_tool(1);
 	
   while (1)
   {
@@ -590,6 +598,32 @@ static float parseFloat(const char *s, int *i)
     return sign * result;
 }
 
+void dock_tool(Coord dock_coords){
+	Coord dock_start = {dock_coords.x - 30, dock_coords.y};
+
+	move(dock_start);
+	move(dock_coords);
+	move(dock_start);
+}
+
+void switch_tool(int tool){
+  if (toolIndex == tool){
+    return; // No need to switch if the tool is already selected
+  }
+	if (tool == 0){
+		dock_tool(currentTool);
+		dock_tool(tool00);
+    toolIndex = 0;
+    currentTool = tool00;
+	}
+	else if (tool == 1){
+		dock_tool(currentTool);
+		dock_tool(tool01);
+    toolIndex = 1;
+    currentTool = tool01;
+	}
+}
+
 void befehl(char input[32]){	
 	if(input[0] == 'M'){
 		if(input[1] == '3'){
@@ -632,7 +666,14 @@ void befehl(char input[32]){
         }
       }
     }
-  } 
+  }
+  else if(input[0] == 'T'){
+    int i = 1;
+    while(input[i] == ' ') i++;
+    int tool = parseInt(input, &i);
+    switch_tool(tool);
+    return;
+  }
   
 
 	report('F');
