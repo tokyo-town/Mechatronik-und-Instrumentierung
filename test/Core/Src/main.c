@@ -86,6 +86,7 @@ volatile Coord tool01 = {5500,150};
 volatile int toolIndex = 0;
 volatile Coord currentTool = {5500,100};
 
+volatile int nextMoveSendAck = 1;
 
 int main(void)
 {
@@ -127,6 +128,7 @@ int main(void)
 //	drawText("Mechatronik", (Coord){0,0});
 
     switch_tool(1);
+    switch_tool(0);
 	
   while (1)
   {
@@ -425,7 +427,11 @@ void TIM6_DAC_IRQHandler(){
 		drawing = 0;
 		nSteps = 0;
 		
-		report('K');
+    if (nextMoveSendAck == 1){
+		  report('K');
+    } else {
+      nextMoveSendAck = 1;
+    }
 	}
 
 	// SEHR WICHTIG!!!
@@ -601,8 +607,11 @@ static float parseFloat(const char *s, int *i)
 void dock_tool(Coord dock_coords){
 	Coord dock_start = {dock_coords.x - 30, dock_coords.y};
 
+  nextMoveSendAck = 0;
 	move(dock_start);
+  nextMoveSendAck = 0;
 	move(dock_coords);
+  
 	move(dock_start);
 }
 
