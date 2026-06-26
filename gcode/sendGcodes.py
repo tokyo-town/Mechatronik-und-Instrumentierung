@@ -1,12 +1,12 @@
-import serial
+from serial import Serial
 
 acknowledge = 'K'
 fail = 'F'
 endCmd = '\n'
-size_scale = 0.04
+size_scale = 0.05
 
-ser = serial.Serial(
-    port='COM9',      # anpassen
+ser = Serial(
+    port='COM10',      # anpassen
     baudrate=115200,
     timeout=1
 )
@@ -24,7 +24,7 @@ def coordsToGcode(coords, endPts):
         if i == 0:
             Gcodes.append(f'M5{endCmd}')
         
-        Gcodes.append(f'G0 X{int(x*size_scale)} Y{int(y*size_scale)}{endCmd}')
+        Gcodes.append(f'G0 X{round(x*size_scale,1)} Y{round(y*size_scale,1)}{endCmd}')
 
         if i == 0:
             Gcodes.append(f'M3{endCmd}')
@@ -53,22 +53,22 @@ def letter_coords(letter):
     return coords, endPts
 
 
-def textToGcode(text):
+def textToGcode(text, start_coord):
     gcode = []
-    start = [0, 0]
+    start = [start_coord[0], start_coord[1]]
 
     for letter in text:
         if letter == " ":
-            start = [start[0] + 50, start[1]]
+            start = [start[0] + 50*size_scale, start[1]]
             
             gcode.append(f"M5{endCmd}")
-            gcode.append(f"G0 X{int(start[0]*size_scale)} Y{int(start[1]*size_scale)}{endCmd}")
+            gcode.append(f"G0 X{start[0]} Y{start[1]}{endCmd}")
 
         elif letter == '\n':
-            start = [0, start[1] - 300]
+            start = [0, start[1] - 300 * size_scale]
 
             gcode.append(f"M5{endCmd}")
-            gcode.append(f"G0 X{int(start[0]*size_scale)} Y{int(start[1]*size_scale)}{endCmd}")
+            gcode.append(f"G0 X{start[0]} Y{start[1]}{endCmd}")
 
         else:
             coords, endPts = letter_coords(letter)
@@ -81,7 +81,7 @@ def textToGcode(text):
 
             x, y, w, h = letterRect(letter)
 
-            start = [start[0] + w, start[1]]
+            start = [start[0] + w*size_scale, start[1]]
 
         print(start)
     return gcode
@@ -123,13 +123,18 @@ def main():
     # coords, endPts = letter_coords('A')
     # commands = coordsToGcode(coords, endPts)
 
-    commands = textToGcode('fff fff\nfff')
-
+#    commands = textToGcode('fff fff\nfff')
+    commands = textToGcode('Hallo Welt', [200, 500])#Hallo Welt')
     # commands = readGcode(r"C:\Users\heinr\OneDrive\Documents\TU\Mechatronik-und-Instrumentierung\gcode\gig2reduced.txt")
 
     cmd_index = 0
 
     print(commands)
+
+    ser.write("G".encode())
+    ser.write("2".encode())
+    ser.write("8".encode())
+    ser.write("\n".encode())
 
     while cmd_index < len(commands):
         rx = ser.read(1) # read one byte
