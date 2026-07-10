@@ -40,11 +40,11 @@ void reportString(char *string);
 /* Private variables ---------------------------------------------------------*/
 uint32_t nSteps = 0; //nur positive Zahlen!
 uint16_t microsteps = 4; // bei 8 microsteps wird der erste und letzte "verschluckt"
-uint16_t stepAuflösung = 4; // bei wie vielen microsteps er stehenbleiben kann
+uint16_t stepAuflösung = 16; // bei wie vielen microsteps er stehenbleiben kann
 uint16_t frequency = 200; // Frequenz pro Fullstep
 const uint16_t maxSteps = 512;
 const char EOL_CHAR = '\n';
-const uint16_t umProFullstep = 589; // ein Fullstep hat ~0,655mm
+const uint16_t umProFullstep = 583; // ein Fullstep hat ~0,655mm
 uint32_t maxX = 420000;	// 42cm in x in um
 uint32_t maxY = 300000; // 30cm in y in um
 
@@ -115,7 +115,7 @@ int main(void)
 
   setMicrosteps(16);
 	//nSteps = 48*microsteps*5; // 5 Umdrehungen
-	setFrequency(200*microsteps); // damit man auf 200Hz pro Fullstep kommt
+	setFrequency(100*microsteps); // damit man auf 200Hz pro Fullstep kommt
   // PWM und Steps trennen!!! PWM bei ~20kHz und steps bei so 1-5kHz laut Chat
   LL_TIM_EnableCounter(TIM4); // start PWM
   LL_TIM_EnableCounter(TIM3); // start PWM
@@ -133,6 +133,67 @@ int main(void)
 
 //    switch_tool(1);
 //    switch_tool(0);
+  
+	/* Diagonalen zur Demonstration der microsteps
+	int x = 100000;
+	int y = 20000;
+	stift(0);
+	homing();
+	move((Coord) {x, y});
+	stift(1);
+	move((Coord) {x+10000, y+100000});
+	stift(0);
+	move((Coord) {x+10000, y});
+	stift(1);
+	setMicrosteps(8);
+	setFrequency(100*microsteps);
+	move((Coord) {x+20000, y+100000});
+	stift(0);
+	move((Coord) {x+20000, y});
+	stift(1);
+	setMicrosteps(4);
+	setFrequency(100*microsteps);
+	move((Coord) {x+30000, y+100000});
+	stift(0);
+	move((Coord) {x+30000, y});
+	stift(1);
+	setMicrosteps(2);
+	setFrequency(100*microsteps);
+	move((Coord) {x+40000, y+100000});
+	stift(0);
+	move((Coord) {x+40000, y});
+	stift(1);
+	setMicrosteps(1);
+	setFrequency(100*microsteps);
+	move((Coord) {x+50000, y+100000});
+	stift(0);*/
+	
+	/* Testmuster
+	int x = 100000;
+	int y = 200000;
+	int d = 30000;
+	stift(0);
+	homing();
+	move((Coord) {x, y});
+	stift(1);	
+	move((Coord) {x+d, y});
+	move((Coord) {x, y});
+	move((Coord) {x+d, y+d});
+	move((Coord) {x, y});
+	move((Coord) {x, y+d});
+	move((Coord) {x, y});
+	move((Coord) {x-d, y+d});
+	move((Coord) {x, y});
+	move((Coord) {x-d, y});
+	move((Coord) {x, y});
+	move((Coord) {x-d, y-d});
+	move((Coord) {x, y});
+	move((Coord) {x, y-d});
+	move((Coord) {x, y});
+	move((Coord) {x+d, y-d});
+	move((Coord) {x, y});
+	stift(0);
+	homing();*/
 	
   while (1)
   {
@@ -384,7 +445,7 @@ void tim6_Config(){
 
 void TIM6_DAC_IRQHandler(){
 	if(nSteps > 0){
-		//if(nSteps == 1 && frequency>150){ setFrequency(150*microsteps);} // wird bei n=0 wieder auf alte Frequenz gesetzt
+		//if(nSteps == 1 && frequency>150){ setFrequency(150*microsteps);} // wird bei n=0 wieder auf alte Frequenz gesetzt !ACHTUNG! TIM-update neuausgelöst???
 	  amplitude = runAmplitude;
 	  setPWMs(step_index_1,1);
 	  setPWMs(step_index_2,2);
@@ -740,7 +801,9 @@ void move(Coord input){ // Bresenham Algorythmus, Koordinaten in um
 
 void homing(){
 	nextMoveSendAck = 0;
-	
+	int s = stepAuflösung;
+	stepAuflösung = 1;
+//	setFrequency(100*microsteps);
 	if(!LL_GPIO_IsInputPinSet(GPIOA, LL_GPIO_PIN_0)){
 		startCoord = (Coord) {90000,0};
 		move((Coord) {0,0});
@@ -748,9 +811,11 @@ void homing(){
 	if(!LL_GPIO_IsInputPinSet(GPIOA, LL_GPIO_PIN_1)){
 		startCoord = (Coord) {0,90000};
 		move((Coord) {0,0});
-	}//else{report('K');}
+	}//else{report('K');} 
 	startCoord = (Coord) {0,0};
 	
+	stepAuflösung = s;
+//	setFrequency(frequency*microsteps);
 	nextMoveSendAck = 1;
 	report('K');
 }

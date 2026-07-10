@@ -124,12 +124,12 @@ def main():
     # commands = coordsToGcode(coords, endPts)
 
 #    commands = textToGcode('fff fff\nfff')
-    commands = textToGcode('Hallo Welt', [200, 500])#Hallo Welt')
-    # commands = readGcode(r"C:\Users\heinr\OneDrive\Documents\TU\Mechatronik-und-Instrumentierung\gcode\gig2reduced.txt")
+    #commands = textToGcode('Hallo Welt', [200, 500])#Hallo Welt')
+    commands = readGcode(r"C:\Users\heinr\OneDrive\Documents\TU\Mechatronik-und-Instrumentierung\gcode\gig2reduced.txt")
 
     cmd_index = 0
 
-    print(commands)
+    #print(commands)
 
     ser.write("G".encode())
     ser.write("2".encode())

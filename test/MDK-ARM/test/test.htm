@@ -3,7 +3,7 @@
 <title>Static Call Graph - [test\test.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image test\test.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6240002: Last Updated: Wed Jun 24 14:50:33 2026
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6240002: Last Updated: Thu Jun 25 13:00:02 2026
 <BR><P>
 <H3>Maximum Stack Usage =        192 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -816,7 +816,7 @@ Global Symbols
 <P><STRONG><a name="[5]"></a>UsageFault_Handler</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, stm32f4xx_it.o(.text.UsageFault_Handler))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f446xx.o(RESET)
 </UL>
-<P><STRONG><a name="[c2]"></a>befehl</STRONG> (Thumb, 452 bytes, Stack size 48 bytes, main.o(.text.befehl))
+<P><STRONG><a name="[c2]"></a>befehl</STRONG> (Thumb, 460 bytes, Stack size 48 bytes, main.o(.text.befehl))
 <BR><BR>[Stack]<UL><LI>Max Depth = 148<LI>Call Chain = befehl &rArr; switch_tool &rArr; dock_tool &rArr; move &rArr; LL_TIM_EnableCounter
 </UL>
 <BR>[Calls]<UL><LI><a href="#[d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;switch_tool
@@ -854,8 +854,8 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[cd]"></a>homing</STRONG> (Thumb, 180 bytes, Stack size 48 bytes, main.o(.text.homing))
-<BR><BR>[Stack]<UL><LI>Max Depth = 76<LI>Call Chain = homing &rArr; move &rArr; LL_TIM_EnableCounter
+<P><STRONG><a name="[cd]"></a>homing</STRONG> (Thumb, 206 bytes, Stack size 56 bytes, main.o(.text.homing))
+<BR><BR>[Stack]<UL><LI>Max Depth = 84<LI>Call Chain = homing &rArr; move &rArr; LL_TIM_EnableCounter
 </UL>
 <BR>[Calls]<UL><LI><a href="#[d1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;move
 <LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;report
@@ -886,7 +886,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_main
 </UL>
 
-<P><STRONG><a name="[d1]"></a>move</STRONG> (Thumb, 454 bytes, Stack size 24 bytes, main.o(.text.move))
+<P><STRONG><a name="[d1]"></a>move</STRONG> (Thumb, 504 bytes, Stack size 24 bytes, main.o(.text.move))
 <BR><BR>[Stack]<UL><LI>Max Depth = 28<LI>Call Chain = move &rArr; LL_TIM_EnableCounter
 </UL>
 <BR>[Calls]<UL><LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LL_TIM_EnableCounter
@@ -930,7 +930,7 @@ Global Symbols
 <LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[df]"></a>setMicrosteps</STRONG> (Thumb, 24 bytes, Stack size 4 bytes, main.o(.text.setMicrosteps))
+<P><STRONG><a name="[df]"></a>setMicrosteps</STRONG> (Thumb, 82 bytes, Stack size 4 bytes, main.o(.text.setMicrosteps))
 <BR><BR>[Stack]<UL><LI>Max Depth = 4<LI>Call Chain = setMicrosteps
 </UL>
 <BR>[Called By]<UL><LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
